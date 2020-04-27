@@ -1,0 +1,30 @@
+#lx-aside {
+  width: 20%;
+}
+
+#lx-main-content {
+  margin-left: 23%;
+}
+
+p {
+  font-size: 16px;
+}
+
+.social-links i {
+  background: none;
+}
+
+.lx-navigation .lx-cover .copy .display-t,
+.lx-navigation .lx-cover .copy .display-tc {
+  height: 100px;
+}
+
+h2,
+h3,
+h4 {
+  font-weight: bold;
+}
+
+.single .lx-post .lx-entry div h2 {
+  font-weight: bold;
+}
