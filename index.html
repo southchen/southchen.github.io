@@ -8,8 +8,9 @@
 <title>Brushes &amp; Keys</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Nan Chen">
-<meta name="keywords" content="javascript web-devlopement">
-<meta name="description" content="">
+<meta name="keywords" content="javascript web-devlopement photography">
+<meta name="description" content="Personal blog tech & life">
+
 <script id="hexo-configurations">
   var CONFIG = {
     root: '/',
@@ -81,16 +82,18 @@
 
 <div id="lx-aside" style="background-image: url(https://images.unsplash.com/photo-1557853197-aefb550b6fdc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80)">
   <div class="overlay">
-  <div class="featured">
-    <div class="avatar"><a href="/"><img src="https://avatars0.githubusercontent.com/u/26827800?s=460&u=59259f6cb361b7fba376e3ae0c589ccc1639c8b4&v=4"></a></div>
-    <span>Nan Chen</span>
-    <h1>Brushes & Keys</h1>
-    
+    <div class="featured">
+      <div class="avatar"><a href="/"><img src="https://avatars0.githubusercontent.com/u/26827800?s=460&u=59259f6cb361b7fba376e3ae0c589ccc1639c8b4&v=4"></a></div>
+      <span>Nan Chen</span>
+      <h1>Brushes & Keys</h1>
+      <span>Coding-Baking Photos-Paints </span>
     <div class="social-links">
   <a href="https://github.com/southchen" target="_blank"><i
       class="fa fa-github fa-fw"></i></a>
   <a href="https://instagram.com/divetothesea" target="_blank"><i
       class="fa fa-instagram fa-fw"></i></a>
+  <a href="https://www.behance.net/southchen" target="_blank"><i
+      class="fa fa-behance fa-fw"></i></a>
 </div>
 
   </div>
@@ -104,7 +107,9 @@
     <div>
       <h2 class="title"><a href="/2020/04/27/Webpack-core-concept/">Learning Webpack core concept</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-04-27</span>
-      <p><p>Main reference:</p>
+      <p><img src="https://raw.githubusercontent.com/webpack/media/master/logo/logo-on-white-bg.png">
+
+<p>Main reference:</p>
 <p><a src="https://www.youtube.com/watch?v=xse6JKcfbzs">Sean Larkin’s talk Everything’s a Plugin: Understanding Webpack From the Inside Out at JS Kongress 2019</a></p>
 <hr>
 <h2 id="Getting-started"><a href="#Getting-started" class="headerlink" title="Getting started:"></a>Getting started:</h2><p>Build modules on the browser including non-js file</p>
@@ -139,123 +144,7 @@
 <h4 id="include-amp-exclude"><a href="#include-amp-exclude" class="headerlink" title="include&amp;exclude"></a>include&amp;exclude</h4><p>Filter through</p>
 <p>eg.node-modules</p>
 <h4 id="chaining-loaders"><a href="#chaining-loaders" class="headerlink" title="chaining loaders"></a>chaining loaders</h4><p>order sensitive</p>
-<p>like a streamline</p>
-<h2 id="Plugin"><a href="#Plugin" class="headerlink" title="Plugin"></a>Plugin</h2><p>a class/instance which has an ‘apply’ method which can be used by complier to emit event</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">examplePlugin.protyotype.apply= funciton(complier)&#123;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span>(process)!== <span class="string">'undefined'</span>)&#123;</span><br><span class="line"></span><br><span class="line">  complier.plugin(<span class="string">'done'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">stats</span>)</span>&#123;</span><br><span class="line">                  <span class="keyword">if</span> (stats.hasErrors())&#123;</span><br><span class="line">    process.stderr.wirte(<span class="string">'\x07'</span>);</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;);</span><br><span class="line"></span><br><span class="line">  complier.plugin(<span class="string">'failed'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">    process.stderr.wirte(<span class="string">'\x07'</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">module</span>.exports= examplePlugin;</span><br></pre></td></tr></table></figure>
-
-<p>To use:</p>
-<p>require() plugin from node_modules into config</p>
-<p>add new instance of plugin to plugin keys in config object</p>
-<p>provide additonal info for arguments</p>
-<h3 id="Tapable"><a href="#Tapable" class="headerlink" title="Tapable"></a>Tapable</h3><p>backbone of webpack plugin</p>
-<p>mixin</p>
-<p>Apply plug asyn / parallel</p>
-<p>Event emitter/hook</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">basicPlugin</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;&#125;</span><br><span class="line">  apply(complier) &#123;</span><br><span class="line">    compiler.plugin(<span class="string">"make"</span>, (compilation) =&gt; &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"access to the compilation"</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">somePlugin</span></span>&#123;</span><br><span class="line">	apply(complier)&#123;</span><br><span class="line">    compiler.plugin(<span class="string">'run'</span>,(compilation,cb)=&gt;&#123;...&#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>the plugin is registerd via compliers inherited apply function</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Compiler</span> <span class="keyword">extends</span> <span class="title">Tapable</span></span>&#123;</span><br><span class="line"><span class="comment">//some fn...</span></span><br><span class="line"><span class="keyword">this</span>.apply.plugsAsync(<span class="string">'run'</span>,<span class="keyword">this</span>,()=&gt;&#123;...&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Tapable instances call apply.plugins() and pass the event and state through to plugin</p>
-<p>.run() -&gt; trigger the hook</p>
-<h3 id="Tapable-instance"><a href="#Tapable-instance" class="headerlink" title="Tapable instance"></a>Tapable instance</h3><img src="/.com//1.png" alt="1" style="zoom:67%;">
-
-<p>7 instances of Tapable</p>
-<ul>
-<li><p>Compiler</p>
-<ul>
-<li><img src="/.com//3.png" alt="3" style="zoom:50%;">
-
-
-
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>exposed via node API</p>
-</li>
-<li><p>central dispatch</p>
-</li>
-<li><p>Start/stop</p>
-</li>
-<li><pre><code class="js"><span class="keyword">const</span> webpack = <span class="built_in">require</span> (<span class="string">'webpack'</span>);
-<span class="keyword">const</span> complier = webpack(<span class="xml"><span class="tag">&lt;<span class="name">config</span>&gt;</span>);</span></code></pre>
-</li>
-</ul>
-<ul>
-<li><p>Compilation (dependency graph)</p>
-<ul>
-<li>created by the complier</li>
-<li>contains the dependency graph traversal algo</li>
-</ul>
-</li>
-<li><p>Resolver</p>
-<ul>
-<li>Finds the dependencies file</li>
-<li>Verifies the file exists</li>
-<li>turn partial path to abso path</li>
-<li>return the path, context, request</li>
-</ul>
-</li>
-<li><p>Module Factories</p>
-<ul>
-<li>Takes resolved request</li>
-<li>collect the source</li>
-<li>Returns Module object</li>
-</ul>
-</li>
-<li><p>Parser</p>
-<ul>
-<li><img src="/.com//4.png" alt="4" style="zoom:50%;"></li>
-<li>Convert a module object turns to AST tree</li>
-<li>finds all require/import and turn to dependency’s</li>
-</ul>
-</li>
-<li><p>{Template}</p>
-<ul>
-<li><img src="/.com//5.png" alt="5" style="zoom:50%;"></li>
-<li>Binding data with view/module</li>
-<li>config props</li>
-<li>Dep graph state</li>
-<li>template jsx</li>
-<li>Chunk -&gt;module -&gt;dependncies</li>
-<li>render() to bundle.js</li>
-</ul>
-<h3 id="How-webpack-builds-the-dependency-graph"><a href="#How-webpack-builds-the-dependency-graph" class="headerlink" title="How webpack builds the dependency graph"></a>How webpack builds the dependency graph</h3></li>
-<li><img src="/.com//6.png" alt="6" style="zoom:50%;">
-</li>
-<li><p>the complier reads the options and create compilations</p>
-<img src="/.com//7.png" alt="7" style="zoom:20%;">
-</li>
-<li><p>after the resolver verfied these files, returns the normal modules</p>
-</li>
-<li><img src="/.com//8.png" alt="8" style="zoom:20%;">
-</li>
-<li><p>the parser, if non-js pass it to the loader, if it’s JS attach the dependencies to the module after resolved them</p>
-</li>
-<li><p>use template and module factore to remove/replace the require/import to run the app on browser</p>
-<h3 id="HOW-A-MODULE-GETS-TO-THE-BROWSER-w-webpack"><a href="#HOW-A-MODULE-GETS-TO-THE-BROWSER-w-webpack" class="headerlink" title="HOW A MODULE GETS TO THE BROWSER /w webpack"></a>HOW A MODULE GETS TO THE BROWSER /w webpack</h3></li>
-<li><img src="/.com//9.png" alt="9" style="zoom:80%;">
-
-<ul>
-<li><img src="/.com//10.png" alt="10" style="zoom:20%;"></li>
-<li><img src="/.com//11.png" alt="11" style="zoom:20%;"></li>
-<li><img src="/.com//12.png" alt="12" style="zoom:20%;"></li>
-<li><img src="/.com//13.png" alt="13" style="zoom:20%;"></li>
-<li><img src="/.com//14.png" alt="14" style="zoom:20%;">
-
-</li>
-</ul>
-</li>
-</ul>
-<p>Cache-loader</p>
-<p>Webpack-dev-middleware</p>
-<hr>
-<h4 id="Credits"><a href="#Credits" class="headerlink" title="Credits"></a>Credits</h4><p>all images in this post originats from the slides of this talk <a src="https://www.youtube.com/watch?v=xse6JKcfbzs">Sean Larkin’s talk Everything’s a Plugin: Understanding Webpack From the Inside Out at JS Kongress 2019</a></p>
-</p>
+<p>like a streamline<br>….</p></p>
       <div class="post-button"><a class="btn" href="/2020/04/27/Webpack-core-concept/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
@@ -265,9 +154,12 @@
 
 <footer>
   <div>
-    Copyright &copy; 2019.<a href="/">Brushes & Keys</a><br>Powered by <a href="https://hexo.io"
-      target="_blank">Hexo</a> | Theme <a href="https://lx.js.org" target="_blank">Lx</a> | Modified by
-    Nan Chen <br>
+    Copyright &copy; 2020<a href="/"> Brushes & Keys</a><br>Powered by <a
+      href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.js.org" target="_blank">Lx</a> |
+    Modified by
+    Nan Chen <br> Find me at <a href="https://github.com/southchen" target="_blank" rel="noopener">GitHub</a> <a
+      href="https://instagram.com/divetothesea">Instagram</a> <a href="https://www.behance.net/southchen" target="_blank" rel="noopener">Behance</a>
+    <br>
   </div>
 </footer>
 
@@ -291,7 +183,7 @@
         </div>
         <div class="row for-name">
           <p>Nan Chen</p>
-          <span class="tagline">Hello, World!</span>
+          <span class="tagline">Not a Number 😆</span>
         </div>
       </div>
     </span>
@@ -304,8 +196,7 @@
     <li class="has-sub"><span class="dropdown-heading">
       <i class="fa fa-bookmark fa-fw"></i>Pages</span>
         <ul>
-          <li><a href="/guestbook/">Guestbook</a></li>
-        <li><a href="/about/">About</a></li>
+          <li><a href="/about/">About</a></li>
         </ul>
     </li>
     <li class="has-sub"><span class="dropdown-heading">

@@ -28,3 +28,25 @@ h4 {
 .single .lx-post .lx-entry div h2 {
   font-weight: bold;
 }
+
+.hamburger {
+  left: 20px;
+}
+
+.hamburger--arrow-r.is-active .hamburger-inner::before {
+  transform: translate3d(-4px, 0, 0) rotate(-45deg) scale(.7, 1);
+}
+
+.hamburger--arrow-r.is-active .hamburger-inner::after {
+  transform: translate3d(-4px, 0, 0) rotate(45deg) scale(.7, 1);
+}
+
+#lx-aside .featured h1 {
+
+  font-weight: 600;
+}
+
+#lx-aside .featured>span {
+  font-family: monospace;
+  font-size: 16px;
+}

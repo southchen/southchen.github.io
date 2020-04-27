@@ -8,8 +8,9 @@
 <title>Learning Webpack core concept | Brushes &amp; Keys</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Nan Chen">
-<meta name="keywords" content="javascript web-devlopement">
-<meta name="description" content="">
+<meta name="keywords" content="javascript web-devlopement photography">
+<meta name="description" content="Personal blog tech & life">
+
 <script id="hexo-configurations">
   var CONFIG = {
     root: '/',
@@ -100,6 +101,8 @@
       class="fa fa-github fa-fw"></i></a>
   <a href="https://instagram.com/divetothesea" target="_blank"><i
       class="fa fa-instagram fa-fw"></i></a>
+  <a href="https://www.behance.net/southchen" target="_blank"><i
+      class="fa fa-behance fa-fw"></i></a>
 </div>
 </div>
 </div>
@@ -109,7 +112,9 @@
     <div class="lx-post">
       <div class="lx-entry padding">
         <div>
-          <p>Main reference:</p>
+          <img src="https://raw.githubusercontent.com/webpack/media/master/logo/logo-on-white-bg.png">
+
+<p>Main reference:</p>
 <p><a src="https://www.youtube.com/watch?v=xse6JKcfbzs">Sean Larkin’s talk Everything’s a Plugin: Understanding Webpack From the Inside Out at JS Kongress 2019</a></p>
 <hr>
 <h2 id="Getting-started"><a href="#Getting-started" class="headerlink" title="Getting started:"></a>Getting started:</h2><p>Build modules on the browser including non-js file</p>
@@ -144,7 +149,9 @@
 <h4 id="include-amp-exclude"><a href="#include-amp-exclude" class="headerlink" title="include&amp;exclude"></a>include&amp;exclude</h4><p>Filter through</p>
 <p>eg.node-modules</p>
 <h4 id="chaining-loaders"><a href="#chaining-loaders" class="headerlink" title="chaining loaders"></a>chaining loaders</h4><p>order sensitive</p>
-<p>like a streamline</p>
+<p>like a streamline<br>….</p>
+<a id="more"></a>
+
 <h2 id="Plugin"><a href="#Plugin" class="headerlink" title="Plugin"></a>Plugin</h2><p>a class/instance which has an ‘apply’ method which can be used by complier to emit event</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">examplePlugin.protyotype.apply= funciton(complier)&#123;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span>(process)!== <span class="string">'undefined'</span>)&#123;</span><br><span class="line"></span><br><span class="line">  complier.plugin(<span class="string">'done'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">stats</span>)</span>&#123;</span><br><span class="line">                  <span class="keyword">if</span> (stats.hasErrors())&#123;</span><br><span class="line">    process.stderr.wirte(<span class="string">'\x07'</span>);</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;);</span><br><span class="line"></span><br><span class="line">  complier.plugin(<span class="string">'failed'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">    process.stderr.wirte(<span class="string">'\x07'</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">module</span>.exports= examplePlugin;</span><br></pre></td></tr></table></figure>
 
@@ -172,9 +179,6 @@
 <li><p>Compiler</p>
 <ul>
 <li><img src="/.com//3.png" alt="3" style="zoom:50%;">
-
-
-
 </li>
 </ul>
 </li>
@@ -189,8 +193,6 @@
 <li><pre><code class="js"><span class="keyword">const</span> webpack = <span class="built_in">require</span> (<span class="string">'webpack'</span>);
 <span class="keyword">const</span> complier = webpack(<span class="xml"><span class="tag">&lt;<span class="name">config</span>&gt;</span>);</span></code></pre>
 </li>
-</ul>
-<ul>
 <li><p>Compilation (dependency graph)</p>
 <ul>
 <li>created by the complier</li>
@@ -300,9 +302,12 @@
 
 <footer>
   <div>
-    Copyright &copy; 2019.<a href="/">Brushes & Keys</a><br>Powered by <a href="https://hexo.io"
-      target="_blank">Hexo</a> | Theme <a href="https://lx.js.org" target="_blank">Lx</a> | Modified by
-    Nan Chen <br>
+    Copyright &copy; 2020<a href="/"> Brushes & Keys</a><br>Powered by <a
+      href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.js.org" target="_blank">Lx</a> |
+    Modified by
+    Nan Chen <br> Find me at <a href="https://github.com/southchen" target="_blank" rel="noopener">GitHub</a> <a
+      href="https://instagram.com/divetothesea">Instagram</a> <a href="https://www.behance.net/southchen" target="_blank" rel="noopener">Behance</a>
+    <br>
   </div>
 </footer>
 
@@ -324,7 +329,7 @@
         </div>
         <div class="row for-name">
           <p>Nan Chen</p>
-          <span class="tagline">Hello, World!</span>
+          <span class="tagline">Not a Number 😆</span>
         </div>
       </div>
     </span>
@@ -337,8 +342,7 @@
     <li class="has-sub"><span class="dropdown-heading">
       <i class="fa fa-bookmark fa-fw"></i>Pages</span>
         <ul>
-          <li><a href="/guestbook/">Guestbook</a></li>
-        <li><a href="/about/">About</a></li>
+          <li><a href="/about/">About</a></li>
         </ul>
     </li>
     <li class="has-sub"><span class="dropdown-heading">
