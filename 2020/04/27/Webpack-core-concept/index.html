@@ -149,7 +149,7 @@
 <h4 id="include-amp-exclude"><a href="#include-amp-exclude" class="headerlink" title="include&amp;exclude"></a>include&amp;exclude</h4><p>Filter through</p>
 <p>eg.node-modules</p>
 <h4 id="chaining-loaders"><a href="#chaining-loaders" class="headerlink" title="chaining loaders"></a>chaining loaders</h4><p>order sensitive</p>
-<p>like a streamline<br>….</p>
+<p>like a streamline</p>
 <a id="more"></a>
 
 <h2 id="Plugin"><a href="#Plugin" class="headerlink" title="Plugin"></a>Plugin</h2><p>a class/instance which has an ‘apply’ method which can be used by complier to emit event</p>
@@ -163,7 +163,7 @@
 <p>mixin</p>
 <p>Apply plug asyn / parallel</p>
 <p>Event emitter/hook</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">basicPlugin</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;&#125;</span><br><span class="line">  apply(complier) &#123;</span><br><span class="line">    compiler.plugin(<span class="string">"make"</span>, (compilation) =&gt; &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"access to the compilation"</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">basicPlugin</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;&#125;</span><br><span class="line">  apply(complier) &#123;</span><br><span class="line">    compiler.plugin(<span class="string">'make'</span>, (compilation) =&gt; &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'access to the compilation'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">somePlugin</span></span>&#123;</span><br><span class="line">	apply(complier)&#123;</span><br><span class="line">    compiler.plugin(<span class="string">'run'</span>,(compilation,cb)=&gt;&#123;...&#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -271,12 +271,12 @@
   <div class="lx-cover prev lx-cover-sm">
     <!-- style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-l.jpeg)" -->
     <div class="overlay"></div>
-    <a class="copy" href="#">
+    <a class="copy" href="/2020/04/29/Closure/">
 			<div class="display-t">
 				<div class="display-tc">
 					<div>
 						<span>Next</span>
-						<h3>No newer post</h3>
+						<h3>A visua...</h3>
 					</div>
 				</div>
 			</div>
