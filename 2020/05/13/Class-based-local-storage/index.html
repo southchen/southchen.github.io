@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="theme-color" content=#58b77a>
-<title>Brushes &amp; Keys</title>
+<title>Class-based local storage | Brushes &amp; Keys</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Nan Chen">
 <meta name="keywords" content="javascript web-devlopement photography">
@@ -78,15 +78,22 @@
 <meta name="generator" content="Hexo 4.2.0"></head>
 
 <body>
-  <div id="page">
+  <style>
+  .single #lx-aside {
+    height: 380px;
+  }
 
-<div id="lx-aside" style="background-image: url(https://images.unsplash.com/photo-1557853197-aefb550b6fdc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80)">
+</style>
+<div class="single">
+  
+<div id="page">
+<div id="lx-aside" style="background-image: url(https://images.unsplash.com/photo-1505238680356-667803448bb6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80)" data-stellar-background-ratio="0.5">
   <div class="overlay">
-    <div class="featured">
+    <div class="page-title">
       <div class="avatar"><a href="/"><img src="https://avatars0.githubusercontent.com/u/26827800?s=460&u=59259f6cb361b7fba376e3ae0c589ccc1639c8b4&v=4"></a></div>
-      <span>Nan Chen</span>
-      <h1>Brushes & Keys</h1>
-      <span>Coding-Baking Photos-Paints </span>
+      <span>2020-05-13</span>
+      <h2>Class-based local storage</h2>
+      
     <div class="social-links">
   <a href="https://github.com/southchen" target="_blank"><i
       class="fa fa-github fa-fw"></i></a>
@@ -95,19 +102,15 @@
   <a href="https://www.behance.net/southchen" target="_blank"><i
       class="fa fa-behance fa-fw"></i></a>
 </div>
-
-  </div>
-  </div>
+</div>
+</div>
 </div>
 
-<div id="lx-main-content">
-  <div class="lx-post"> 
-
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/05/13/Class-based-local-storage/">Class-based local storage</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-05-13</span>
-      <p><h1 id="Class-based-local-storage"><a href="#Class-based-local-storage" class="headerlink" title="Class-based local storage"></a>Class-based local storage</h1><p>Sometimes when I was trying to build some small app, it’s really not neccessary to connect the app to the cloud database like mongoDB. </p>
+  <div id="lx-main-content">
+    <div class="lx-post">
+      <div class="lx-entry padding">
+        <div>
+          <h1 id="Class-based-local-storage"><a href="#Class-based-local-storage" class="headerlink" title="Class-based local storage"></a>Class-based local storage</h1><p>Sometimes when I was trying to build some small app, it’s really not neccessary to connect the app to the cloud database like mongoDB. </p>
 <p>A local json file would be enough.</p>
 <p>It provide basic CURD api. And it also allows customed repo by extending a new class from it.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//using node modules</span></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">const</span> crypto = <span class="built_in">require</span>(<span class="string">'crypto'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="class"><span class="keyword">class</span> <span class="title">Repository</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(filename) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!filename) &#123; <span class="comment">//filename validator</span></span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Creating a repository requires a filename'</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>.filename = filename;</span><br><span class="line">    <span class="keyword">try</span> &#123; <span class="comment">//if the repo exists, access it</span></span><br><span class="line">      fs.accessSync(<span class="keyword">this</span>.filename);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (err) &#123; <span class="comment">//if the repo doesn't exist, create one</span></span><br><span class="line">      fs.writeFileSync(<span class="keyword">this</span>.filename, <span class="string">'[]'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">async</span> create(attrs) &#123; <span class="comment">//cerate new data entry</span></span><br><span class="line">    attrs.id = <span class="keyword">this</span>.randomId();</span><br><span class="line">    <span class="keyword">const</span> records = <span class="keyword">await</span> <span class="keyword">this</span>.getAll();</span><br><span class="line">    records.push(attrs);</span><br><span class="line">    <span class="keyword">await</span> <span class="keyword">this</span>.writeAll(records);</span><br><span class="line">    <span class="keyword">return</span> attrs;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">async</span> getAll() &#123; <span class="comment">//get all data</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">JSON</span>.parse(</span><br><span class="line">      <span class="keyword">await</span> fs.promises.readFile(<span class="keyword">this</span>.filename, &#123;</span><br><span class="line">        encoding: <span class="string">'utf8'</span></span><br><span class="line">      &#125;)</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">async</span> writeAll(records) &#123;  <span class="comment">//write file</span></span><br><span class="line">    <span class="keyword">await</span> fs.promises.writeFile(</span><br><span class="line">      <span class="keyword">this</span>.filename,</span><br><span class="line">      <span class="built_in">JSON</span>.stringify(records, <span class="literal">null</span>, <span class="number">2</span>)</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">  randomId() &#123; <span class="comment">//create an uniq id for each entry</span></span><br><span class="line">    <span class="keyword">return</span> crypto.randomBytes(<span class="number">4</span>).toString(<span class="string">'hex'</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">async</span> getOne(id) &#123; <span class="comment">//get single data</span></span><br><span class="line">    <span class="keyword">const</span> records = <span class="keyword">await</span> <span class="keyword">this</span>.getAll();</span><br><span class="line">    <span class="keyword">return</span> records.find(<span class="function"><span class="params">record</span> =&gt;</span> record.id === id);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">async</span> <span class="keyword">delete</span>(id) &#123; <span class="comment">//delete</span></span><br><span class="line">    <span class="keyword">const</span> records = <span class="keyword">await</span> <span class="keyword">this</span>.getAll();</span><br><span class="line">    <span class="keyword">const</span> filteredRecords = records.filter(<span class="function"><span class="params">record</span> =&gt;</span> record.id !== id);</span><br><span class="line">    <span class="keyword">await</span> <span class="keyword">this</span>.writeAll(filteredRecords);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">async</span> update(id, attrs) &#123; <span class="comment">//update data</span></span><br><span class="line">    <span class="keyword">const</span> records = <span class="keyword">await</span> <span class="keyword">this</span>.getAll();</span><br><span class="line">    <span class="keyword">const</span> record = records.find(<span class="function"><span class="params">record</span> =&gt;</span> record.id === id);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!record) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">`Record with id <span class="subst">$&#123;id&#125;</span> not found`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">Object</span>.assign(record, attrs);</span><br><span class="line">    <span class="keyword">await</span> <span class="keyword">this</span>.writeAll(records);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">async</span> getOneBy(filters) &#123; <span class="comment">//filter data</span></span><br><span class="line">    <span class="keyword">const</span> records = <span class="keyword">await</span> <span class="keyword">this</span>.getAll();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> record <span class="keyword">of</span> records) &#123;</span><br><span class="line">      <span class="keyword">let</span> found = <span class="literal">true</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> filters) &#123;</span><br><span class="line">        <span class="keyword">if</span> (record[key] !== filters[key]) &#123;</span><br><span class="line">          found = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (found) &#123;</span><br><span class="line">        <span class="keyword">return</span> record;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -117,105 +120,43 @@
 
 <p>Ref:</p>
 <p><a hrer="https://www.udemy.com/course/javascript-beginners-complete-tutorial/learn/">Stephen Grider ‘s udemy course</a></p>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/05/13/Class-based-local-storage/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+
+        </div>
+      </div>
     </div>
   </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/04/29/Closure/">A visual way to learn Closure</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-04-29</span>
-      <p><div class="note warning">
-            <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h3><p>This article is orginall based on my understanding of the concept. No guarantee on accuracy.😅</p>
-          </div>
+  <div class="lx-navigation">
+  <div class="lx-cover prev lx-cover-sm">
+    <!-- style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-l.jpeg)" -->
+    <div class="overlay"></div>
+    <a class="copy" href="#">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>No newer post</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" >
+			<!-- style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-r.jpeg)" -->
+      <div class="overlay"></div>
+      <a class="copy" href="/2020/04/29/Closure/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>A visual way to learn Closure</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
 
-<p>Closure is kind of intimidating concept for people new to javascript.</p>
-<p>I think it’s nessesary to clarify some concept of execution context (EC) and scope before approaching ‘closure’ it self.</p>
-<ul>
-<li><p>Javascript has 3 types of scope (after ES6)</p>
-<ul>
-<li><p>block scope </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> a = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// ReferenceError: a is not defined</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Function scope</p>
-</li>
-<li><p>Global scope</p>
-</li>
-</ul>
-</li>
-</ul>
-<p>  whenever you’re trying to call/use a variable, the engine would find it <strong>along the scope chain</strong>. </p>
-<p>  If the engine detects that a variable would not be called after the function excution context was removed from the call stack, it would junk the variable (<strong>garbage collecting</strong>) and free the memory.</p>
-<ul>
-<li><p>The [[scope]] is determined during <strong>function declarartion</strong>.</p>
-</li>
-<li><p><strong>All</strong> code are exeuted in their own excution context: global EC or function EC. </p>
-</li>
-<li><p>EC can be abstracted as a object which includes <span class="label primary">variable object</span>, <span class="label success">scope chain</span> and <span class="label warning"> this value</span> . </p>
-<p><img src="/2020/04/29/Closure/closure-Page-2.svg" alt="closure-Page-2"></p>
-</li>
-<li><p>Whenever a function is called, its EC would be pushed to the top of call stack. And all the VO are actived as activation object. When all the code inside the function is executed or returnd, the EC was destroied. Next time if the same function is called agin, a new EC would be created.</p>
-</li>
-<li><p>The function EC has two pahses: creation phase and execution phase.</p>
-</li>
-<li><p>The creation phase is when the  VO and ‘this’ are created, and the scope chain is initialed by [[scope]]</p>
-</li>
-<li><p>The execution phase is when the value of each object/varibale are assigned and determined.</p>
-</li>
-</ul>
-<p><img src="/2020/04/29/Closure/closure.svg" alt="closure"></p>
-<h3 id="A-classic-interview-question"><a href="#A-classic-interview-question" class="headerlink" title="A classic interview question:"></a>A classic interview question:</h3></p>
-      <div class="post-button"><a class="btn" href="/2020/04/29/Closure/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/04/27/Webpack-core-concept/">Learning Webpack core concept</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-04-27</span>
-      <p><img src="https://raw.githubusercontent.com/webpack/media/master/logo/logo-on-white-bg.png">
-
-<p>Main reference:</p>
-<p><a src="https://www.youtube.com/watch?v=xse6JKcfbzs">Sean Larkin’s talk Everything’s a Plugin: Understanding Webpack From the Inside Out at JS Kongress 2019</a></p>
-<hr>
-<h2 id="Getting-started"><a href="#Getting-started" class="headerlink" title="Getting started:"></a>Getting started:</h2><p>Build modules on the browser including non-js file</p>
-<p>$ webpack &lt;entry.js&gt;</p>
-<p>$ webpack-dev-server –port=9000</p>
-<h2 id="Entry-point"><a href="#Entry-point" class="headerlink" title="Entry point"></a>Entry point</h2><ul>
-<li><p>a module relys on other module, dependncies</p>
-</li>
-<li><p>the first js to load to ‘kick-off’ your app, a starting point for webpack to build the dependency graph</p>
-</li>
-<li><p>what to load for the browser; compliments the output property.</p>
-</li>
-</ul>
-<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><ul>
-<li><p>where and how to distributes the bubdles (compilations)</p>
-</li>
-<li><p>default: bundle.js</p>
-</li>
-</ul>
-<h2 id="Loaders"><a href="#Loaders" class="headerlink" title="Loaders"></a>Loaders</h2><ul>
-<li><p>js functions that takes the source fiel, and return a <strong>modifed</strong> state</p>
-</li>
-<li><p>tell webpack how to load non-js file(transfer &amp; interpretation)</p>
-</li>
-<li><p>return compliations</p>
-</li>
-</ul>
-<h4 id="test"><a href="#test" class="headerlink" title="test"></a>test</h4><p>RegEx instructs the complier which files to run the loader against</p>
-<h4 id="use"><a href="#use" class="headerlink" title="use"></a>use</h4><p>An array/string/function which returns loader objects</p>
-<h4 id="enforce"><a href="#enforce" class="headerlink" title="enforce"></a>enforce</h4><p>Pre/post</p>
-<p>run this rules before/after all other rules</p>
-<h4 id="include-amp-exclude"><a href="#include-amp-exclude" class="headerlink" title="include&amp;exclude"></a>include&amp;exclude</h4><p>Filter through</p>
-<p>eg.node-modules</p>
-<h4 id="chaining-loaders"><a href="#chaining-loaders" class="headerlink" title="chaining loaders"></a>chaining loaders</h4><p>order sensitive</p>
-<p>like a streamline</p></p>
-      <div class="post-button"><a class="btn" href="/2020/04/27/Webpack-core-concept/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-
-
-
+</div>
 
 <footer>
   <div>
@@ -228,8 +169,6 @@
   </div>
 </footer>
 
-  </div>
-</div>
 </div>
 
   <button class="hamburger hamburger--arrow-r" type="button">
