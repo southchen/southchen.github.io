@@ -111,11 +111,10 @@
       <div class="lx-entry padding">
         <div>
           <div class="note warning">
-            <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h3><p>This article is orginall based on my understanding of the concept. No guarantee on accuracy.😅</p>
+            <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h3><p>This article is originally based on my understanding of this concept. No guarantee on the accuracy.😅</p>
           </div>
 
-<p>Closure is kind of intimidating concept for people new to javascript.</p>
-<p>I think it’s nessesary to clarify some concept of execution context (EC) and scope before approaching ‘closure’ it self.</p>
+<p>The closure is a kind of intimidating concept for people new to javascript.<br>I think it’s necessary to clarify some concept of execution context (EC) and scope before approaching ‘closure’ itself.</p>
 <ul>
 <li><p>Javascript has 3 types of scope (after ES6)</p>
 <ul>
@@ -130,22 +129,21 @@
 </li>
 </ul>
 <p>  whenever you’re trying to call/use a variable, the engine would find it <strong>along the scope chain</strong>. </p>
-<p>  If the engine detects that a variable would not be called after the function excution context was removed from the call stack, it would junk the variable (<strong>garbage collecting</strong>) and free the memory.</p>
+<p>  If the engine detects that a variable would not be called after the function execution context was removed from the call stack, it would junk the variable (<strong>garbage collecting</strong>) and free the memory.</p>
 <ul>
 <li><p>The [[scope]] is determined during <strong>function declarartion</strong>.</p>
+<p><strong>All</strong> code is executed in their execution context: global EC or function EC. </p>
+<p>EC can be abstracted as an object which includes <span class="label primary">variable object</span>, <span class="label success">scope chain</span>, and <span class="label warning"> this value</span>. </p>
 </li>
-<li><p><strong>All</strong> code are exeuted in their own excution context: global EC or function EC. </p>
+<li><p><img src="/.com//closure-Page-2.svg" alt="closure-Page-2"></p>
 </li>
-<li><p>EC can be abstracted as a object which includes <span class="label primary">variable object</span>, <span class="label success">scope chain</span> and <span class="label warning"> this value</span> . </p>
-<p><img src="/.com//closure-Page-2.svg" alt="closure-Page-2"></p>
+<li><p>Whenever a function is called, its EC would be pushed to the top of the call stack. And all the VO are activated as activation objects. When all the code inside the function is executed or returned, the EC was destroyed. Next time if the same function is called again, a new EC would be created.</p>
 </li>
-<li><p>Whenever a function is called, its EC would be pushed to the top of call stack. And all the VO are actived as activation object. When all the code inside the function is executed or returnd, the EC was destroied. Next time if the same function is called agin, a new EC would be created.</p>
+<li><p>The function EC has two phases: creation phase and execution phase.</p>
 </li>
-<li><p>The function EC has two pahses: creation phase and execution phase.</p>
+<li><p>The creation phase is when the VO and ‘this’ are created, and the scope chain is initialed by [[scope]]</p>
 </li>
-<li><p>The creation phase is when the  VO and ‘this’ are created, and the scope chain is initialed by [[scope]]</p>
-</li>
-<li><p>The execution phase is when the value of each object/varibale are assigned and determined.</p>
+<li><p>The execution phase is when the value of each object/variable is assigned and determined.</p>
 </li>
 </ul>
 <p><img src="/.com//closure.svg" alt="closure"></p>
@@ -202,12 +200,12 @@
   <div class="lx-cover prev lx-cover-sm">
     <!-- style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-l.jpeg)" -->
     <div class="overlay"></div>
-    <a class="copy" href="#">
+    <a class="copy" href="/2020/05/13/Class-based-local-storage/">
 			<div class="display-t">
 				<div class="display-tc">
 					<div>
 						<span>Next</span>
-						<h3>No newer post</h3>
+						<h3>Class-b...</h3>
 					</div>
 				</div>
 			</div>
@@ -221,7 +219,7 @@
 				<div class="display-tc">
 					<div>
 						<span>Prev</span>
-						<h3>Learnin...</h3>
+						<h3>Learning Webpack core concept</h3>
 					</div>
 				</div>
 			</div>
