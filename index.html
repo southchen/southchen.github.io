@@ -118,51 +118,6 @@
   </div>
   <div class="lx-entry padding">
     <div>
-      <h2 class="title"><a href="/2020/04/29/Closure/">A visual way to learn Closure</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-04-29</span>
-      <p><div class="note warning">
-            <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h3><p>This article is originally based on my understanding of this concept. No guarantee on the accuracy.😅</p>
-          </div>
-
-<p>The closure is a kind of intimidating concept for people new to javascript.<br>I think it’s necessary to clarify some concept of execution context (EC) and scope before approaching ‘closure’ itself.</p>
-<ul>
-<li><p>Javascript has 3 types of scope (after ES6)</p>
-<ul>
-<li><p>block scope </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> a = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// ReferenceError: a is not defined</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Function scope</p>
-</li>
-<li><p>Global scope</p>
-</li>
-</ul>
-</li>
-</ul>
-<p>  whenever you’re trying to call/use a variable, the engine would find it <strong>along the scope chain</strong>. </p>
-<p>  If the engine detects that a variable would not be called after the function execution context was removed from the call stack, it would junk the variable (<strong>garbage collecting</strong>) and free the memory.</p>
-<ul>
-<li><p>The [[scope]] is determined during <strong>function declarartion</strong>.</p>
-<p><strong>All</strong> code is executed in their execution context: global EC or function EC. </p>
-<p>EC can be abstracted as an object which includes <span class="label primary">variable object</span>, <span class="label success">scope chain</span>, and <span class="label warning"> this value</span>. </p>
-</li>
-<li><p><img src="/.com//closure-Page-2.svg" alt="closure-Page-2"></p>
-</li>
-<li><p>Whenever a function is called, its EC would be pushed to the top of the call stack. And all the VO are activated as activation objects. When all the code inside the function is executed or returned, the EC was destroyed. Next time if the same function is called again, a new EC would be created.</p>
-</li>
-<li><p>The function EC has two phases: creation phase and execution phase.</p>
-</li>
-<li><p>The creation phase is when the VO and ‘this’ are created, and the scope chain is initialed by [[scope]]</p>
-</li>
-<li><p>The execution phase is when the value of each object/variable is assigned and determined.</p>
-</li>
-</ul>
-<p><img src="/.com//closure.svg" alt="closure"></p>
-<h3 id="A-classic-interview-question"><a href="#A-classic-interview-question" class="headerlink" title="A classic interview question:"></a>A classic interview question:</h3></p>
-      <div class="post-button"><a class="btn" href="/2020/04/29/Closure/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
       <h2 class="title"><a href="/2020/04/27/Webpack-core-concept/">Learning Webpack core concept</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-04-27</span>
       <p><img src="https://raw.githubusercontent.com/webpack/media/master/logo/logo-on-white-bg.png">
