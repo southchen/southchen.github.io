@@ -1,0 +1,335 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content=#58b77a>
+<title>Understanding Promise part 2 | Brushes &amp; Keys</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Nan Chen">
+<meta name="keywords" content="javascript web-devlopement photography">
+<meta name="description" content="Personal blog tech & life">
+
+<script id="hexo-configurations">
+  var CONFIG = {
+    root: '/',
+    theme: 'lx',
+    version: '0.3.9',
+    localsearch:{
+      "enable": false,
+      "trigger": "auto",
+      "top_n_per_article": 1,
+      "unescape": false,
+      "preload": false
+      },
+    path: '-'
+  };
+</script>
+
+<link rel="shortcut icon" href="/bg.png">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/css/main.min.css">
+<link rel="stylesheet" href="/css/mycss.css">
+<style type="text/css">
+  pre,
+  code {
+    font-family: 'Hind Siliguri',
+      monospace;
+  }
+
+  html {
+    font-family: sans-serif;
+  }
+
+  body {
+    font-family: sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  figure {
+    font-family: Hind Siliguri;
+  }
+
+  .menu-container {
+    font-family: sans-serif;
+  }
+
+</style>
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/js/jquery.jside.menu.js"></script>
+<script>
+  $(document).ready(function () {
+    $(".menu-container").jSideMenu({
+      jSidePosition: "position-right",
+      jSideSticky: true,
+      jSideSkin: "greenish",
+    });
+  });
+
+</script>
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Hind Siliguri:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <style>
+  .single #lx-aside {
+    height: 380px;
+  }
+
+</style>
+<div class="single">
+  
+<div id="page">
+<div id="lx-aside" style="background-image: url(https://images.unsplash.com/photo-1505238680356-667803448bb6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80)" data-stellar-background-ratio="0.5">
+  <div class="overlay">
+    <div class="page-title">
+      <div class="avatar"><a href="/"><img src="https://avatars0.githubusercontent.com/u/26827800?s=460&u=59259f6cb361b7fba376e3ae0c589ccc1639c8b4&v=4"></a></div>
+      <span>2020-05-16</span>
+      <h2>Understanding Promise part 2</h2>
+      <div class="tags"><i
+          class="fa fa-tag"></i><a class="tag-link" href="/tags/javascript/" rel="tag">javascript</a> <i class="fa fa-tag"></i><a class="tag-link" href="/tags/promise/" rel="tag">promise</a>
+      </div>
+    <div class="social-links">
+  <a href="https://github.com/southchen" target="_blank"><i
+      class="fa fa-github fa-fw"></i></a>
+  <a href="https://instagram.com/divetothesea" target="_blank"><i
+      class="fa fa-instagram fa-fw"></i></a>
+  <a href="https://www.behance.net/southchen" target="_blank"><i
+      class="fa fa-behance fa-fw"></i></a>
+</div>
+</div>
+</div>
+</div>
+
+  <div id="lx-main-content">
+    <div class="lx-post">
+      <div class="lx-entry padding">
+        <div>
+          <div class="note warning">
+            <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h3><p>This article is originally based on my understanding of this concept. No guarantee on the accuracy.😅</p>
+          </div>
+
+<p>‘The <strong><code>Promise</code></strong> object represents the eventual completion (or failure) of an asynchronous operation, and its resulting value.’</p>
+<p>It was introduced to handle asynchronous operation like synchronous opeartion and avoid the callback hell.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">doSomething(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">  doSomethingElse(result, <span class="function"><span class="keyword">function</span>(<span class="params">newResult</span>) </span>&#123;</span><br><span class="line">    doThirdThing(newResult, <span class="function"><span class="keyword">function</span>(<span class="params">finalResult</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'Got the final result: '</span> + finalResult);</span><br><span class="line">    &#125;, failureCallback);</span><br><span class="line">  &#125;, failureCallback);</span><br><span class="line">&#125;, failureCallback);</span><br></pre></td></tr></table></figure>
+
+<p>Common asynchronous-operation</p>
+<ul>
+<li>setTimeOut, setInterval</li>
+<li>XHR request (fetch api)</li>
+<li>Event Listening</li>
+</ul>
+<p>Thansk to promise’s .then() chaining, we can put the callback outside</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">doSomething()</span><br><span class="line">.then(<span class="function"><span class="params">result</span> =&gt;</span> doSomethingElse(result))</span><br><span class="line">.then(<span class="function"><span class="params">newResult</span> =&gt;</span> doThirdThing(newResult))</span><br><span class="line">.then(<span class="function"><span class="params">finalResult</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Got the final result: <span class="subst">$&#123;finalResult&#125;</span>`</span>);</span><br><span class="line">&#125;)</span><br><span class="line">.catch(failureCallback);<span class="comment">//error handler for all above!</span></span><br></pre></td></tr></table></figure>
+
+<p>*<em>This all based on modern API that returning a promise. That is to say the promise chains start with an API function  which returns a promise. *</em></p>
+<p>We can create our own promise as well. Although it’s not typical practive but it can be helpful to ‘promisify’ some old callback-style API then chaining the handler. </p>
+<p>Let’s look at how a promise is created. </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(</span><br><span class="line">  <span class="comment">//executor which runs immediately/sync:</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'sync!'</span>)</span><br><span class="line">  (res, rej)=&gt;&#123;</span><br><span class="line">    <span class="comment">// asynchronous operation. they will be put into the task queue</span></span><br><span class="line">    <span class="comment">//instead of returning something, it calls the callback as sideeffect to pass the result of asyn operation to res()/rej()</span></span><br><span class="line">    <span class="keyword">if</span>(somecodition) res(result); <span class="comment">//once the promise is settled the state won't be changed</span></span><br><span class="line">    rej(error)</span><br><span class="line">    <span class="comment">//then the res()/rej() can pass the result to the ousdie by chaining a .then()/.catch()</span></span><br><span class="line">&#125; </span><br><span class="line">  <span class="comment">//the construcor return the new promise obj (of course)</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>An example of wrapping a callback-style function with Promise:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> wait = <span class="function"><span class="params">ms</span> =&gt;</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> setTimeout(resolve, ms));</span><br><span class="line"></span><br><span class="line">wait(<span class="number">10000</span>).then(<span class="function"><span class="params">()</span> =&gt;</span> saySomething(<span class="string">"10 seconds"</span>)).catch(failureCallback);</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>Another example to implement the query cache:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">query</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//use the property of this function</span></span><br><span class="line">  <span class="keyword">const</span> cache = query.cache || (query.cache = <span class="keyword">new</span> <span class="built_in">Map</span>());</span><br><span class="line">  <span class="keyword">if</span> (cache.has(name)) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"cached data"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(cache.get(name));</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ajax(<span class="string">`http://exampledoamin.com/q?name=<span class="subst">$&#123;name&#125;</span>`</span>).then(</span><br><span class="line">    user =&gt; &#123;</span><br><span class="line">      cache.set(name, user);</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"no cached data"</span>);</span><br><span class="line">      <span class="keyword">return</span> user;</span><br><span class="line">    &#125;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Promise-prototype-method"><a href="#Promise-prototype-method" class="headerlink" title="Promise prototype method"></a>Promise prototype method</h2><ul>
+<li>Promise.prototype.then()</li>
+<li>Promise.prototype.catch()</li>
+<li>Promise.prototype.finally()</li>
+</ul>
+<p>ES2017 🍬🍬🍬🍬🍬🍬</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> result = <span class="keyword">await</span> doSomething();</span><br><span class="line">    <span class="keyword">const</span> newResult = <span class="keyword">await</span> doSomethingElse(result);</span><br><span class="line">    <span class="keyword">const</span> finalResult = <span class="keyword">await</span> doThirdThing(newResult);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`Got the final result: <span class="subst">$&#123;finalResult&#125;</span>`</span>);</span><br><span class="line">  &#125; <span class="keyword">catch</span>(error) &#123;</span><br><span class="line">    failureCallback(error);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>async alone syntax can be used to create promise as well:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//async opeartion here....</span></span><br><span class="line">    <span class="comment">//instead of resolve/reject, just return the result form async operation</span></span><br><span class="line">    <span class="keyword">return</span> value</span><br><span class="line">    <span class="comment">//for error</span></span><br><span class="line">    <span class="keyword">throw</span> error</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> p1 = foo() <span class="comment">//Promise Promise &#123;&lt;resolved&gt;: value&#125; /error</span></span><br></pre></td></tr></table></figure>
+
+<p>await has to be used inside a async function.</p>
+<p>await &lt; Promise &gt; will wait the promise to be settled </p>
+<p>Promise queue implementation</p>
+<ul>
+<li>using forEach</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doThing</span>(<span class="params">fn, callback</span>) </span>&#123;</span><br><span class="line">    fn(); <span class="comment">//call the funcion in the list</span></span><br><span class="line">    callback(); <span class="comment">//call the resolve to pass it to next promise</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">queue</span>(<span class="params">lists</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> promise = <span class="built_in">Promise</span>.resolve();</span><br><span class="line">    lists.forEach(<span class="function"><span class="params">fn</span> =&gt;</span> &#123;</span><br><span class="line">        promise = promise.then(<span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="comment">//key point here, let promise point to next promise</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">                doThing(fn, () =&gt; &#123;</span><br><span class="line">                    resolve()</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> promise; <span class="comment">//return the promise</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>using reduce</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">queue</span>(<span class="params">lists</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> lists.reduce(<span class="function">(<span class="params">promise, list</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> promise.then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">                doThing(list, () =&gt; &#123;</span><br><span class="line">                    resolve;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;, <span class="built_in">Promise</span>.resolve());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="number">2</span>)</span><br><span class="line">    &#125;, <span class="number">200</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f3</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">3</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">queue([f1, f2, f3])</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>Other promise API</p>
+<ul>
+<li><p>Promise.resolve()</p>
+<ul>
+<li>This one actually can be used to implement the .then() and .catch() api</li>
+<li>If the none parameter, return a resovled Promise with undefined value</li>
+<li>if the parameter is not a promise object,  return a resovled Promise with that parameter</li>
+<li>If the parameter is a promise object, return that promise as it is.</li>
+</ul>
+</li>
+<li><p>Promise.reject()</p>
+<ul>
+<li>rarely used</li>
+</ul>
+</li>
+<li><p>Promise.race()</p>
+</li>
+<li><p>Promise.all(&lt; iterable &gt;)</p>
+<ul>
+<li><p>usually work with .map()</p>
+</li>
+<li><pre><code class="js">p.then(<span class="function"><span class="params">results</span>=&gt;</span>{
+    <span class="keyword">return</span> <span class="built_in">Promise</span>.all(results.map(<span class="function"><span class="params">r</span>=&gt;</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span>=&gt;</span>{
+        ...<span class="comment">//do something</span>
+    })))
+})</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<p>Reference:</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank" rel="noopener">MDN Promise</a></p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="lx-navigation">
+  <div class="lx-cover prev lx-cover-sm">
+    <!-- style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-l.jpeg)" -->
+    <div class="overlay"></div>
+    <a class="copy" href="#">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>No newer post</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" >
+			<!-- style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-r.jpeg)" -->
+      <div class="overlay"></div>
+      <a class="copy" href="/2020/05/16/Understanding-Promise/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>Understanding Promise part 1</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+
+</div>
+
+<footer>
+  <div>
+    Copyright &copy; 2020<a href="/"> Brushes & Keys</a><br>Powered by <a
+      href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.js.org" target="_blank">Lx</a> |
+    Modified by
+    Nan Chen <br> Find me at <a href="https://github.com/southchen" target="_blank" rel="noopener">GitHub</a> <a
+      href="https://instagram.com/divetothesea">Instagram</a> <a href="https://www.behance.net/southchen" target="_blank" rel="noopener">Behance</a>
+    <br>
+  </div>
+</footer>
+
+</div>
+
+  <button class="hamburger hamburger--arrow-r" type="button">
+    <div class="hamburger-box">
+      <div class="hamburger-inner"></div>
+    </div>
+  </button>
+  <div class="menu visibility">
+  <div class="menu-head">
+    <span class="layer">
+      <div class="col">
+        <div class="row for-pic">
+          <div class="profile-pic">
+            <a href="/"><img src="https://avatars0.githubusercontent.com/u/26827800?s=460&u=59259f6cb361b7fba376e3ae0c589ccc1639c8b4&v=4" alt="Nan Chen"/></a>
+          </div>
+        </div>
+        <div class="row for-name">
+          <p>Nan Chen</p>
+          <span class="tagline">Not a Number 😆</span>
+        </div>
+      </div>
+    </span>
+  </div>
+  <nav class="menu-container">
+  <ul class="menu-items">
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>Home</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+    
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>Pages</span>
+        <ul>
+          <li><a href="/about">About</a></li>
+        </ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-link fa-fw"></i>Friends</span>
+        <ul>
+          <li> <a href="https://lx.js.org" target="_blank">Theme-Lx</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+</div>
+
+  <div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/js/jquery.easing.min.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      var goToTop = function () {
+        $(".js-gotop").on("click", function (event) {
+          event.preventDefault();
+          $("html, body").animate({
+            scrollTop: $("html").offset().top
+          }, 500, "easeInOutExpo");
+          return false;
+        });
+        $(window).scroll(function () {
+          var $win = $(window);
+          if ($win.scrollTop() > 200) {
+            $(".js-top").addClass("active");
+          } else {
+            $(".js-top").removeClass("active");
+          }
+        });
+      };
+      $(function () {
+        goToTop();
+      });
+    }());
+
+  </script>
+  
+
+
+</body>
+
+</html>
