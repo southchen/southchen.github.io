@@ -105,6 +105,129 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2 class="title"><a href="/2020/05/21/Template-for-Divided-Conquer-Algorithm/">Template for Divided Conquer Algorithm</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-05-21</span>
+      <p><div class="note warning">
+            <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h3><p>This article is originally based on my understanding of this concept. No guarantee on the accuracy.😅</p>
+          </div>
+
+<p><strong><code>Template:</code></strong></p>
+<ul>
+<li><p>1.base case</p>
+</li>
+<li><p>2.split to smaller sacle </p>
+<p>(directly slice from the array otherwise maintain the index, and dynamically updated every call)</p>
+</li>
+<li><p>3.recursion</p>
+</li>
+<li><p>4.combination </p>
+<p>(define the combination function and pass the returned value from recursion as parameter)</p>
+</li>
+</ul>
+<p>Let’s see the examples from easy to moderate</p>
+<h2 id="🌟-Search-the-max-amp-min-value"><a href="#🌟-Search-the-max-amp-min-value" class="headerlink" title="🌟 Search the max&amp;min value"></a>🌟 Search the max&amp;min value</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">searchMaxMin</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">      <span class="comment">//the base case</span></span><br><span class="line">        <span class="keyword">if</span> (arr.length &lt;= <span class="number">2</span>) &#123;</span><br><span class="line">          <span class="keyword">return</span> [<span class="built_in">Math</span>.max(...arr), <span class="built_in">Math</span>.min(...arr)];</span><br><span class="line">        &#125;</span><br><span class="line">      <span class="comment">//split</span></span><br><span class="line">        <span class="keyword">var</span> mid = arr.length / <span class="number">2</span> - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">let</span> left = arr.slice(<span class="number">0</span>, mid + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">let</span> right = arr.slice(mid + <span class="number">1</span>, arr.length);</span><br><span class="line">      <span class="comment">//recursion</span></span><br><span class="line">        <span class="keyword">var</span> sortedLeft = searchMaxMin(left);</span><br><span class="line">        <span class="keyword">var</span> sortedRight = searchMaxMin(right);</span><br><span class="line"><span class="comment">//combination function</span></span><br><span class="line">         <span class="keyword">const</span> combine = <span class="function">(<span class="params">left, right</span>) =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">var</span> result = [];</span><br><span class="line">          result[<span class="number">0</span>] = left[<span class="number">0</span>] &gt; right[<span class="number">0</span>] ? left[<span class="number">0</span>] : right[<span class="number">0</span>];</span><br><span class="line">          result[<span class="number">1</span>] = left[<span class="number">1</span>] &gt; right[<span class="number">1</span>] ? right[<span class="number">1</span>] : left[<span class="number">1</span>];</span><br><span class="line">          <span class="keyword">return</span> result;</span><br><span class="line">        &#125;;</span><br><span class="line"><span class="comment">//combine the returned value</span></span><br><span class="line">        <span class="keyword">return</span> combine(sortedLeft, sortedRight);</span><br><span class="line">      &#125;</span><br><span class="line">searchMaxMin([<span class="number">11</span>,<span class="number">2</span>,<span class="number">34</span>,<span class="number">0</span>,<span class="number">55</span>,<span class="number">11</span>])</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="🌟🌟-Merge-Sorting"><a href="#🌟🌟-Merge-Sorting" class="headerlink" title="🌟🌟 Merge Sorting"></a>🌟🌟 Merge Sorting</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mergeSort=<span class="function"><span class="params">arr</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="comment">//the edge case</span></span><br><span class="line">    <span class="keyword">if</span>(arr.length&lt;<span class="number">2</span>) <span class="keyword">return</span> arr;</span><br><span class="line">     <span class="comment">//split into smaller pieces</span></span><br><span class="line">    <span class="keyword">let</span> mid=<span class="built_in">Math</span>.floor(arr.length/<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">let</span> left=arr.slice(<span class="number">0</span>,mid),right=arr.slice(mid);</span><br><span class="line">   <span class="comment">//recursion</span></span><br><span class="line">    <span class="keyword">let</span> sortedLeft = mergeSort(left),sortedRight=(mergeSort(right));</span><br><span class="line">    <span class="comment">//combination function</span></span><br><span class="line">    <span class="keyword">const</span> merge=<span class="function">(<span class="params">left,right</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> res=[];</span><br><span class="line">    <span class="keyword">while</span>(left.length&amp;&amp;right.length)&#123;</span><br><span class="line">        <span class="keyword">if</span>(left[<span class="number">0</span>]&lt;=right[<span class="number">0</span>])&#123;</span><br><span class="line">            res.push(left.shift());</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            res.push(right.shift());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(left.length)&#123;</span><br><span class="line">        res.push(left.shift());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(right.length)&#123;</span><br><span class="line">        res.push(right.shift());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br><span class="line">    <span class="comment">//combine the returned value</span></span><br><span class="line">    <span class="keyword">return</span> merge(sortedLeft,sortedRight);</span><br><span class="line">&#125;;</span><br><span class="line">mergeSort([<span class="number">3</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">2</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>The call-stack would run in this sequence:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">merge(mergesort(<span class="number">3</span>,<span class="number">1</span>),mergersort(<span class="number">5</span>,<span class="number">0</span>,<span class="number">2</span>))</span><br><span class="line">merge(mergesort(<span class="number">3</span>),mergersort(<span class="number">1</span>))</span><br><span class="line">merge(left<span class="number">-3</span>,right<span class="number">-1</span>)</span><br><span class="line">merge(mergesort(<span class="number">5</span>),mergersort(<span class="number">0</span>,<span class="number">2</span>))</span><br><span class="line">merge(mergesort(<span class="number">0</span>),mergersort(<span class="number">2</span>))</span><br><span class="line">merge(left<span class="number">-0</span>,right<span class="number">-2</span>)</span><br><span class="line">merge(left<span class="number">-5</span>,right<span class="number">-0</span>,<span class="number">2</span>)</span><br><span class="line">merge(left<span class="number">-1</span>,<span class="number">3</span>,right<span class="number">-0</span>,<span class="number">2</span>,<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="🌟🌟-Quick-Sorting"><a href="#🌟🌟-Quick-Sorting" class="headerlink" title="🌟🌟 Quick Sorting"></a>🌟🌟 Quick Sorting</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">quick</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//the base case</span></span><br><span class="line">        <span class="keyword">if</span> (nums.length &lt;= <span class="number">1</span>) <span class="keyword">return</span> nums;</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">let</span> mid = <span class="built_in">Math</span>.floor(nums.length / <span class="number">2</span>);</span><br><span class="line">        <span class="keyword">let</span> pivot = nums.splice(mid, <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">let</span> left = [],</span><br><span class="line">          right = [];</span><br><span class="line">    <span class="comment">//break into two smaller array;</span></span><br><span class="line">        <span class="keyword">for</span> (num <span class="keyword">of</span> nums) &#123;</span><br><span class="line">          <span class="keyword">if</span> (num &lt; pivot) left.push(num);</span><br><span class="line">          <span class="keyword">if</span> (num &gt;= pivot) right.push(num);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="comment">//recursively pass the smaller sacle</span></span><br><span class="line">    <span class="keyword">let</span> sortedLeft =quick(left); </span><br><span class="line">    <span class="keyword">let</span> sortedRight = quick(right);</span><br><span class="line">    <span class="comment">//combine the returned result</span></span><br><span class="line">   <span class="keyword">return</span> [...sortedLeft, ...pivot, ...sortedRight]; </span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="🌟🌟-169-Majority-Element"><a href="#🌟🌟-169-Majority-Element" class="headerlink" title="🌟🌟 169. Majority Element"></a>🌟🌟 <a href="https://leetcode-cn.com/problems/majority-element/" target="_blank" rel="noopener">169. Majority Element</a></h2></p>
+      <div class="post-button"><a class="btn" href="/2020/05/21/Template-for-Divided-Conquer-Algorithm/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
+      <h2 class="title"><a href="/2020/05/16/Understanding-Promise-part-2/">Understanding Promise part 2</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-05-16</span>
+      <p><div class="note warning">
+            <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h3><p>This article is originally based on my understanding of this concept. No guarantee on the accuracy.😅</p>
+          </div>
+
+<p>‘The <strong><code>Promise</code></strong> object represents the eventual completion (or failure) of an asynchronous operation, and its resulting value.’</p>
+<p>It was introduced to handle asynchronous operation like synchronous opeartion and avoid the callback hell.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">doSomething(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">  doSomethingElse(result, <span class="function"><span class="keyword">function</span>(<span class="params">newResult</span>) </span>&#123;</span><br><span class="line">    doThirdThing(newResult, <span class="function"><span class="keyword">function</span>(<span class="params">finalResult</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'Got the final result: '</span> + finalResult);</span><br><span class="line">    &#125;, failureCallback);</span><br><span class="line">  &#125;, failureCallback);</span><br><span class="line">&#125;, failureCallback);</span><br></pre></td></tr></table></figure>
+
+<p>Common asynchronous-operation</p>
+<ul>
+<li>setTimeOut, setInterval</li>
+<li>XHR request (fetch api)</li>
+<li>Event Listening</li>
+</ul>
+<p>Thansk to promise’s .then() chaining, we can put the callback outside：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">doSomething()</span><br><span class="line">.then(<span class="function"><span class="params">result</span> =&gt;</span> doSomethingElse(result))</span><br><span class="line">.then(<span class="function"><span class="params">newResult</span> =&gt;</span> doThirdThing(newResult))</span><br><span class="line">.then(<span class="function"><span class="params">finalResult</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Got the final result: <span class="subst">$&#123;finalResult&#125;</span>`</span>);</span><br><span class="line">&#125;)</span><br><span class="line">.catch(failureCallback);<span class="comment">//error handler for all above!</span></span><br></pre></td></tr></table></figure>
+
+<p>*<em>This all based on modern API that returning a promise. That is to say, the promise chains starts with an API function  which returns a promise. *</em></p>
+<p>We can create our own promise as well. Although it’s not typical practice but it can be helpful to ‘promisify’ some old callback-style API then chain the handler. </p>
+<p>Let’s look at how a promise is created. </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(</span><br><span class="line">  <span class="comment">//executor which runs immediately/sync:</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'sync!'</span>)</span><br><span class="line">  (res, rej)=&gt;&#123;</span><br><span class="line">    <span class="comment">// asynchronous operation. they will be put into the task queue</span></span><br><span class="line">    <span class="comment">//instead of returning something, it calls the callback as sideeffect to pass the result of asyn operation to res()/rej()</span></span><br><span class="line">    <span class="keyword">if</span>(somecodition) res(result); <span class="comment">//once the promise is settled the state won't be changed</span></span><br><span class="line">    rej(error)</span><br><span class="line">    <span class="comment">//then the res()/rej() can pass the result to the ousdie by chaining a .then()/.catch()</span></span><br><span class="line">&#125; </span><br><span class="line">  <span class="comment">//the construcor return the new promise obj (of course)</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>An example of wrapping a callback-style function with Promise:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> wait = <span class="function"><span class="params">ms</span> =&gt;</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> setTimeout(resolve, ms));</span><br><span class="line"></span><br><span class="line">wait(<span class="number">10000</span>).then(<span class="function"><span class="params">()</span> =&gt;</span> saySomething(<span class="string">"10 seconds"</span>)).catch(failureCallback);</span><br></pre></td></tr></table></figure></p>
+      <div class="post-button"><a class="btn" href="/2020/05/16/Understanding-Promise-part-2/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
+      <h2 class="title"><a href="/2020/05/16/Understanding-Promise/">Understanding Promise part 1</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-05-16</span>
+      <p><div class="note warning">
+            <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h3><p>This article is originally based on my understanding of this concept. No guarantee on the accuracy.😅</p>
+          </div>
+
+<p>Starting from a puzzle from <a href="https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html" target="_blank" rel="noopener">this article</a>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">doSomething().then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> doSomethingElse();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">doSomething().then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  doSomethingElse();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">doSomething().then(doSomethingElse());</span><br><span class="line"></span><br><span class="line">doSomething().then(doSomethingElse);</span><br><span class="line"><span class="comment">//note doSomething() and doSomethingElse() return a resolved promise</span></span><br></pre></td></tr></table></figure>
+
+<p>How would this code run?</p>
+<h3 id="To-answer-this-puzzle-a-few-key-points-should-be-understood"><a href="#To-answer-this-puzzle-a-few-key-points-should-be-understood" class="headerlink" title="To answer this puzzle, a few key points should be understood:"></a>To answer this puzzle, a few key points should be understood:</h3><ul>
+<li><p>.then(callback) would ounly be put into the <strong>task queue</strong> when the chained promise was settled (fullfulled/resolved or rejected).</p>
+</li>
+<li><p>.then(callback) would pass the value returned from the callback to following .then/.catch</p>
+<ul>
+<li><p>If there is no explicit return of the callback, returns undefined</p>
+</li>
+<li><p>If the callback returns a promise as well, the following .then()/.catch() would be thrown into the task queue, when it’s settled. After the current stack is cleaned, they would be pushed to the stack (run the callback). Even a promise has already settled, the .then() still runs asynchronously. </p>
+<ul>
+<li><pre><code class="js"><span class="keyword">let</span> p = <span class="built_in">Promise</span>.resolve(<span class="string">'resolved already'</span>)
+p.then(<span class="function"><span class="params">v</span>=&gt;</span>{<span class="built_in">console</span>.loe(<span class="string">'async result: '</span>=v)})
+<span class="built_in">console</span>.log(<span class="string">'cleaning stack'</span>)
+<span class="comment">//print 'cleaning stack' 'async result: resolved already'</span>
+&lt;!--￼<span class="number">1</span>--&gt;</code></pre>
+</li>
+</ul>
+</li>
+<li><p>if the callback returns a normal variable, the variable would be passed, and the state will be set to <strong>resolved</strong>.</p>
+<ul>
+<li><p>a corner-case: if the callback returns obj which has a ‘then’ method, the following then() would run as the code in ‘then’ method.</p>
+</li>
+<li><pre><code class="js"> <span class="built_in">Promise</span>.resolve({<span class="attr">value</span>: <span class="number">1</span>,
+                  then: <span class="function"><span class="keyword">function</span> (<span class="params">resolve</span>) </span>{ <span class="comment">//the following then call this function</span>
+                      <span class="built_in">console</span>.log(<span class="keyword">this</span>.value) <span class="comment">//print 1.</span>
+                      resolve(<span class="string">'then method in object'</span>) 
+                    <span class="comment">//resolve (or reject) function is a must，otherwise the following then would not be called, pending</span>
+                  })
+           .then(<span class="function"><span class="params">value</span> =&gt;</span> {
+              <span class="built_in">console</span>.log(<span class="string">'the result from pre .then:'</span> + value); <span class="comment">//print 'the result form pre .then: then method in object'</span>
+              }
+          })
+&lt;!--￼<span class="number">2</span>--&gt;</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong>But actually this is against the design of Promise whose aim is to avoid callback style but to chain the async exceutor outside the previous one. So it’d better update to this:</strong></p></li></ul></li></ul></p>
+      <div class="post-button"><a class="btn" href="/2020/05/16/Understanding-Promise/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2 class="title"><a href="/2020/05/13/Class-based-local-storage/">Class-based local storage</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-05-13</span>
       <p><h1 id="Class-based-local-storage"><a href="#Class-based-local-storage" class="headerlink" title="Class-based local storage"></a>Class-based local storage</h1><p>Sometimes when I was trying to build some small app, it’s really not neccessary to connect the app to the cloud database like mongoDB. </p>
@@ -118,52 +241,54 @@
   </div>
   <div class="lx-entry padding">
     <div>
-      <h2 class="title"><a href="/2020/04/27/Webpack-core-concept/">Learning Webpack core concept</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-04-27</span>
-      <p><img src="https://raw.githubusercontent.com/webpack/media/master/logo/logo-on-white-bg.png">
+      <h2 class="title"><a href="/2020/04/29/Closure/">A visual way to learn Closure</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-04-29</span>
+      <p><div class="note warning">
+            <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h3><p>This article is originally based on my understanding of this concept. No guarantee on the accuracy.😅</p>
+          </div>
 
-<p>Main reference:</p>
-<p><a src="https://www.youtube.com/watch?v=xse6JKcfbzs">Sean Larkin’s talk Everything’s a Plugin: Understanding Webpack From the Inside Out at JS Kongress 2019</a></p>
-<hr>
-<h2 id="Getting-started"><a href="#Getting-started" class="headerlink" title="Getting started:"></a>Getting started:</h2><p>Build modules on the browser including non-js file</p>
-<p>$ webpack &lt;entry.js&gt;</p>
-<p>$ webpack-dev-server –port=9000</p>
-<h2 id="Entry-point"><a href="#Entry-point" class="headerlink" title="Entry point"></a>Entry point</h2><ul>
-<li><p>a module relys on other module, dependncies</p>
+<p>The closure is a kind of intimidating concept for people new to javascript.<br>I think it’s necessary to clarify some concept of execution context (EC) and scope before approaching ‘closure’ itself.</p>
+<ul>
+<li><p>Javascript has 3 types of scope (after ES6)</p>
+<ul>
+<li><p>block scope </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> a = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// ReferenceError: a is not defined</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>the first js to load to ‘kick-off’ your app, a starting point for webpack to build the dependency graph</p>
+<li><p>Function scope</p>
 </li>
-<li><p>what to load for the browser; compliments the output property.</p>
+<li><p>Global scope</p>
 </li>
 </ul>
-<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><ul>
-<li><p>where and how to distributes the bubdles (compilations)</p>
-</li>
-<li><p>default: bundle.js</p>
 </li>
 </ul>
-<h2 id="Loaders"><a href="#Loaders" class="headerlink" title="Loaders"></a>Loaders</h2><ul>
-<li><p>js functions that takes the source fiel, and return a <strong>modifed</strong> state</p>
+<p>  whenever you’re trying to call/use a variable, the engine would find it <strong>along the scope chain</strong>. </p>
+<p>  If the engine detects that a variable would not be called after the function execution context was removed from the call stack, it would junk the variable (<strong>garbage collecting</strong>) and free the memory.</p>
+<ul>
+<li><p>The [[scope]] is determined during <strong>function declarartion</strong>.</p>
+<p><strong>All</strong> code is executed in their execution context: global EC or function EC. </p>
+<p>EC can be abstracted as an object which includes <span class="label primary">variable object</span>, <span class="label success">scope chain</span>, and <span class="label warning"> this value</span>. </p>
 </li>
-<li><p>tell webpack how to load non-js file(transfer &amp; interpretation)</p>
+<li><p><img src="/.com//closure-Page-2.svg" alt="closure-Page-2"></p>
 </li>
-<li><p>return compliations</p>
+<li><p>Whenever a function is called, its EC would be pushed to the top of the call stack. And all the VO are activated as activation objects. When all the code inside the function is executed or returned, the EC was destroyed. Next time if the same function is called again, a new EC would be created.</p>
+</li>
+<li><p>The function EC has two phases: creation phase and execution phase.</p>
+</li>
+<li><p>The creation phase is when the VO and ‘this’ are created, and the scope chain is initialed by [[scope]]</p>
+</li>
+<li><p>The execution phase is when the value of each object/variable is assigned and determined.</p>
 </li>
 </ul>
-<h4 id="test"><a href="#test" class="headerlink" title="test"></a>test</h4><p>RegEx instructs the complier which files to run the loader against</p>
-<h4 id="use"><a href="#use" class="headerlink" title="use"></a>use</h4><p>An array/string/function which returns loader objects</p>
-<h4 id="enforce"><a href="#enforce" class="headerlink" title="enforce"></a>enforce</h4><p>Pre/post</p>
-<p>run this rules before/after all other rules</p>
-<h4 id="include-amp-exclude"><a href="#include-amp-exclude" class="headerlink" title="include&amp;exclude"></a>include&amp;exclude</h4><p>Filter through</p>
-<p>eg.node-modules</p>
-<h4 id="chaining-loaders"><a href="#chaining-loaders" class="headerlink" title="chaining loaders"></a>chaining loaders</h4><p>order sensitive</p>
-<p>like a streamline</p></p>
-      <div class="post-button"><a class="btn" href="/2020/04/27/Webpack-core-concept/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+<p><img src="/.com//closure.svg" alt="closure"></p>
+<h3 id="A-classic-interview-question"><a href="#A-classic-interview-question" class="headerlink" title="A classic interview question:"></a>A classic interview question:</h3></p>
+      <div class="post-button"><a class="btn" href="/2020/04/29/Closure/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
 
 
-
+<div id="pagination">
+  <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"></a>
+</div>
 
 <footer>
   <div>
