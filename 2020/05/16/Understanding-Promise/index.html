@@ -121,13 +121,13 @@
 
 <p>How would this code run?</p>
 <h3 id="To-answer-this-puzzle-a-few-key-points-should-be-understood"><a href="#To-answer-this-puzzle-a-few-key-points-should-be-understood" class="headerlink" title="To answer this puzzle, a few key points should be understood:"></a>To answer this puzzle, a few key points should be understood:</h3><ul>
-<li><p>.then(callback) would ounly run when the chained promise was resolved.</p>
+<li><p>.then(callback) would ounly be put into the <strong>task queue</strong> when the chained promise was settled (fullfulled/resolved or rejected).</p>
 </li>
 <li><p>.then(callback) would pass the value returned from the callback to following .then/.catch</p>
 <ul>
-<li><p>If there is no return of callback, return undefined</p>
+<li><p>If there is no explicit return of the callback, returns undefined</p>
 </li>
-<li><p>If the callback returns a promise as well, the following .then()/.catch() would be thrown into the task queue, when it’s settled. After the current stack is cleaned, they would be pushed. Even a promise has already settled, the .then() still runs asynchronously. </p>
+<li><p>If the callback returns a promise as well, the following .then()/.catch() would be thrown into the task queue, when it’s settled. After the current stack is cleaned, they would be pushed to the stack (run the callback). Even a promise has already settled, the .then() still runs asynchronously. </p>
 <ul>
 <li><pre><code class="js"><span class="keyword">let</span> p = <span class="built_in">Promise</span>.resolve(<span class="string">'resolved already'</span>)
 p.then(<span class="function"><span class="params">v</span>=&gt;</span>{<span class="built_in">console</span>.loe(<span class="string">'async result: '</span>=v)})
@@ -139,7 +139,7 @@ p.then(<span class="function"><span class="params">v</span>=&gt;</span>{<span cl
 </li>
 <li><p>if the callback returns a normal variable, the variable would be passed, and the state will be set to <strong>resolved</strong>.</p>
 <ul>
-<li><p>a corner-case: if the callback returns obj which has a ‘then’ method, the following then() would run as the code in ‘then method’</p>
+<li><p>a corner-case: if the callback returns obj which has a ‘then’ method, the following then() would run as the code in ‘then’ method.</p>
 </li>
 <li><pre><code class="js"> <span class="built_in">Promise</span>.resolve({<span class="attr">value</span>: <span class="number">1</span>,
                   then: <span class="function"><span class="keyword">function</span> (<span class="params">resolve</span>) </span>{ <span class="comment">//the following then call this function</span>
@@ -155,7 +155,8 @@ p.then(<span class="function"><span class="params">v</span>=&gt;</span>{<span cl
 </li>
 </ul>
 </li>
-<li><p><strong>But actually this is against the design of Promise whose aim is to avoid callback style but chain the async exceutor outside the previous one. So it’d better update to this:</strong></p>
+<li><p><strong>But actually this is against the design of Promise whose aim is to avoid callback style but to chain the async exceutor outside the previous one. So it’d better update to this:</strong></p>
+<a id="more"></a>
 </li>
 <li><pre><code class="js"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> {
         setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> {
@@ -177,7 +178,7 @@ p.then(<span class="function"><span class="params">v</span>=&gt;</span>{<span cl
 </li>
 </ul>
 </li>
-<li><p>If the parameter of .then is not a callback, but an invoked function (eg foo( ), (function( ){…})( ) ). The invoked function would run immediately.  And if a promise is created and resolved inside that function, it would be overseen by the chain of promise.</p>
+<li><p>If the parameter of .then is not a callback, but an invoked function (eg. foo( ), (function( ){…})( ) ). The invoked function would run immediately.  And if a promise is created and resolved inside that function, it would be overseen by the chain/queue of promise.</p>
 <ul>
 <li><pre><code class="js"><span class="function"><span class="keyword">function</span> <span class="title">dosth</span>(<span class="params">v</span>) </span>{
         <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> {
@@ -218,7 +219,6 @@ p.then(<span class="function"><span class="params">v</span>=&gt;</span>{<span cl
           <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'test error'</span>);
           <span class="comment">//return Promise.resolve('begining'); //[1]</span>
         })
-        <span class="comment">//catch也返回一个promise，无显式return默认resolved，向后同步传递</span>
         .catch(<span class="function">(<span class="params">err</span>) =&gt;</span> {
           <span class="built_in">console</span>.log(<span class="string">'I catch：'</span>, err);
                      <span class="comment">//[1]implicit return </span>

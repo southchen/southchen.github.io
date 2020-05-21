@@ -1,0 +1,304 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content=#58b77a>
+<title>Template for Divided Conquer Algorithm | Brushes &amp; Keys</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Nan Chen">
+<meta name="keywords" content="javascript web-devlopement photography">
+<meta name="description" content="Personal blog tech & life">
+
+<script id="hexo-configurations">
+  var CONFIG = {
+    root: '/',
+    theme: 'lx',
+    version: '0.3.9',
+    localsearch:{
+      "enable": false,
+      "trigger": "auto",
+      "top_n_per_article": 1,
+      "unescape": false,
+      "preload": false
+      },
+    path: '-'
+  };
+</script>
+
+<link rel="shortcut icon" href="/bg.png">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/css/main.min.css">
+<link rel="stylesheet" href="/css/mycss.css">
+<style type="text/css">
+  pre,
+  code {
+    font-family: 'Hind Siliguri',
+      monospace;
+  }
+
+  html {
+    font-family: sans-serif;
+  }
+
+  body {
+    font-family: sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  figure {
+    font-family: Hind Siliguri;
+  }
+
+  .menu-container {
+    font-family: sans-serif;
+  }
+
+</style>
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/js/jquery.jside.menu.js"></script>
+<script>
+  $(document).ready(function () {
+    $(".menu-container").jSideMenu({
+      jSidePosition: "position-right",
+      jSideSticky: true,
+      jSideSkin: "greenish",
+    });
+  });
+
+</script>
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Hind Siliguri:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <style>
+  .single #lx-aside {
+    height: 380px;
+  }
+
+</style>
+<div class="single">
+  
+<div id="page">
+<div id="lx-aside" style="background-image: url(https://images.unsplash.com/photo-1505238680356-667803448bb6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80)" data-stellar-background-ratio="0.5">
+  <div class="overlay">
+    <div class="page-title">
+      <div class="avatar"><a href="/"><img src="https://avatars0.githubusercontent.com/u/26827800?s=460&u=59259f6cb361b7fba376e3ae0c589ccc1639c8b4&v=4"></a></div>
+      <span>2020-05-21</span>
+      <h2>Template for Divided Conquer Algorithm</h2>
+      <div class="tags"><i
+          class="fa fa-tag"></i><a class="tag-link" href="/tags/algorithm/" rel="tag">algorithm</a> <i class="fa fa-tag"></i><a class="tag-link" href="/tags/interview/" rel="tag">interview</a> <i class="fa fa-tag"></i><a class="tag-link" href="/tags/javascirpt/" rel="tag">javascirpt</a>
+      </div>
+    <div class="social-links">
+  <a href="https://github.com/southchen" target="_blank"><i
+      class="fa fa-github fa-fw"></i></a>
+  <a href="https://instagram.com/divetothesea" target="_blank"><i
+      class="fa fa-instagram fa-fw"></i></a>
+  <a href="https://www.behance.net/southchen" target="_blank"><i
+      class="fa fa-behance fa-fw"></i></a>
+</div>
+</div>
+</div>
+</div>
+
+  <div id="lx-main-content">
+    <div class="lx-post">
+      <div class="lx-entry padding">
+        <div>
+          <div class="note warning">
+            <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h3><p>This article is originally based on my understanding of this concept. No guarantee on the accuracy.😅</p>
+          </div>
+
+<p><strong><code>Template:</code></strong></p>
+<ul>
+<li><p>1.base case</p>
+</li>
+<li><p>2.split to smaller sacle </p>
+<p>(directly slice from the array otherwise maintain the index, and dynamically updated every call)</p>
+</li>
+<li><p>3.recursion</p>
+</li>
+<li><p>4.combination </p>
+<p>(define the combination function and pass the returned value from recursion as parameter)</p>
+</li>
+</ul>
+<p>Let’s see the examples from easy to moderate</p>
+<h2 id="🌟-Search-the-max-amp-min-value"><a href="#🌟-Search-the-max-amp-min-value" class="headerlink" title="🌟 Search the max&amp;min value"></a>🌟 Search the max&amp;min value</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">searchMaxMin</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">      <span class="comment">//the base case</span></span><br><span class="line">        <span class="keyword">if</span> (arr.length &lt;= <span class="number">2</span>) &#123;</span><br><span class="line">          <span class="keyword">return</span> [<span class="built_in">Math</span>.max(...arr), <span class="built_in">Math</span>.min(...arr)];</span><br><span class="line">        &#125;</span><br><span class="line">      <span class="comment">//split</span></span><br><span class="line">        <span class="keyword">var</span> mid = arr.length / <span class="number">2</span> - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">let</span> left = arr.slice(<span class="number">0</span>, mid + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">let</span> right = arr.slice(mid + <span class="number">1</span>, arr.length);</span><br><span class="line">      <span class="comment">//recursion</span></span><br><span class="line">        <span class="keyword">var</span> sortedLeft = searchMaxMin(left);</span><br><span class="line">        <span class="keyword">var</span> sortedRight = searchMaxMin(right);</span><br><span class="line"><span class="comment">//combination function</span></span><br><span class="line">         <span class="keyword">const</span> combine = <span class="function">(<span class="params">left, right</span>) =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">var</span> result = [];</span><br><span class="line">          result[<span class="number">0</span>] = left[<span class="number">0</span>] &gt; right[<span class="number">0</span>] ? left[<span class="number">0</span>] : right[<span class="number">0</span>];</span><br><span class="line">          result[<span class="number">1</span>] = left[<span class="number">1</span>] &gt; right[<span class="number">1</span>] ? right[<span class="number">1</span>] : left[<span class="number">1</span>];</span><br><span class="line">          <span class="keyword">return</span> result;</span><br><span class="line">        &#125;;</span><br><span class="line"><span class="comment">//combine the returned value</span></span><br><span class="line">        <span class="keyword">return</span> combine(sortedLeft, sortedRight);</span><br><span class="line">      &#125;</span><br><span class="line">searchMaxMin([<span class="number">11</span>,<span class="number">2</span>,<span class="number">34</span>,<span class="number">0</span>,<span class="number">55</span>,<span class="number">11</span>])</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="🌟🌟-Merge-Sorting"><a href="#🌟🌟-Merge-Sorting" class="headerlink" title="🌟🌟 Merge Sorting"></a>🌟🌟 Merge Sorting</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mergeSort=<span class="function"><span class="params">arr</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="comment">//the edge case</span></span><br><span class="line">    <span class="keyword">if</span>(arr.length&lt;<span class="number">2</span>) <span class="keyword">return</span> arr;</span><br><span class="line">     <span class="comment">//split into smaller pieces</span></span><br><span class="line">    <span class="keyword">let</span> mid=<span class="built_in">Math</span>.floor(arr.length/<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">let</span> left=arr.slice(<span class="number">0</span>,mid),right=arr.slice(mid);</span><br><span class="line">   <span class="comment">//recursion</span></span><br><span class="line">    <span class="keyword">let</span> sortedLeft = mergeSort(left),sortedRight=(mergeSort(right));</span><br><span class="line">    <span class="comment">//combination function</span></span><br><span class="line">    <span class="keyword">const</span> merge=<span class="function">(<span class="params">left,right</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> res=[];</span><br><span class="line">    <span class="keyword">while</span>(left.length&amp;&amp;right.length)&#123;</span><br><span class="line">        <span class="keyword">if</span>(left[<span class="number">0</span>]&lt;=right[<span class="number">0</span>])&#123;</span><br><span class="line">            res.push(left.shift());</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            res.push(right.shift());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(left.length)&#123;</span><br><span class="line">        res.push(left.shift());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(right.length)&#123;</span><br><span class="line">        res.push(right.shift());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br><span class="line">    <span class="comment">//combine the returned value</span></span><br><span class="line">    <span class="keyword">return</span> merge(sortedLeft,sortedRight);</span><br><span class="line">&#125;;</span><br><span class="line">mergeSort([<span class="number">3</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">2</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>The call-stack would run in this sequence:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">merge(mergesort(<span class="number">3</span>,<span class="number">1</span>),mergersort(<span class="number">5</span>,<span class="number">0</span>,<span class="number">2</span>))</span><br><span class="line">merge(mergesort(<span class="number">3</span>),mergersort(<span class="number">1</span>))</span><br><span class="line">merge(left<span class="number">-3</span>,right<span class="number">-1</span>)</span><br><span class="line">merge(mergesort(<span class="number">5</span>),mergersort(<span class="number">0</span>,<span class="number">2</span>))</span><br><span class="line">merge(mergesort(<span class="number">0</span>),mergersort(<span class="number">2</span>))</span><br><span class="line">merge(left<span class="number">-0</span>,right<span class="number">-2</span>)</span><br><span class="line">merge(left<span class="number">-5</span>,right<span class="number">-0</span>,<span class="number">2</span>)</span><br><span class="line">merge(left<span class="number">-1</span>,<span class="number">3</span>,right<span class="number">-0</span>,<span class="number">2</span>,<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="🌟🌟-Quick-Sorting"><a href="#🌟🌟-Quick-Sorting" class="headerlink" title="🌟🌟 Quick Sorting"></a>🌟🌟 Quick Sorting</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">quick</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//the base case</span></span><br><span class="line">        <span class="keyword">if</span> (nums.length &lt;= <span class="number">1</span>) <span class="keyword">return</span> nums;</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">let</span> mid = <span class="built_in">Math</span>.floor(nums.length / <span class="number">2</span>);</span><br><span class="line">        <span class="keyword">let</span> pivot = nums.splice(mid, <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">let</span> left = [],</span><br><span class="line">          right = [];</span><br><span class="line">    <span class="comment">//break into two smaller array;</span></span><br><span class="line">        <span class="keyword">for</span> (num <span class="keyword">of</span> nums) &#123;</span><br><span class="line">          <span class="keyword">if</span> (num &lt; pivot) left.push(num);</span><br><span class="line">          <span class="keyword">if</span> (num &gt;= pivot) right.push(num);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="comment">//recursively pass the smaller sacle</span></span><br><span class="line">    <span class="keyword">let</span> sortedLeft =quick(left); </span><br><span class="line">    <span class="keyword">let</span> sortedRight = quick(right);</span><br><span class="line">    <span class="comment">//combine the returned result</span></span><br><span class="line">   <span class="keyword">return</span> [...sortedLeft, ...pivot, ...sortedRight]; </span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="🌟🌟-169-Majority-Element"><a href="#🌟🌟-169-Majority-Element" class="headerlink" title="🌟🌟 169. Majority Element"></a>🌟🌟 <a href="https://leetcode-cn.com/problems/majority-element/" target="_blank" rel="noopener">169. Majority Element</a></h2><a id="more"></a>
+
+<p>Version 1:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> majorityElement = <span class="function">(<span class="params">nums</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">//base case</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (nums.length &lt;= <span class="number">1</span>) <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">  <span class="comment">//split</span></span><br><span class="line">  <span class="keyword">let</span> mid = nums.length / <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">let</span> left = nums.slice(<span class="number">0</span>, mid);</span><br><span class="line">  <span class="keyword">let</span> right = nums.slice(mid, nums.length);</span><br><span class="line"></span><br><span class="line">  <span class="comment">//recursion</span></span><br><span class="line">  <span class="keyword">let</span> majLeft = majorityElement(left);</span><br><span class="line">  <span class="keyword">let</span> majRight = majorityElement(right);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (majLeft === majRight) <span class="keyword">return</span> majLeft;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//combination</span></span><br><span class="line">  <span class="keyword">const</span> combine = <span class="function">(<span class="params">majLeft, majRight</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> countLeft = <span class="number">0</span>,</span><br><span class="line">      countRight = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (nums[i] === majLeft) &#123;</span><br><span class="line">        countLeft++;</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[i] === majRight) &#123;</span><br><span class="line">        countRight++;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> countLeft &gt; countRight ? majLeft : majRight;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> combine(majLeft, majRight);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Version 2:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> majorityElement=<span class="function"><span class="params">nums</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="comment">//combination function</span></span><br><span class="line">    <span class="keyword">const</span> count=<span class="function">(<span class="params">arr,num,left,right</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> count=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i=left;i&lt;=right;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(arr[i]===num)&#123;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> conquer=<span class="function">(<span class="params">arr,left,right</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">        <span class="keyword">if</span>(left===right)&#123;</span><br><span class="line">            <span class="keyword">return</span> arr[left];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//split and recursion</span></span><br><span class="line">        <span class="keyword">let</span> mid=<span class="built_in">Math</span>.floor((left+right)/<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">let</span> leftRes=conquer(arr,left,mid);</span><br><span class="line">        <span class="keyword">let</span> rightRes=conquer(arr,mid+<span class="number">1</span>,right);</span><br><span class="line">        <span class="keyword">if</span>(leftRes===rightRes)&#123;</span><br><span class="line">            <span class="keyword">return</span> leftRes;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">return</span> (count(arr,leftRes,left,right)&gt;count(arr,rightRes,left,right)?leftRes:rightRes);</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> conquer(nums,<span class="number">0</span>,nums.length<span class="number">-1</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="🌟🌟🌟53-Maximum-Subarray"><a href="#🌟🌟🌟53-Maximum-Subarray" class="headerlink" title="🌟🌟🌟53. Maximum Subarray"></a>🌟🌟🌟<a href="https://leetcode-cn.com/problems/maximum-subarray/" target="_blank" rel="noopener">53. Maximum Subarray</a></h2><p><strong><code>DC is not the best solution, but it works</code></strong></p>
+<img src="https://pic.leetcode-cn.com/3aa2128a7ddcf1123454a6e5364792490c5edff62674f3cfd9c81cb7b5e8e522-file_1576478143567" alt="img" style="zoom:67%;">
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> maxSubArray = <span class="function"><span class="keyword">function</span> (<span class="params">nums</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//base case</span></span><br><span class="line">  <span class="keyword">if</span> (nums.length == <span class="number">1</span>) <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">  <span class="comment">//split</span></span><br><span class="line">  <span class="keyword">const</span> mid = <span class="built_in">Math</span>.floor(nums.length / <span class="number">2</span>);</span><br><span class="line">  <span class="keyword">const</span> left = nums.slice(<span class="number">0</span>, mid);</span><br><span class="line">  <span class="keyword">const</span> right = nums.slice(mid, nums.length);</span><br><span class="line">  <span class="comment">//rec</span></span><br><span class="line">  <span class="comment">//console.log(left);</span></span><br><span class="line">  <span class="keyword">return</span> combine(maxSubArray(left), maxSubArray(right));</span><br><span class="line">  <span class="comment">//combination fun ⚠️⚠️⚠️this is the hardest part</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">combine</span>(<span class="params">lSum, rSum</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> leftMax = -<span class="built_in">Number</span>.MAX_SAFE_INTEGER;</span><br><span class="line">    <span class="keyword">let</span> rightMax = -<span class="built_in">Number</span>.MAX_SAFE_INTEGER;</span><br><span class="line">    <span class="keyword">let</span> ltorSum = <span class="number">0</span>,</span><br><span class="line">      rtolSum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = left.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">      ltorSum += left[i];</span><br><span class="line"></span><br><span class="line">      leftMax = <span class="built_in">Math</span>.max(leftMax, ltorSum);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; right.length; j++) &#123;</span><br><span class="line">      rtolSum += right[j];</span><br><span class="line">      rightMax = <span class="built_in">Math</span>.max(rightMax, rtolSum);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> crossSum = leftMax + rightMax;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.max(crossSum, lSum, rSum);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="🌟🌟🌟215-Kth-Largest-Element-in-an-Array"><a href="#🌟🌟🌟215-Kth-Largest-Element-in-an-Array" class="headerlink" title="🌟🌟🌟215. Kth Largest Element in an Array"></a>🌟🌟🌟<a href="https://leetcode-cn.com/problems/kth-largest-element-in-an-array/" target="_blank" rel="noopener">215. Kth Largest Element in an Array</a></h2><p><img src="https://pic.leetcode-cn.com/1c1fe2ba0c651a7916a77114d58478fd5f52a7fc9b4bf554101f0b3c1047a8c0-image.png" alt="image.png"></p>
+<p>Similar as quick sort.</p>
+<p>A pivot is chosen, and ‘shuffle’ the array into two side: left side is smaller than pivot and right side is bigger.</p>
+<p>Check if the index of the pivot is greater than K, if yes, meaning the number we’re looking for is in the lefter part; otherwise in the right part. Recursivly look through the half part of the array untile the index of pivot is equal to K.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> findKthLargest = <span class="function"><span class="keyword">function</span> (<span class="params">nums, k</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> left = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">var</span> right = nums.length - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">return</span> quickSelect(nums, left, right, k);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">quickSelect</span>(<span class="params">nums, left, right, k</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//base case</span></span><br><span class="line">  <span class="keyword">if</span> (nums.length &lt;= <span class="number">1</span>) <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">    <span class="comment">//randomnize the pivot, to aviod the pivot was constantly assign to the max/min number of array</span></span><br><span class="line">  <span class="keyword">let</span> random = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * (right - left + <span class="number">1</span>) + left);</span><br><span class="line">  <span class="keyword">let</span> pivot = nums[random];</span><br><span class="line">  [nums[random], nums[right]] = [nums[right], nums[random]];</span><br><span class="line">    <span class="comment">//use two pointer similar as leetcode[75]</span></span><br><span class="line">  <span class="keyword">let</span> j = left,</span><br><span class="line">    i = left;</span><br><span class="line">  <span class="keyword">while</span> (j &lt; right) &#123;</span><br><span class="line">    <span class="keyword">if</span> (nums[j] &lt;= pivot) &#123;</span><br><span class="line">      [nums[j], nums[i]] = [nums[i], nums[j]];</span><br><span class="line">      i++;</span><br><span class="line">      j++;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      j++;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  [nums[j], nums[i]] = [nums[i], nums[j]];</span><br><span class="line">    <span class="comment">//campare the i with the N-k</span></span><br><span class="line">  <span class="keyword">if</span> (i === right + <span class="number">1</span> - k) <span class="keyword">return</span> nums[i];</span><br><span class="line">  <span class="keyword">if</span> (i &lt; right + <span class="number">1</span> - k) &#123;</span><br><span class="line">    <span class="keyword">return</span> quickSelect(nums, i + <span class="number">1</span>, right, k);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> quickSelect(nums, left, i - <span class="number">1</span>, k - right + i - <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="🌟🌟🌟🌟932-Beautiful-Array"><a href="#🌟🌟🌟🌟932-Beautiful-Array" class="headerlink" title="🌟🌟🌟🌟932. Beautiful Array"></a>🌟🌟🌟🌟<a href="https://leetcode-cn.com/problems/beautiful-array/" target="_blank" rel="noopener">932. Beautiful Array</a></h2><p>For some fixed N, an array A is beautiful if it is a permutation of the integers 1, 2, …, N, such that:</p>
+<p>For every i &lt; j, there is no k with i &lt; k &lt; j such that A[k] * 2 = A[i] + A[j].</p>
+<p>Given N, return any beautiful array A.  (It is guaranteed that one exists.)</p>
+<blockquote>
+<p>Example 1:<br>Input: 4<br>Output: [2,1,4,3]<br>Example 2:<br>Input: 5<br>Output: [3,1,2,5,4]</p>
+</blockquote>
+<p>The key points is detecting the pattern of the A[k] * 2 = A[i] + A[j]. This suggest that A[i] and A[j] are not odds/even at the same time.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> beautifulArray = <span class="function"><span class="keyword">function</span> (<span class="params">N</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//base, fill the array with 1</span></span><br><span class="line">  <span class="keyword">if</span> (N &lt;= <span class="number">1</span>) <span class="keyword">return</span> [<span class="number">1</span>];</span><br><span class="line">  <span class="comment">//init</span></span><br><span class="line">  <span class="keyword">let</span> mid = N % <span class="number">2</span> === <span class="number">0</span> ? N / <span class="number">2</span> : <span class="built_in">Math</span>.floor(N / <span class="number">2</span>) + <span class="number">1</span>;</span><br><span class="line">  <span class="comment">//recursion</span></span><br><span class="line">  <span class="keyword">let</span> left = beautifulArray(mid);</span><br><span class="line">  <span class="keyword">let</span> right = beautifulArray(N - mid);</span><br><span class="line">  <span class="comment">//combination</span></span><br><span class="line">  <span class="keyword">const</span> merge = <span class="function">(<span class="params">left, right</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; left.length; i++) &#123;</span><br><span class="line">      left[i] = <span class="number">2</span> * left[i];</span><br><span class="line">      left[i] -= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; right.length; j++) &#123;</span><br><span class="line">      right[j] = <span class="number">2</span> * right[j];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> [...left, ...right];</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> merge(left, right);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="lx-navigation">
+  <div class="lx-cover prev lx-cover-sm">
+    <!-- style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-l.jpeg)" -->
+    <div class="overlay"></div>
+    <a class="copy" href="#">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>No newer post</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" >
+			<!-- style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-r.jpeg)" -->
+      <div class="overlay"></div>
+      <a class="copy" href="/2020/05/16/Understanding-Promise-part-2/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>Understanding Promise part 2</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+
+</div>
+
+<footer>
+  <div>
+    Copyright &copy; 2020<a href="/"> Brushes & Keys</a><br>Powered by <a
+      href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.js.org" target="_blank">Lx</a> |
+    Modified by
+    Nan Chen <br> Find me at <a href="https://github.com/southchen" target="_blank" rel="noopener">GitHub</a> <a
+      href="https://instagram.com/divetothesea">Instagram</a> <a href="https://www.behance.net/southchen" target="_blank" rel="noopener">Behance</a>
+    <br>
+  </div>
+</footer>
+
+</div>
+
+  <button class="hamburger hamburger--arrow-r" type="button">
+    <div class="hamburger-box">
+      <div class="hamburger-inner"></div>
+    </div>
+  </button>
+  <div class="menu visibility">
+  <div class="menu-head">
+    <span class="layer">
+      <div class="col">
+        <div class="row for-pic">
+          <div class="profile-pic">
+            <a href="/"><img src="https://avatars0.githubusercontent.com/u/26827800?s=460&u=59259f6cb361b7fba376e3ae0c589ccc1639c8b4&v=4" alt="Nan Chen"/></a>
+          </div>
+        </div>
+        <div class="row for-name">
+          <p>Nan Chen</p>
+          <span class="tagline">Not a Number 😆</span>
+        </div>
+      </div>
+    </span>
+  </div>
+  <nav class="menu-container">
+  <ul class="menu-items">
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>Home</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+    
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>Pages</span>
+        <ul>
+          <li><a href="/about">About</a></li>
+        </ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-link fa-fw"></i>Friends</span>
+        <ul>
+          <li> <a href="https://lx.js.org" target="_blank">Theme-Lx</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+</div>
+
+  <div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/js/jquery.easing.min.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      var goToTop = function () {
+        $(".js-gotop").on("click", function (event) {
+          event.preventDefault();
+          $("html, body").animate({
+            scrollTop: $("html").offset().top
+          }, 500, "easeInOutExpo");
+          return false;
+        });
+        $(window).scroll(function () {
+          var $win = $(window);
+          if ($win.scrollTop() > 200) {
+            $(".js-top").addClass("active");
+          } else {
+            $(".js-top").removeClass("active");
+          }
+        });
+      };
+      $(function () {
+        goToTop();
+      });
+    }());
+
+  </script>
+  
+
+
+</body>
+
+</html>
