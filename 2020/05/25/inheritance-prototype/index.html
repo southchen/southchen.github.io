@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content=#58b77a>
+<title>A visual way to understand inheritance &amp; prototype | Brushes &amp; Keys</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Nan Chen">
+<meta name="keywords" content="javascript web-devlopement photography">
+<meta name="description" content="Personal blog tech & life">
+
+<script id="hexo-configurations">
+  var CONFIG = {
+    root: '/',
+    theme: 'lx',
+    version: '0.3.9',
+    localsearch:{
+      "enable": false,
+      "trigger": "auto",
+      "top_n_per_article": 1,
+      "unescape": false,
+      "preload": false
+      },
+    path: '-'
+  };
+</script>
+
+<link rel="shortcut icon" href="/bg.png">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/css/main.min.css">
+<link rel="stylesheet" href="/css/mycss.css">
+<style type="text/css">
+  pre,
+  code {
+    font-family: 'Hind Siliguri',
+      monospace;
+  }
+
+  html {
+    font-family: sans-serif;
+  }
+
+  body {
+    font-family: sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  figure {
+    font-family: Hind Siliguri;
+  }
+
+  .menu-container {
+    font-family: sans-serif;
+  }
+
+</style>
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/js/jquery.jside.menu.js"></script>
+<script>
+  $(document).ready(function () {
+    $(".menu-container").jSideMenu({
+      jSidePosition: "position-right",
+      jSideSticky: true,
+      jSideSkin: "greenish",
+    });
+  });
+
+</script>
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Hind Siliguri:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <style>
+  .single #lx-aside {
+    height: 380px;
+  }
+
+</style>
+<div class="single">
+  
+<div id="page">
+<div id="lx-aside" style="background-image: url(https://images.unsplash.com/photo-1505238680356-667803448bb6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80)" data-stellar-background-ratio="0.5">
+  <div class="overlay">
+    <div class="page-title">
+      <div class="avatar"><a href="/"><img src="https://avatars0.githubusercontent.com/u/26827800?s=460&u=59259f6cb361b7fba376e3ae0c589ccc1639c8b4&v=4"></a></div>
+      <span>2020-05-25</span>
+      <h2>A visual way to understand inheritanc...</h2>
+      <div class="tags"><i
+          class="fa fa-tag"></i><a class="tag-link" href="/tags/javascript/" rel="tag">javascript</a> <i class="fa fa-tag"></i><a class="tag-link" href="/tags/prototype/" rel="tag">prototype</a>
+      </div>
+    <div class="social-links">
+  <a href="https://github.com/southchen" target="_blank"><i
+      class="fa fa-github fa-fw"></i></a>
+  <a href="https://instagram.com/divetothesea" target="_blank"><i
+      class="fa fa-instagram fa-fw"></i></a>
+  <a href="https://www.behance.net/southchen" target="_blank"><i
+      class="fa fa-behance fa-fw"></i></a>
+</div>
+</div>
+</div>
+</div>
+
+  <div id="lx-main-content">
+    <div class="lx-post">
+      <div class="lx-entry padding">
+        <div>
+          <h2 id="A-visual-way-to-understand-inheritance-amp-prototype"><a href="#A-visual-way-to-understand-inheritance-amp-prototype" class="headerlink" title="A visual way to understand inheritance &amp; prototype"></a>A visual way to understand inheritance &amp; prototype</h2><p>In JavaScript, there is actually no concept of real Class (in es6, class is purely syntax sugar 🍬)</p>
+<p>The inheritance was made by inheriting along the prototype chain. And it’s a real OOP language since you can create a new object directly from an object bypassing the class.</p>
+<p>The keyword <code>new &lt;Constructor&gt;</code> and Object.create(<code>&lt;Prototype object&gt;</code>) method can both manuiplate the prototype chain (<code>__proto__</code>):</p>
+<img src="/.com//prototype-Page-2.png" alt="prototype-Page-2" style="zoom:50%;">
+
+<p>the orange line refers to the prototype chain.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params">argu</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.con = argu;</span><br><span class="line">&#125;</span><br><span class="line">A.prototype.proto = <span class="function"><span class="params">()</span>=&gt;</span>&#123;<span class="built_in">console</span>.log(<span class="keyword">this</span>)&#125;</span><br><span class="line"><span class="keyword">let</span> a1 = <span class="built_in">Object</span>.create(A.prototype)</span><br><span class="line"><span class="keyword">let</span> a2 = <span class="keyword">new</span> A(<span class="string">'a2'</span>)</span><br><span class="line">a2.con <span class="comment">// 'a2'</span></span><br><span class="line">a1.con <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>the new keyword and the .create method both combine the returned object to the prototype of the constructor function. However, the new object a2 will inheritage the this.con property constructor (a function) while the a1 will not.</p>
+<p>Both a1 and a2 have access to the .proto method by searching along the prototype chain.</p>
+<p>A common mistakes when I first bump into the idea of inheritance I have made was accidentally create an object from a  constructor function rather than the prototype of the constructor.</p>
+<img src="/.com//prototype-Page-3.png" alt="prototype-Page-3" style="zoom:50%;">
+
+<p>As the figure shown, the incorrectly created object a1now is an instance of function. And have no access to method of A.prototype.proto: </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a1 <span class="keyword">instanceof</span> <span class="built_in">Function</span> <span class="comment">//true</span></span><br><span class="line">a1.proto() <span class="comment">//a1.proto is not a function</span></span><br><span class="line">a1.prototype.proto() <span class="comment">//this works</span></span><br></pre></td></tr></table></figure>
+
+<p>The prototype object can be only found on a function. An object other than function have no pointer referencing to prototype. </p>
+<a id="more"></a>
+
+<p>Before ES6, when there isn’t a Object.create() method, the it canbe done by (what happened in the dashed square)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;; <span class="comment">//an empty (without any this.method/prop)</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">B</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params">argu</span>)</span>&#123;<span class="keyword">this</span>.con=argu&#125;</span><br><span class="line">F.prototype = A.prototype; <span class="comment">//assign the prototype object to the new F function</span></span><br><span class="line">B.prototype = <span class="keyword">new</span> F() <span class="comment">//assign the prototype of new object B to the instance of F function</span></span><br><span class="line">B.protoype.constructor = B;</span><br></pre></td></tr></table></figure>
+
+<img src="/.com//prototype-Page-4.png" alt="prototype-Page-4" style="zoom:50%;">
+
+<p>Then the instance of B has the A.prototype on their prototype chian.</p>
+<p>The side effect is that the instance of B has no instance property .con.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> b1 = <span class="keyword">new</span> B(<span class="string">'b'</span>)</span><br><span class="line">b1.con <span class="comment">//undefined</span></span><br></pre></td></tr></table></figure>
+
+<img src="/.com//prototype-Page-4-1.png" alt="prototype-Page-4-1" style="zoom:50%;">
+
+
+
+<p>If they need that property/method, the this.xx can be passed to the B by calling A.call(this,arg). So the instance property would bind to the B. </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">B</span>(<span class="params">arg</span>)</span>&#123;</span><br><span class="line">A.call(<span class="keyword">this</span>.arg)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> b1 = <span class="keyword">new</span> B(<span class="string">'b1'</span>)</span><br><span class="line"><span class="keyword">let</span> b2 = <span class="keyword">new</span> B(<span class="string">'b2'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>What happened if we just directly assign the a instance of A to the B.prototype?</p>
+<img src="/.com//prototype-.png" alt="prototype-" style="zoom:50%;">
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params">argu</span>)</span>&#123;<span class="keyword">this</span>.con=argu&#125;</span><br><span class="line">B.prototype = <span class="keyword">new</span> A(<span class="string">'instance'</span>) </span><br><span class="line"><span class="keyword">let</span> b1 = <span class="keyword">new</span> B()</span><br><span class="line"><span class="keyword">let</span> b2 = <span class="keyword">new</span> B()</span><br><span class="line">b1.con <span class="comment">//'instance'</span></span><br><span class="line">b2.con <span class="comment">//'instance'</span></span><br></pre></td></tr></table></figure>
+
+<p>The main drawback is that:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b1.con ===b2.con ===a.con <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<p>Which normally is not useful if two distinct instance share the same instance property. </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="lx-navigation">
+  <div class="lx-cover prev lx-cover-sm">
+    <!-- style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-l.jpeg)" -->
+    <div class="overlay"></div>
+    <a class="copy" href="#">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>No newer post</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" >
+			<!-- style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-r.jpeg)" -->
+      <div class="overlay"></div>
+      <a class="copy" href="/2020/05/24/Leetcode-Linked-List/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>Leetcode Linked List</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+
+</div>
+
+<footer>
+  <div>
+    Copyright &copy; 2020<a href="/"> Brushes & Keys</a><br>Powered by <a
+      href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.js.org" target="_blank">Lx</a> |
+    Modified by
+    Nan Chen <br> Find me at <a href="https://github.com/southchen" target="_blank" rel="noopener">GitHub</a> <a
+      href="https://instagram.com/divetothesea">Instagram</a> <a href="https://www.behance.net/southchen" target="_blank" rel="noopener">Behance</a>
+    <br>
+  </div>
+</footer>
+
+</div>
+
+  <button class="hamburger hamburger--arrow-r" type="button">
+    <div class="hamburger-box">
+      <div class="hamburger-inner"></div>
+    </div>
+  </button>
+  <div class="menu visibility">
+  <div class="menu-head">
+    <span class="layer">
+      <div class="col">
+        <div class="row for-pic">
+          <div class="profile-pic">
+            <a href="/"><img src="https://avatars0.githubusercontent.com/u/26827800?s=460&u=59259f6cb361b7fba376e3ae0c589ccc1639c8b4&v=4" alt="Nan Chen"/></a>
+          </div>
+        </div>
+        <div class="row for-name">
+          <p>Nan Chen</p>
+          <span class="tagline">Not a Number 😆</span>
+        </div>
+      </div>
+    </span>
+  </div>
+  <nav class="menu-container">
+  <ul class="menu-items">
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>Home</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+    
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>Pages</span>
+        <ul>
+          <li><a href="/about">About</a></li>
+        </ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-link fa-fw"></i>Friends</span>
+        <ul>
+          <li> <a href="https://lx.js.org" target="_blank">Theme-Lx</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+</div>
+
+  <div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/js/jquery.easing.min.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      var goToTop = function () {
+        $(".js-gotop").on("click", function (event) {
+          event.preventDefault();
+          $("html, body").animate({
+            scrollTop: $("html").offset().top
+          }, 500, "easeInOutExpo");
+          return false;
+        });
+        $(window).scroll(function () {
+          var $win = $(window);
+          if ($win.scrollTop() > 200) {
+            $(".js-top").addClass("active");
+          } else {
+            $(".js-top").removeClass("active");
+          }
+        });
+      };
+      $(function () {
+        goToTop();
+      });
+    }());
+
+  </script>
+  
+
+
+</body>
+
+</html>
