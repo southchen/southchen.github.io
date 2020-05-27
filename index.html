@@ -105,9 +105,79 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2 class="title"><a href="/2020/05/27/Binary-tree-part-1/">Binary tree part 1</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-05-27</span>
+      <p><div class="note warning">
+            <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h3><p>This article is originally based on my understanding of this concept. No guarantee on the accuracy.😅</p>
+          </div>
+
+<p>Since the root and node share similar structure, it’s natural to use recursion to solve relative problem.</p>
+<p>Also, iteration can also be applied. The key would be which kind of data structure to store the data of a tree. Normally, a queue(FIFO) or a stack(FILO) depeding on the traversal order.</p>
+<h2 id="Binary-Tree-in-javascript："><a href="#Binary-Tree-in-javascript：" class="headerlink" title="Binary Tree in javascript："></a>Binary Tree in javascript：</h2><img src="https://pic2.zhimg.com/v2-3f628f0ace23334d7abdbce9cb9ff30d_r.jpg" alt="img" style="zoom:50%;">
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">BinaryTree</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> Node = <span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.val = val;</span><br><span class="line">    <span class="keyword">this</span>.left = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">this</span>.right = <span class="literal">null</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">let</span> root = <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Or using an array to store the elements of the tree where the root node is stored at index 1 not 0.</p>
+<p>For complete binary tree, if the index of an element (eg, D, i = 4). Its left child node will be stored in <code>2*i</code> (H,at 8), and its right childe node will be stored in<code>2 * i-1</code>, its root node will be stored at <code>Math.floor( i/2)</code></p>
+<img src="https://pic1.zhimg.com/v2-38bb49427f4918303528a0d7a7d3e650_r.jpg" alt="img" style="zoom:50%;">
+
+<img src="https://camo.githubusercontent.com/386bd63548817d77c2373eb1e63dfebd4f489e32/68747470733a2f2f7374617469633030312e6765656b62616e672e6f72672f7265736f757263652f696d6167652f30382f32332f30386264343339393135363163656562373636373966626237373037313232332e6a7067" alt="img" style="zoom:50%;">
+
+<h2 id="Traversal-of-tree"><a href="#Traversal-of-tree" class="headerlink" title="Traversal of tree"></a>Traversal of tree</h2><img src="https://pic1.zhimg.com/v2-28b51a414a2c78a707e7bb74364ecb1c_r.jpg" alt="img" style="zoom:50%;">
+
+<table>
+<thead>
+<tr>
+<th>Depth-first</th>
+<th>Breath-first</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Preorder</td>
+<td>Level-order</td>
+</tr>
+<tr>
+<td>Inorder</td>
+<td></td>
+</tr>
+<tr>
+<td>Postorder</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="Preorder-root-gt-left-node-gt-right-node"><a href="#Preorder-root-gt-left-node-gt-right-node" class="headerlink" title="Preorder (root -&gt; left node -&gt;right node"></a><strong>Preorder</strong> <strong><code>(root -&gt; left node -&gt;right node</code></strong></h2><p><img src="http://image.mamicode.com/info/201810/20181023185908213011.png" alt="preorder"></p>
+<p> <strong>Recursion:</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> preorderTraversal = <span class="function"><span class="keyword">function</span> (<span class="params">root</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> res = [];</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">traversal</span>(<span class="params">root</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root !== <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="comment">//exit point</span></span><br><span class="line">      <span class="comment">//the sequences matters!</span></span><br><span class="line">      res.push(root.val); <span class="comment">// access the root</span></span><br><span class="line">      traversal(root.left); <span class="comment">// left</span></span><br><span class="line">      traversal(root.right); <span class="comment">// right</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  traversal(root);</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p> *<em>Iteration: *</em></p>
+<p>version 1:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> preorderTraversal = <span class="function">(<span class="params">root</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> res = []; <span class="comment">//store the values of nodes</span></span><br><span class="line">  <span class="keyword">const</span> stack = [root]; <span class="comment">//FILO</span></span><br><span class="line">  <span class="keyword">if</span> (!root) <span class="keyword">return</span> res; <span class="comment">//exit point</span></span><br><span class="line">  <span class="keyword">while</span> (stack.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> cur = stack.pop(); <span class="comment">//pop out the current element</span></span><br><span class="line">    res.push(cur.val); <span class="comment">//push to the result array</span></span><br><span class="line">    cur.right &amp;&amp; stack.push(cur.right); <span class="comment">//if has right node, first push it</span></span><br><span class="line">    cur.left &amp;&amp; stack.push(cur.left); <span class="comment">//if has left node, then push it</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>version 2:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> preorderTraversal = <span class="function"><span class="keyword">function</span> (<span class="params">root</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> result = [];</span><br><span class="line">  <span class="keyword">var</span> stack = [];</span><br><span class="line">  <span class="keyword">var</span> p = root;</span><br><span class="line">  <span class="keyword">while</span> (stack.length != <span class="number">0</span> || p != <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (p != <span class="literal">null</span>) &#123;</span><br><span class="line">      stack.push(p);</span><br><span class="line">      result.push(p.val); <span class="comment">// Add before going to children</span></span><br><span class="line">      p = p.left;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">var</span> node = stack.pop();</span><br><span class="line">      p = node.right;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="Inorder-left-node-gt-root-gt-right-node"><a href="#Inorder-left-node-gt-root-gt-right-node" class="headerlink" title="Inorder left node -&gt; root -&gt; right node"></a><strong>Inorder</strong> <strong><code>left node -&gt; root -&gt; right node</code></strong></h2><ul>
+<li><p><img src="https://pic4.zhimg.com/v2-d3473214e2c730b8c52cca780f1281bb_r.jpg" alt="inorder traversal"></p>
+<p><strong>Recursion:</strong></p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> inorderTraversal = <span class="function"><span class="keyword">function</span> (<span class="params">root</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> res = [];</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">traversal</span>(<span class="params">root</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root !== <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="comment">//exit point</span></span><br><span class="line">      traversal(root.left); <span class="comment">//left node first</span></span><br><span class="line">      res.push(root.val); <span class="comment">//store the root</span></span><br><span class="line">      traversal(root.right); <span class="comment">//right node last</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  traversal(root);</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+      <div class="post-button"><a class="btn" href="/2020/05/27/Binary-tree-part-1/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2 class="title"><a href="/2020/05/25/inheritance-prototype/">A visual way to understand inheritance & prototype</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-05-25</span>
-      <p><h2 id="A-visual-way-to-understand-inheritance-amp-prototype"><a href="#A-visual-way-to-understand-inheritance-amp-prototype" class="headerlink" title="A visual way to understand inheritance &amp; prototype"></a>A visual way to understand inheritance &amp; prototype</h2><p>In JavaScript, there is actually no concept of real Class (in es6, class is purely syntax sugar 🍬)</p>
+      <p><h2 id="A-visual-way-to-understand-inheritance-amp-prototype"><a href="#A-visual-way-to-understand-inheritance-amp-prototype" class="headerlink" title="A visual way to understand inheritance &amp; prototype"></a>A visual way to understand inheritance &amp; prototype</h2><div class="note warning">
+            <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h3><p>This article is originally based on my understanding of this concept. No guarantee on the accuracy.😅</p>
+          </div>
+
+
+
+<p>In JavaScript, there is actually no concept of real Class (in es6, class is purely syntax sugar 🍬)</p>
 <p>The inheritance was made by inheriting along the prototype chain. And it’s a real OOP language since you can create a new object directly from an object bypassing the class.</p>
 <p>The keyword <code>new &lt;Constructor&gt;</code> and Object.create(<code>&lt;Prototype object&gt;</code>) method can both manuiplate the prototype chain (<code>__proto__</code>):</p>
 <img src="/2020/05/25/inheritance-prototype/prototype-Page-2.png" alt="prototype-Page-2" style="zoom:50%;">
@@ -317,57 +387,6 @@
 <p>An example of wrapping a callback-style function with Promise:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> wait = <span class="function"><span class="params">ms</span> =&gt;</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> setTimeout(resolve, ms));</span><br><span class="line"></span><br><span class="line">wait(<span class="number">10000</span>).then(<span class="function"><span class="params">()</span> =&gt;</span> saySomething(<span class="string">"10 seconds"</span>)).catch(failureCallback);</span><br></pre></td></tr></table></figure></p>
       <div class="post-button"><a class="btn" href="/2020/05/16/Understanding-Promise-part-2/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/05/16/Understanding-Promise/">Understanding Promise part 1</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-05-16</span>
-      <p><div class="note warning">
-            <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h3><p>This article is originally based on my understanding of this concept. No guarantee on the accuracy.😅</p>
-          </div>
-
-<p>Starting from a puzzle from <a href="https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html" target="_blank" rel="noopener">this article</a>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">doSomething().then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> doSomethingElse();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">doSomething().then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  doSomethingElse();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">doSomething().then(doSomethingElse());</span><br><span class="line"></span><br><span class="line">doSomething().then(doSomethingElse);</span><br><span class="line"><span class="comment">//note doSomething() and doSomethingElse() return a resolved promise</span></span><br></pre></td></tr></table></figure>
-
-<p>How would this code run?</p>
-<h3 id="To-answer-this-puzzle-a-few-key-points-should-be-understood"><a href="#To-answer-this-puzzle-a-few-key-points-should-be-understood" class="headerlink" title="To answer this puzzle, a few key points should be understood:"></a>To answer this puzzle, a few key points should be understood:</h3><ul>
-<li><p>.then(callback) would ounly be put into the <strong>task queue</strong> when the chained promise was settled (fullfulled/resolved or rejected).</p>
-</li>
-<li><p>.then(callback) would pass the value returned from the callback to following .then/.catch</p>
-<ul>
-<li><p>If there is no explicit return of the callback, returns undefined</p>
-</li>
-<li><p>If the callback returns a promise as well, the following .then()/.catch() would be thrown into the task queue, when it’s settled. After the current stack is cleaned, they would be pushed to the stack (run the callback). Even a promise has already settled, the .then() still runs asynchronously. </p>
-<ul>
-<li><pre><code class="js"><span class="keyword">let</span> p = <span class="built_in">Promise</span>.resolve(<span class="string">'resolved already'</span>)
-p.then(<span class="function"><span class="params">v</span>=&gt;</span>{<span class="built_in">console</span>.loe(<span class="string">'async result: '</span>=v)})
-<span class="built_in">console</span>.log(<span class="string">'cleaning stack'</span>)
-<span class="comment">//print 'cleaning stack' 'async result: resolved already'</span>
-&lt;!--￼<span class="number">1</span>--&gt;</code></pre>
-</li>
-</ul>
-</li>
-<li><p>if the callback returns a normal variable, the variable would be passed, and the state will be set to <strong>resolved</strong>.</p>
-<ul>
-<li><p>a corner-case: if the callback returns obj which has a ‘then’ method, the following then() would run as the code in ‘then’ method.</p>
-</li>
-<li><pre><code class="js"> <span class="built_in">Promise</span>.resolve({<span class="attr">value</span>: <span class="number">1</span>,
-                  then: <span class="function"><span class="keyword">function</span> (<span class="params">resolve</span>) </span>{ <span class="comment">//the following then call this function</span>
-                      <span class="built_in">console</span>.log(<span class="keyword">this</span>.value) <span class="comment">//print 1.</span>
-                      resolve(<span class="string">'then method in object'</span>) 
-                    <span class="comment">//resolve (or reject) function is a must，otherwise the following then would not be called, pending</span>
-                  })
-           .then(<span class="function"><span class="params">value</span> =&gt;</span> {
-              <span class="built_in">console</span>.log(<span class="string">'the result from pre .then:'</span> + value); <span class="comment">//print 'the result form pre .then: then method in object'</span>
-              }
-          })
-&lt;!--￼<span class="number">2</span>--&gt;</code></pre>
-</li>
-</ul>
-</li>
-<li><p><strong>But actually this is against the design of Promise whose aim is to avoid callback style but to chain the async exceutor outside the previous one. So it’d better update to this:</strong></p></li></ul></li></ul></p>
-      <div class="post-button"><a class="btn" href="/2020/05/16/Understanding-Promise/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
 

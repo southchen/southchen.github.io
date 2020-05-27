@@ -1,0 +1,355 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content=#58b77a>
+<title>Binary tree part 1 | Brushes &amp; Keys</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Nan Chen">
+<meta name="keywords" content="javascript web-devlopement photography">
+<meta name="description" content="Personal blog tech & life">
+
+<script id="hexo-configurations">
+  var CONFIG = {
+    root: '/',
+    theme: 'lx',
+    version: '0.3.9',
+    localsearch:{
+      "enable": false,
+      "trigger": "auto",
+      "top_n_per_article": 1,
+      "unescape": false,
+      "preload": false
+      },
+    path: '-'
+  };
+</script>
+
+<link rel="shortcut icon" href="/bg.png">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/css/main.min.css">
+<link rel="stylesheet" href="/css/mycss.css">
+<style type="text/css">
+  pre,
+  code {
+    font-family: 'Hind Siliguri',
+      monospace;
+  }
+
+  html {
+    font-family: sans-serif;
+  }
+
+  body {
+    font-family: sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  figure {
+    font-family: Hind Siliguri;
+  }
+
+  .menu-container {
+    font-family: sans-serif;
+  }
+
+</style>
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/js/jquery.jside.menu.js"></script>
+<script>
+  $(document).ready(function () {
+    $(".menu-container").jSideMenu({
+      jSidePosition: "position-right",
+      jSideSticky: true,
+      jSideSkin: "greenish",
+    });
+  });
+
+</script>
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Hind Siliguri:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <style>
+  .single #lx-aside {
+    height: 380px;
+  }
+
+</style>
+<div class="single">
+  
+<div id="page">
+<div id="lx-aside" style="background-image: url(https://images.unsplash.com/photo-1505238680356-667803448bb6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80)" data-stellar-background-ratio="0.5">
+  <div class="overlay">
+    <div class="page-title">
+      <div class="avatar"><a href="/"><img src="https://avatars0.githubusercontent.com/u/26827800?s=460&u=59259f6cb361b7fba376e3ae0c589ccc1639c8b4&v=4"></a></div>
+      <span>2020-05-27</span>
+      <h2>Binary tree part 1</h2>
+      <div class="tags"><i
+          class="fa fa-tag"></i><a class="tag-link" href="/tags/algorithm/" rel="tag">algorithm</a> <i class="fa fa-tag"></i><a class="tag-link" href="/tags/datastructure/" rel="tag">datastructure</a> <i class="fa fa-tag"></i><a class="tag-link" href="/tags/javascript/" rel="tag">javascript</a>
+      </div>
+    <div class="social-links">
+  <a href="https://github.com/southchen" target="_blank"><i
+      class="fa fa-github fa-fw"></i></a>
+  <a href="https://instagram.com/divetothesea" target="_blank"><i
+      class="fa fa-instagram fa-fw"></i></a>
+  <a href="https://www.behance.net/southchen" target="_blank"><i
+      class="fa fa-behance fa-fw"></i></a>
+</div>
+</div>
+</div>
+</div>
+
+  <div id="lx-main-content">
+    <div class="lx-post">
+      <div class="lx-entry padding">
+        <div>
+          <div class="note warning">
+            <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h3><p>This article is originally based on my understanding of this concept. No guarantee on the accuracy.😅</p>
+          </div>
+
+<p>Since the root and node share similar structure, it’s natural to use recursion to solve relative problem.</p>
+<p>Also, iteration can also be applied. The key would be which kind of data structure to store the data of a tree. Normally, a queue(FIFO) or a stack(FILO) depeding on the traversal order.</p>
+<h2 id="Binary-Tree-in-javascript："><a href="#Binary-Tree-in-javascript：" class="headerlink" title="Binary Tree in javascript："></a>Binary Tree in javascript：</h2><img src="https://pic2.zhimg.com/v2-3f628f0ace23334d7abdbce9cb9ff30d_r.jpg" alt="img" style="zoom:50%;">
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">BinaryTree</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> Node = <span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.val = val;</span><br><span class="line">    <span class="keyword">this</span>.left = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">this</span>.right = <span class="literal">null</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">let</span> root = <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Or using an array to store the elements of the tree where the root node is stored at index 1 not 0.</p>
+<p>For complete binary tree, if the index of an element (eg, D, i = 4). Its left child node will be stored in <code>2*i</code> (H,at 8), and its right childe node will be stored in<code>2 * i-1</code>, its root node will be stored at <code>Math.floor( i/2)</code></p>
+<img src="https://pic1.zhimg.com/v2-38bb49427f4918303528a0d7a7d3e650_r.jpg" alt="img" style="zoom:50%;">
+
+<img src="https://camo.githubusercontent.com/386bd63548817d77c2373eb1e63dfebd4f489e32/68747470733a2f2f7374617469633030312e6765656b62616e672e6f72672f7265736f757263652f696d6167652f30382f32332f30386264343339393135363163656562373636373966626237373037313232332e6a7067" alt="img" style="zoom:50%;">
+
+<h2 id="Traversal-of-tree"><a href="#Traversal-of-tree" class="headerlink" title="Traversal of tree"></a>Traversal of tree</h2><img src="https://pic1.zhimg.com/v2-28b51a414a2c78a707e7bb74364ecb1c_r.jpg" alt="img" style="zoom:50%;">
+
+<table>
+<thead>
+<tr>
+<th>Depth-first</th>
+<th>Breath-first</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Preorder</td>
+<td>Level-order</td>
+</tr>
+<tr>
+<td>Inorder</td>
+<td></td>
+</tr>
+<tr>
+<td>Postorder</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="Preorder-root-gt-left-node-gt-right-node"><a href="#Preorder-root-gt-left-node-gt-right-node" class="headerlink" title="Preorder (root -&gt; left node -&gt;right node"></a><strong>Preorder</strong> <strong><code>(root -&gt; left node -&gt;right node</code></strong></h2><p><img src="http://image.mamicode.com/info/201810/20181023185908213011.png" alt="preorder"></p>
+<p> <strong>Recursion:</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> preorderTraversal = <span class="function"><span class="keyword">function</span> (<span class="params">root</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> res = [];</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">traversal</span>(<span class="params">root</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root !== <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="comment">//exit point</span></span><br><span class="line">      <span class="comment">//the sequences matters!</span></span><br><span class="line">      res.push(root.val); <span class="comment">// access the root</span></span><br><span class="line">      traversal(root.left); <span class="comment">// left</span></span><br><span class="line">      traversal(root.right); <span class="comment">// right</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  traversal(root);</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p> *<em>Iteration: *</em></p>
+<p>version 1:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> preorderTraversal = <span class="function">(<span class="params">root</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> res = []; <span class="comment">//store the values of nodes</span></span><br><span class="line">  <span class="keyword">const</span> stack = [root]; <span class="comment">//FILO</span></span><br><span class="line">  <span class="keyword">if</span> (!root) <span class="keyword">return</span> res; <span class="comment">//exit point</span></span><br><span class="line">  <span class="keyword">while</span> (stack.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> cur = stack.pop(); <span class="comment">//pop out the current element</span></span><br><span class="line">    res.push(cur.val); <span class="comment">//push to the result array</span></span><br><span class="line">    cur.right &amp;&amp; stack.push(cur.right); <span class="comment">//if has right node, first push it</span></span><br><span class="line">    cur.left &amp;&amp; stack.push(cur.left); <span class="comment">//if has left node, then push it</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>version 2:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> preorderTraversal = <span class="function"><span class="keyword">function</span> (<span class="params">root</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> result = [];</span><br><span class="line">  <span class="keyword">var</span> stack = [];</span><br><span class="line">  <span class="keyword">var</span> p = root;</span><br><span class="line">  <span class="keyword">while</span> (stack.length != <span class="number">0</span> || p != <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (p != <span class="literal">null</span>) &#123;</span><br><span class="line">      stack.push(p);</span><br><span class="line">      result.push(p.val); <span class="comment">// Add before going to children</span></span><br><span class="line">      p = p.left;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">var</span> node = stack.pop();</span><br><span class="line">      p = node.right;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="Inorder-left-node-gt-root-gt-right-node"><a href="#Inorder-left-node-gt-root-gt-right-node" class="headerlink" title="Inorder left node -&gt; root -&gt; right node"></a><strong>Inorder</strong> <strong><code>left node -&gt; root -&gt; right node</code></strong></h2><ul>
+<li><p><img src="https://pic4.zhimg.com/v2-d3473214e2c730b8c52cca780f1281bb_r.jpg" alt="inorder traversal"></p>
+<p><strong>Recursion:</strong></p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> inorderTraversal = <span class="function"><span class="keyword">function</span> (<span class="params">root</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> res = [];</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">traversal</span>(<span class="params">root</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root !== <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="comment">//exit point</span></span><br><span class="line">      traversal(root.left); <span class="comment">//left node first</span></span><br><span class="line">      res.push(root.val); <span class="comment">//store the root</span></span><br><span class="line">      traversal(root.right); <span class="comment">//right node last</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  traversal(root);</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p> <strong>Iteration:</strong></p>
+<p>General idea: Using a stack to record the iteration.</p>
+<ol>
+<li>If current node has left child node, push it to the stack, and move the current pointer to the left child node.</li>
+<li>If the current node dosen’t have left node (either only has right node or dosen’t have any child), obtain the previous node (the root of the current node) by poping the stack and push into the result. Move the current to the right of the previous node.</li>
+<li>The exit point is when the satck is empty and current node is pointing to null.</li>
+</ol>
+<p>Version 1:</p>
+<p>Left &amp;&amp; push into the stack 👇   &lt;&lt;————————————————————————————｜<br>!left &amp;&amp; push into result and pop out from the stack mark the left child as visited(null) 👇                 ｜<br>right &amp;&amp; push into the stack 👉——————————————————————————————｜</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> inorderTraversal = <span class="function"><span class="keyword">function</span> (<span class="params">root</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!root) <span class="keyword">return</span> [];</span><br><span class="line">  <span class="keyword">let</span> stack = [root],</span><br><span class="line">    res = [],</span><br><span class="line">    cur = root;</span><br><span class="line">  <span class="keyword">while</span> (stack.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">while</span> (cur.left) &#123;</span><br><span class="line">      stack.push(cur.left);</span><br><span class="line">      cur = cur.left;</span><br><span class="line">    &#125;</span><br><span class="line">    cur = stack.pop();</span><br><span class="line">    res.push(cur.val);</span><br><span class="line">    cur.left = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">if</span> (cur.right) &#123;</span><br><span class="line">      stack.push(cur.right);</span><br><span class="line">      cur = cur.right;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Version 2:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> inorderTraversal = <span class="function"><span class="keyword">function</span>(<span class="params">root</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> result = [];</span><br><span class="line">  <span class="keyword">var</span> stack = [];</span><br><span class="line">  <span class="keyword">var</span> p = root;</span><br><span class="line">  <span class="keyword">while</span>(stack.length!=<span class="number">0</span> || p != <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span>(p != <span class="literal">null</span>) &#123;</span><br><span class="line">      stack.push(p);</span><br><span class="line">      p = p.left;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">var</span> node = stack.pop();</span><br><span class="line">      result.push(node.val); </span><br><span class="line">      p = node.right;</span><br><span class="line">  &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Postorder-left-node-gt-right-node-gt-root"><a href="#Postorder-left-node-gt-right-node-gt-root" class="headerlink" title="Postorder left node -&gt; right node-&gt;root"></a><strong>Postorder</strong> <strong><code>left node -&gt; right node-&gt;root</code></strong></h2><ul>
+<li><img src="http://image.mamicode.com/info/201810/20181023185908731585.png" alt="postorder"></li>
+</ul>
+<p>   *<em>Recursion: *</em></p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> postOrder(root)&#123;</span><br><span class="line">	<span class="keyword">let</span> res=[];</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">traversal</span>(<span class="params">node</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node)&#123;</span><br><span class="line">            traversal(node.left)</span><br><span class="line">            traversal(node.rigth)</span><br><span class="line">            res.push(node.val)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    traversal(root);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>   <strong>Iteration:</strong> (the reverse of preorder traversal)</p>
+<p>  Version1:</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> postorderTraversal = <span class="function">(<span class="params">root</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (!root) <span class="keyword">return</span> [];</span><br><span class="line">  <span class="keyword">const</span> stack = [root],</span><br><span class="line">    res = [];</span><br><span class="line">  <span class="keyword">while</span> (stack.length) &#123;</span><br><span class="line">    <span class="keyword">let</span> curr = stack.pop();</span><br><span class="line">    res.unshift(curr.val); <span class="comment">//unshift the current val -&gt;reverse</span></span><br><span class="line">    curr.left &amp;&amp; stack.push(curr.left); <span class="comment">//first push left node -&gt;reverse</span></span><br><span class="line">    curr.rignht &amp;&amp; stack.push(curr.right); <span class="comment">//then push right node</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Version 2:</p>
+<ul>
+<li><pre><code class="js"><span class="keyword">var</span> postorderTraversal = <span class="function"><span class="keyword">function</span> (<span class="params">root</span>) </span>{
+  <span class="keyword">var</span> result = [];
+  <span class="keyword">var</span> stack = [];
+  <span class="keyword">var</span> p = root;
+  <span class="keyword">while</span> (stack.length != <span class="number">0</span> || p != <span class="literal">null</span>) {
+    <span class="keyword">if</span> (p != <span class="literal">null</span>) {
+      stack.push(p);
+      result.unshift(p.val); <span class="comment">// Reverse the process of preorder</span>
+      p = p.right; <span class="comment">// Reverse the process of preorder</span>
+    } <span class="keyword">else</span> {
+      <span class="keyword">var</span> node = stack.pop();
+      p = node.left; <span class="comment">// Reverse the process of preorder</span>
+    }
+  }
+  <span class="keyword">return</span> result;
+};</code></pre>
+</li>
+</ul>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary:"></a>Summary:</h2><div style="display:flex">
+<img src="/2020/05/27/Binary-tree-part-1/_posts/Binary-tree-part-1/binarytree-Page-1.png" alt="binarytree-Page-1" style="zoom:50%;">
+    <img src="/2020/05/27/Binary-tree-part-1/_posts/Binary-tree-part-1/binarytree-Page-2.png" alt="binarytree-Page-2" style="zoom:50%;">
+    <img src="/2020/05/27/Binary-tree-part-1/_posts/Binary-tree-part-1/binarytree-Page-3.png" alt="binarytree-Page-3" style="zoom:50%;">
+</div>
+
+
+
+<h2 id><a href="#" class="headerlink" title></a></h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="lx-navigation">
+  <div class="lx-cover prev lx-cover-sm">
+    <!-- style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-l.jpeg)" -->
+    <div class="overlay"></div>
+    <a class="copy" href="#">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>No newer post</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" >
+			<!-- style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-r.jpeg)" -->
+      <div class="overlay"></div>
+      <a class="copy" href="/2020/05/25/inheritance-prototype/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>A visual way to understand inheritance & protot...</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+
+</div>
+
+<footer>
+  <div>
+    Copyright &copy; 2020<a href="/"> Brushes & Keys</a><br>Powered by <a
+      href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.js.org" target="_blank">Lx</a> |
+    Modified by
+    Nan Chen <br> Find me at <a href="https://github.com/southchen" target="_blank" rel="noopener">GitHub</a> <a
+      href="https://instagram.com/divetothesea">Instagram</a> <a href="https://www.behance.net/southchen" target="_blank" rel="noopener">Behance</a>
+    <br>
+  </div>
+</footer>
+
+</div>
+
+  <button class="hamburger hamburger--arrow-r" type="button">
+    <div class="hamburger-box">
+      <div class="hamburger-inner"></div>
+    </div>
+  </button>
+  <div class="menu visibility">
+  <div class="menu-head">
+    <span class="layer">
+      <div class="col">
+        <div class="row for-pic">
+          <div class="profile-pic">
+            <a href="/"><img src="https://avatars0.githubusercontent.com/u/26827800?s=460&u=59259f6cb361b7fba376e3ae0c589ccc1639c8b4&v=4" alt="Nan Chen"/></a>
+          </div>
+        </div>
+        <div class="row for-name">
+          <p>Nan Chen</p>
+          <span class="tagline">Not a Number 😆</span>
+        </div>
+      </div>
+    </span>
+  </div>
+  <nav class="menu-container">
+  <ul class="menu-items">
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>Home</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+    
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>Pages</span>
+        <ul>
+          <li><a href="/about">About</a></li>
+        </ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-link fa-fw"></i>Friends</span>
+        <ul>
+          <li> <a href="https://lx.js.org" target="_blank">Theme-Lx</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+</div>
+
+  <div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/js/jquery.easing.min.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      var goToTop = function () {
+        $(".js-gotop").on("click", function (event) {
+          event.preventDefault();
+          $("html, body").animate({
+            scrollTop: $("html").offset().top
+          }, 500, "easeInOutExpo");
+          return false;
+        });
+        $(window).scroll(function () {
+          var $win = $(window);
+          if ($win.scrollTop() > 200) {
+            $(".js-top").addClass("active");
+          } else {
+            $(".js-top").removeClass("active");
+          }
+        });
+      };
+      $(function () {
+        goToTop();
+      });
+    }());
+
+  </script>
+  
+
+
+</body>
+
+</html>
