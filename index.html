@@ -105,6 +105,14 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2 class="title"><a href="/2020/05/27/type-conversion/">type conversion</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-05-27</span>
+      <p></p>
+      <div class="post-button"><a class="btn" href="/2020/05/27/type-conversion/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2 class="title"><a href="/2020/05/27/Binary-tree-part-1/">Binary tree part 1</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-05-27</span>
       <p><div class="note warning">
@@ -356,37 +364,6 @@
 
 <h2 id="🌟🌟-169-Majority-Element"><a href="#🌟🌟-169-Majority-Element" class="headerlink" title="🌟🌟 169. Majority Element"></a>🌟🌟 <a href="https://leetcode-cn.com/problems/majority-element/" target="_blank" rel="noopener">169. Majority Element</a></h2></p>
       <div class="post-button"><a class="btn" href="/2020/05/21/Template-for-Divided-Conquer-Algorithm/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/05/16/Understanding-Promise-part-2/">Understanding Promise part 2</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-05-16</span>
-      <p><div class="note warning">
-            <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h3><p>This article is originally based on my understanding of this concept. No guarantee on the accuracy.😅</p>
-          </div>
-
-<p>‘The <strong><code>Promise</code></strong> object represents the eventual completion (or failure) of an asynchronous operation, and its resulting value.’</p>
-<p>It was introduced to handle asynchronous operation like synchronous opeartion and avoid the callback hell.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">doSomething(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">  doSomethingElse(result, <span class="function"><span class="keyword">function</span>(<span class="params">newResult</span>) </span>&#123;</span><br><span class="line">    doThirdThing(newResult, <span class="function"><span class="keyword">function</span>(<span class="params">finalResult</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'Got the final result: '</span> + finalResult);</span><br><span class="line">    &#125;, failureCallback);</span><br><span class="line">  &#125;, failureCallback);</span><br><span class="line">&#125;, failureCallback);</span><br></pre></td></tr></table></figure>
-
-<p>Common asynchronous-operation</p>
-<ul>
-<li>setTimeOut, setInterval</li>
-<li>XHR request (fetch api)</li>
-<li>Event Listening</li>
-</ul>
-<p>Thansk to promise’s .then() chaining, we can put the callback outside：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">doSomething()</span><br><span class="line">.then(<span class="function"><span class="params">result</span> =&gt;</span> doSomethingElse(result))</span><br><span class="line">.then(<span class="function"><span class="params">newResult</span> =&gt;</span> doThirdThing(newResult))</span><br><span class="line">.then(<span class="function"><span class="params">finalResult</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Got the final result: <span class="subst">$&#123;finalResult&#125;</span>`</span>);</span><br><span class="line">&#125;)</span><br><span class="line">.catch(failureCallback);<span class="comment">//error handler for all above!</span></span><br></pre></td></tr></table></figure>
-
-<p>*<em>This all based on modern API that returning a promise. That is to say, the promise chains starts with an API function  which returns a promise. *</em></p>
-<p>We can create our own promise as well. Although it’s not typical practice but it can be helpful to ‘promisify’ some old callback-style API then chain the handler. </p>
-<p>Let’s look at how a promise is created. </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(</span><br><span class="line">  <span class="comment">//executor which runs immediately/sync:</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'sync!'</span>)</span><br><span class="line">  (res, rej)=&gt;&#123;</span><br><span class="line">    <span class="comment">// asynchronous operation. they will be put into the task queue</span></span><br><span class="line">    <span class="comment">//instead of returning something, it calls the callback as sideeffect to pass the result of asyn operation to res()/rej()</span></span><br><span class="line">    <span class="keyword">if</span>(somecodition) res(result); <span class="comment">//once the promise is settled the state won't be changed</span></span><br><span class="line">    rej(error)</span><br><span class="line">    <span class="comment">//then the res()/rej() can pass the result to the ousdie by chaining a .then()/.catch()</span></span><br><span class="line">&#125; </span><br><span class="line">  <span class="comment">//the construcor return the new promise obj (of course)</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-<p>An example of wrapping a callback-style function with Promise:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> wait = <span class="function"><span class="params">ms</span> =&gt;</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> setTimeout(resolve, ms));</span><br><span class="line"></span><br><span class="line">wait(<span class="number">10000</span>).then(<span class="function"><span class="params">()</span> =&gt;</span> saySomething(<span class="string">"10 seconds"</span>)).catch(failureCallback);</span><br></pre></td></tr></table></figure></p>
-      <div class="post-button"><a class="btn" href="/2020/05/16/Understanding-Promise-part-2/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
 
