@@ -105,6 +105,47 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2 class="title"><a href="/2020/05/21/Template-for-Divided-Conquer-Algorithm/">Template for Divided Conquer Algorithm</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-05-21</span>
+      <p><div class="note warning">
+            <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h3><p>This article is originally based on my understanding of this concept. No guarantee on the accuracy.😅</p>
+          </div>
+
+<p><strong><code>Template:</code></strong></p>
+<ul>
+<li><p>1.base case</p>
+</li>
+<li><p>2.split to smaller sacle </p>
+<p>(directly slice from the array otherwise maintain the index, and dynamically updated every call)</p>
+</li>
+<li><p>3.recursion</p>
+</li>
+<li><p>4.combination </p>
+<p>(define the combination function and pass the returned value from recursion as parameter)</p>
+</li>
+</ul>
+<p>Let’s see the examples from easy to moderate</p>
+<h2 id="🌟-Search-the-max-amp-min-value"><a href="#🌟-Search-the-max-amp-min-value" class="headerlink" title="🌟 Search the max&amp;min value"></a>🌟 Search the max&amp;min value</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">searchMaxMin</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">      <span class="comment">//the base case</span></span><br><span class="line">        <span class="keyword">if</span> (arr.length &lt;= <span class="number">2</span>) &#123;</span><br><span class="line">          <span class="keyword">return</span> [<span class="built_in">Math</span>.max(...arr), <span class="built_in">Math</span>.min(...arr)];</span><br><span class="line">        &#125;</span><br><span class="line">      <span class="comment">//split</span></span><br><span class="line">        <span class="keyword">var</span> mid = arr.length / <span class="number">2</span> - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">let</span> left = arr.slice(<span class="number">0</span>, mid + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">let</span> right = arr.slice(mid + <span class="number">1</span>, arr.length);</span><br><span class="line">      <span class="comment">//recursion</span></span><br><span class="line">        <span class="keyword">var</span> sortedLeft = searchMaxMin(left);</span><br><span class="line">        <span class="keyword">var</span> sortedRight = searchMaxMin(right);</span><br><span class="line"><span class="comment">//combination function</span></span><br><span class="line">         <span class="keyword">const</span> combine = <span class="function">(<span class="params">left, right</span>) =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">var</span> result = [];</span><br><span class="line">          result[<span class="number">0</span>] = left[<span class="number">0</span>] &gt; right[<span class="number">0</span>] ? left[<span class="number">0</span>] : right[<span class="number">0</span>];</span><br><span class="line">          result[<span class="number">1</span>] = left[<span class="number">1</span>] &gt; right[<span class="number">1</span>] ? right[<span class="number">1</span>] : left[<span class="number">1</span>];</span><br><span class="line">          <span class="keyword">return</span> result;</span><br><span class="line">        &#125;;</span><br><span class="line"><span class="comment">//combine the returned value</span></span><br><span class="line">        <span class="keyword">return</span> combine(sortedLeft, sortedRight);</span><br><span class="line">      &#125;</span><br><span class="line">searchMaxMin([<span class="number">11</span>,<span class="number">2</span>,<span class="number">34</span>,<span class="number">0</span>,<span class="number">55</span>,<span class="number">11</span>])</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="🌟🌟-Merge-Sorting"><a href="#🌟🌟-Merge-Sorting" class="headerlink" title="🌟🌟 Merge Sorting"></a>🌟🌟 Merge Sorting</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mergeSort=<span class="function"><span class="params">arr</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="comment">//the edge case</span></span><br><span class="line">    <span class="keyword">if</span>(arr.length&lt;<span class="number">2</span>) <span class="keyword">return</span> arr;</span><br><span class="line">     <span class="comment">//split into smaller pieces</span></span><br><span class="line">    <span class="keyword">let</span> mid=<span class="built_in">Math</span>.floor(arr.length/<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">let</span> left=arr.slice(<span class="number">0</span>,mid),right=arr.slice(mid);</span><br><span class="line">   <span class="comment">//recursion</span></span><br><span class="line">    <span class="keyword">let</span> sortedLeft = mergeSort(left),sortedRight=(mergeSort(right));</span><br><span class="line">    <span class="comment">//combination function</span></span><br><span class="line">    <span class="keyword">const</span> merge=<span class="function">(<span class="params">left,right</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> res=[];</span><br><span class="line">    <span class="keyword">while</span>(left.length&amp;&amp;right.length)&#123;</span><br><span class="line">        <span class="keyword">if</span>(left[<span class="number">0</span>]&lt;=right[<span class="number">0</span>])&#123;</span><br><span class="line">            res.push(left.shift());</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            res.push(right.shift());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(left.length)&#123;</span><br><span class="line">        res.push(left.shift());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(right.length)&#123;</span><br><span class="line">        res.push(right.shift());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br><span class="line">    <span class="comment">//combine the returned value</span></span><br><span class="line">    <span class="keyword">return</span> merge(sortedLeft,sortedRight);</span><br><span class="line">&#125;;</span><br><span class="line">mergeSort([<span class="number">3</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">2</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>The call-stack would run in this sequence:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">merge(mergesort(<span class="number">3</span>,<span class="number">1</span>),mergersort(<span class="number">5</span>,<span class="number">0</span>,<span class="number">2</span>))</span><br><span class="line">merge(mergesort(<span class="number">3</span>),mergersort(<span class="number">1</span>))</span><br><span class="line">merge(left<span class="number">-3</span>,right<span class="number">-1</span>)</span><br><span class="line">merge(mergesort(<span class="number">5</span>),mergersort(<span class="number">0</span>,<span class="number">2</span>))</span><br><span class="line">merge(mergesort(<span class="number">0</span>),mergersort(<span class="number">2</span>))</span><br><span class="line">merge(left<span class="number">-0</span>,right<span class="number">-2</span>)</span><br><span class="line">merge(left<span class="number">-5</span>,right<span class="number">-0</span>,<span class="number">2</span>)</span><br><span class="line">merge(left<span class="number">-1</span>,<span class="number">3</span>,right<span class="number">-0</span>,<span class="number">2</span>,<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="🌟🌟-Quick-Sorting"><a href="#🌟🌟-Quick-Sorting" class="headerlink" title="🌟🌟 Quick Sorting"></a>🌟🌟 Quick Sorting</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">quick</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//the base case</span></span><br><span class="line">        <span class="keyword">if</span> (nums.length &lt;= <span class="number">1</span>) <span class="keyword">return</span> nums;</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">let</span> mid = <span class="built_in">Math</span>.floor(nums.length / <span class="number">2</span>);</span><br><span class="line">        <span class="keyword">let</span> pivot = nums.splice(mid, <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">let</span> left = [],</span><br><span class="line">          right = [];</span><br><span class="line">    <span class="comment">//break into two smaller array;</span></span><br><span class="line">        <span class="keyword">for</span> (num <span class="keyword">of</span> nums) &#123;</span><br><span class="line">          <span class="keyword">if</span> (num &lt; pivot) left.push(num);</span><br><span class="line">          <span class="keyword">if</span> (num &gt;= pivot) right.push(num);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="comment">//recursively pass the smaller sacle</span></span><br><span class="line">    <span class="keyword">let</span> sortedLeft =quick(left); </span><br><span class="line">    <span class="keyword">let</span> sortedRight = quick(right);</span><br><span class="line">    <span class="comment">//combine the returned result</span></span><br><span class="line">   <span class="keyword">return</span> [...sortedLeft, ...pivot, ...sortedRight]; </span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="🌟🌟-169-Majority-Element"><a href="#🌟🌟-169-Majority-Element" class="headerlink" title="🌟🌟 169. Majority Element"></a>🌟🌟 <a href="https://leetcode-cn.com/problems/majority-element/" target="_blank" rel="noopener">169. Majority Element</a></h2></p>
+      <div class="post-button"><a class="btn" href="/2020/05/21/Template-for-Divided-Conquer-Algorithm/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2 class="title"><a href="/2020/05/16/Understanding-Promise-part-2/">Understanding Promise part 2</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-05-16</span>
       <p><div class="note warning">
@@ -243,55 +284,10 @@ p.then(<span class="function"><span class="params">v</span>=&gt;</span>{<span cl
       <div class="post-button"><a class="btn" href="/2020/04/29/Closure/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/04/27/Webpack-core-concept/">Learning Webpack core concept</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-04-27</span>
-      <p><img src="https://raw.githubusercontent.com/webpack/media/master/logo/logo-on-white-bg.png">
-
-<p>Main reference:</p>
-<p><a src="https://www.youtube.com/watch?v=xse6JKcfbzs">Sean Larkin’s talk Everything’s a Plugin: Understanding Webpack From the Inside Out at JS Kongress 2019</a></p>
-<hr>
-<h2 id="Getting-started"><a href="#Getting-started" class="headerlink" title="Getting started:"></a>Getting started:</h2><p>Build modules on the browser including non-js file</p>
-<p>$ webpack &lt;entry.js&gt;</p>
-<p>$ webpack-dev-server –port=9000</p>
-<h2 id="Entry-point"><a href="#Entry-point" class="headerlink" title="Entry point"></a>Entry point</h2><ul>
-<li><p>a module relys on other module, dependncies</p>
-</li>
-<li><p>the first js to load to ‘kick-off’ your app, a starting point for webpack to build the dependency graph</p>
-</li>
-<li><p>what to load for the browser; compliments the output property.</p>
-</li>
-</ul>
-<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><ul>
-<li><p>where and how to distributes the bubdles (compilations)</p>
-</li>
-<li><p>default: bundle.js</p>
-</li>
-</ul>
-<h2 id="Loaders"><a href="#Loaders" class="headerlink" title="Loaders"></a>Loaders</h2><ul>
-<li><p>js functions that takes the source fiel, and return a <strong>modifed</strong> state</p>
-</li>
-<li><p>tell webpack how to load non-js file(transfer &amp; interpretation)</p>
-</li>
-<li><p>return compliations</p>
-</li>
-</ul>
-<h4 id="test"><a href="#test" class="headerlink" title="test"></a>test</h4><p>RegEx instructs the complier which files to run the loader against</p>
-<h4 id="use"><a href="#use" class="headerlink" title="use"></a>use</h4><p>An array/string/function which returns loader objects</p>
-<h4 id="enforce"><a href="#enforce" class="headerlink" title="enforce"></a>enforce</h4><p>Pre/post</p>
-<p>run this rules before/after all other rules</p>
-<h4 id="include-amp-exclude"><a href="#include-amp-exclude" class="headerlink" title="include&amp;exclude"></a>include&amp;exclude</h4><p>Filter through</p>
-<p>eg.node-modules</p>
-<h4 id="chaining-loaders"><a href="#chaining-loaders" class="headerlink" title="chaining loaders"></a>chaining loaders</h4><p>order sensitive</p>
-<p>like a streamline</p></p>
-      <div class="post-button"><a class="btn" href="/2020/04/27/Webpack-core-concept/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
 
 
 <div id="pagination">
-  <a class="extend prev" rel="prev" href="/"></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  <a class="extend prev" rel="prev" href="/"></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"></a>
 </div>
 
 <footer>
