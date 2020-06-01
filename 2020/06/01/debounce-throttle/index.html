@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="theme-color" content=#58b77a>
-<title>type conversion | Brushes &amp; Keys</title>
+<title>debounce &amp; throttle | Brushes &amp; Keys</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Nan Chen">
 <meta name="keywords" content="javascript web-devlopement photography">
@@ -91,9 +91,11 @@
   <div class="overlay">
     <div class="page-title">
       <div class="avatar"><a href="/"><img src="https://avatars0.githubusercontent.com/u/26827800?s=460&u=59259f6cb361b7fba376e3ae0c589ccc1639c8b4&v=4"></a></div>
-      <span>2020-05-27</span>
-      <h2>type conversion</h2>
-      
+      <span>2020-06-01</span>
+      <h2>debounce & throttle</h2>
+      <div class="tags"><i
+          class="fa fa-tag"></i><a class="tag-link" href="/tags/javascript/" rel="tag">javascript</a>
+      </div>
     <div class="social-links">
   <a href="https://github.com/southchen" target="_blank"><i
       class="fa fa-github fa-fw"></i></a>
@@ -110,7 +112,24 @@
     <div class="lx-post">
       <div class="lx-entry padding">
         <div>
-          
+          <div class="note warning">
+            <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h3><p>This article is originally based on my understanding of this concept. No guarantee on the accuracy.😅</p>
+          </div>
+
+<h2 id="Throttle"><a href="#Throttle" class="headerlink" title="Throttle"></a>Throttle</h2><p>![throttle](debounce-throttle/Untitled Diagram-Page-1.png)</p>
+<p>Throttle is used to limit how often a function can be called, though throttle is simpler to implement</p>
+<p>Using a flag to record the state: within or exceed the time limit</p>
+<p>Use case: during scrolling, resizing</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> throttle = <span class="function">(<span class="params">fn, limit</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> flag = <span class="literal">false</span>; <span class="comment">//init the flag</span></span><br><span class="line">        <span class="keyword">return</span> <span class="function">(<span class="params">...arg</span>) =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">if</span> (!flag) &#123; <span class="comment">//if the flag is false, exceeds the limit</span></span><br><span class="line">            fn(arg); <span class="comment">//run the passed in function</span></span><br><span class="line">            flag = <span class="literal">true</span>; <span class="comment">//turn the flog to ture, still inside the limit</span></span><br><span class="line">           setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="comment">//use a timer to turn flag to false after the limit</span></span><br><span class="line">            flag = <span class="literal">false</span>;</span><br><span class="line">          &#125;, limit);</span><br><span class="line">          &#125;</span><br><span class="line">  			<span class="comment">//if the flag was true, do nothing.</span></span><br><span class="line">        &#125;;</span><br><span class="line">      &#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Debounce"><a href="#Debounce" class="headerlink" title="Debounce"></a>Debounce</h2><p>![debounce](debounce-throttle/Untitled Diagram-Page-2.png)</p>
+<p>A debounced function is called only once in a given period, delay milliseconds after its last invocation (the timer is reset on every call).</p>
+<p>use case: auto search</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> debounce = <span class="function">(<span class="params">fn, limit</span>) =&gt;</span> &#123;</span><br><span class="line">   <span class="keyword">let</span> id; </span><br><span class="line">   <span class="keyword">return</span> <span class="function">(<span class="params">...arg</span>) =&gt;</span> &#123;</span><br><span class="line">     <span class="keyword">if</span> (id) clearTimeout(id); <span class="comment">//every time the function was called, test if the the timer is running, if so, restart the timer</span></span><br><span class="line">     id = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123; </span><br><span class="line">       fn(arg);</span><br><span class="line">     &#125;, limit);</span><br><span class="line">   &#125;;</span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure>
+
+
         </div>
       </div>
     </div>
@@ -119,12 +138,12 @@
   <div class="lx-cover prev lx-cover-sm">
     <!-- style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-l.jpeg)" -->
     <div class="overlay"></div>
-    <a class="copy" href="/2020/06/01/debounce-throttle/">
+    <a class="copy" href="#">
 			<div class="display-t">
 				<div class="display-tc">
 					<div>
 						<span>Next</span>
-						<h3>debounc...</h3>
+						<h3>No newer post</h3>
 					</div>
 				</div>
 			</div>
@@ -133,12 +152,12 @@
         <div class="lx-cover next lx-cover-sm" >
 			<!-- style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-r.jpeg)" -->
       <div class="overlay"></div>
-      <a class="copy" href="/2020/05/27/Binary-tree-part-1/">
+      <a class="copy" href="/2020/05/27/type-conversion/">
 			<div class="display-t">
 				<div class="display-tc">
 					<div>
 						<span>Prev</span>
-						<h3>Binary tree part 1</h3>
+						<h3>type conversion</h3>
 					</div>
 				</div>
 			</div>
