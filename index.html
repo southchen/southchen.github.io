@@ -105,6 +105,62 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2 class="title"><a href="/2020/06/12/inheritance-0/">inheritance</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-12</span>
+      <p><h1 id="Inheritance-of-Object-in-JS"><a href="#Inheritance-of-Object-in-JS" class="headerlink" title="Inheritance of Object in JS"></a>Inheritance of Object in JS</h1><div class="note warning">
+            <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h3><p>This article is originally based on my understanding of this concept. No guarantee on the accuracy.😅</p>
+          </div>
+
+<h2 id="Prototype-chain"><a href="#Prototype-chain" class="headerlink" title="Prototype chain"></a>Prototype chain</h2><p>Let subType’s prototype points to an instance of the superType;</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SubType.prototype= <span class="keyword">new</span> SuperType()</span><br></pre></td></tr></table></figure>
+
+<p>Problems:</p>
+<ul>
+<li>The instance property of SuperType becoms the shared prototype property for SubType</li>
+<li>There is no way to pass arguments to the constructor of superType</li>
+</ul>
+<h2 id="Constructor-stealing"><a href="#Constructor-stealing" class="headerlink" title="Constructor stealing"></a>Constructor stealing</h2><p>Calling the constructor of supertype inside the constructor of subtype.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SubType</span>(<span class="params">...arg</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//now it's avaliable to pass arguments to supertype</span></span><br><span class="line"> 	SuperType.call(<span class="keyword">this</span>,arg)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Problems:</p>
+<ul>
+<li>No access for Subtype to the prototype method/properties of the SuperType</li>
+<li>The methods are defined inside the constructor which makes them instance method. Not shared with all instances;</li>
+</ul>
+<h2 id="Combination-inheritance"><a href="#Combination-inheritance" class="headerlink" title="Combination inheritance"></a>Combination inheritance</h2><p>Prototype chain + constructor stealing</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SubType</span> (<span class="params">..args</span>)</span>&#123;</span><br><span class="line">	SuperType.call(<span class="keyword">this</span>,args)</span><br><span class="line">&#125;</span><br><span class="line">SubType.prototype = <span class="keyword">new</span> SuperType()</span><br><span class="line">SubType.prototype.constructor =Subtype;</span><br></pre></td></tr></table></figure>
+
+<p>Problems:</p>
+<ul>
+<li>The constructor function always be called twice during the inheritance;</li>
+</ul>
+<h2 id="Prototypal-inheritance"><a href="#Prototypal-inheritance" class="headerlink" title="Prototypal inheritance"></a>Prototypal inheritance</h2><p>The constructor is not necessary to perform inheritance. It simply can be done by a object itself.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.create()</span><br><span class="line"><span class="built_in">Object</span>.prototype.create=<span class="function">(<span class="params">prototype</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line">    <span class="comment">//points the prototype to the argument (an object)</span></span><br><span class="line">    F.prototype = prototype;</span><br><span class="line">    <span class="comment">//return the instance of the temp constructor</span></span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> F()</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> Person = &#123;<span class="attr">greeting</span>:<span class="string">'Hello'</span>&#125;</span><br><span class="line"><span class="keyword">let</span> Student =<span class="built_in">Object</span>.create(Person)</span><br></pre></td></tr></table></figure>
+
+<p>Inheritance using constructor:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SubType &#x3D; Object(SuperType.prototype)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Parasitic-inheritance"><a href="#Parasitic-inheritance" class="headerlink" title="Parasitic inheritance"></a>Parasitic inheritance</h2><p>Create a function only focus on encapsulation</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parasitic</span>(<span class="params">prototype</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">let</span> object = <span class="built_in">Object</span>.create(prototype);</span><br><span class="line">    object.method=<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> object;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> <span class="keyword">super</span> = &#123;<span class="attr">name</span>:<span class="string">'super'</span>&#125;</span><br><span class="line"><span class="keyword">let</span> obj1= parasitic(<span class="keyword">super</span>);</span><br><span class="line"><span class="keyword">let</span> obj2=parasitic(<span class="keyword">super</span>);</span><br><span class="line">obj1.method !=obj2.method;</span><br></pre></td></tr></table></figure>
+
+<p>Problems:</p>
+<ul>
+<li>The methods are not shared with instances;</li>
+</ul>
+<h2 id="Parasitic-combination"><a href="#Parasitic-combination" class="headerlink" title="Parasitic combination"></a>Parasitic combination</h2><p>For combination inheritance, the constructor function was called twice.</p>
+<p>The instance property of superType were created first to be the prototype property of subtype, (SubType.prototype = new Super())</p>
+<p>then created as iinstance properties.(inside the constructor)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inheritance</span>(<span class="params">subType,superType</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> prototype=<span class="built_in">Object</span>.create(superType.prototype);</span><br><span class="line">    prototype.construcotr = subType;</span><br><span class="line">    subType.prototype=prototype;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Mixing-inheritance"><a href="#Mixing-inheritance" class="headerlink" title="Mixing inheritance"></a>Mixing inheritance</h2><p>JS dosen’t support multiple inheritance, but method of different class/object can be borrowed by mixing</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> Student =&#123;</span><br><span class="line">	study(book)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'read'</span>+book)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.greeting=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(name)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> jack = <span class="keyword">new</span> Person(<span class="string">'jack'</span>)<span class="comment">//jack Person &#123;name:'jack'&#125;</span></span><br><span class="line">Obejct.assign(jack,Student);<span class="comment">//jack Person &#123;name: "jack", greeting: ƒ, study: ƒ&#125;</span></span><br></pre></td></tr></table></figure>
+
+</p>
+      <div class="post-button"><a class="btn" href="/2020/06/12/inheritance-0/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2 class="title"><a href="/2020/06/08/browser-rendering/">browser rendering</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-08</span>
       <p><h1 id="Browser-rendering"><a href="#Browser-rendering" class="headerlink" title="Browser rendering"></a>Browser rendering</h1><div class="note warning">
@@ -455,36 +511,6 @@
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> inorderTraversal = <span class="function"><span class="keyword">function</span> (<span class="params">root</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> res = [];</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">traversal</span>(<span class="params">root</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root !== <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="comment">//exit point</span></span><br><span class="line">      traversal(root.left); <span class="comment">//left node first</span></span><br><span class="line">      res.push(root.val); <span class="comment">//store the root</span></span><br><span class="line">      traversal(root.right); <span class="comment">//right node last</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  traversal(root);</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
       <div class="post-button"><a class="btn" href="/2020/05/27/Binary-tree-part-1/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/05/25/inheritance-prototype/">A visual way to understand inheritance & prototype</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-05-25</span>
-      <p><h2 id="A-visual-way-to-understand-inheritance-amp-prototype"><a href="#A-visual-way-to-understand-inheritance-amp-prototype" class="headerlink" title="A visual way to understand inheritance &amp; prototype"></a>A visual way to understand inheritance &amp; prototype</h2><div class="note warning">
-            <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h3><p>This article is originally based on my understanding of this concept. No guarantee on the accuracy.😅</p>
-          </div>
-
-
-
-<p>In JavaScript, there is actually no concept of real Class (in es6, class is purely syntax sugar 🍬)</p>
-<p>The inheritance was made by inheriting along the prototype chain. And it’s a real OOP language since you can create a new object directly from an object bypassing the class.</p>
-<p>The keyword <code>new &lt;Constructor&gt;</code> and Object.create(<code>&lt;Prototype object&gt;</code>) method can both manuiplate the prototype chain (<code>__proto__</code>):</p>
-<img src="/.com//prototype-Page-2.png" alt="prototype-Page-2" style="zoom:50%;">
-
-<p>the orange line refers to the prototype chain.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params">argu</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.con = argu;</span><br><span class="line">&#125;</span><br><span class="line">A.prototype.proto = <span class="function"><span class="params">()</span>=&gt;</span>&#123;<span class="built_in">console</span>.log(<span class="keyword">this</span>)&#125;</span><br><span class="line"><span class="keyword">let</span> a1 = <span class="built_in">Object</span>.create(A.prototype)</span><br><span class="line"><span class="keyword">let</span> a2 = <span class="keyword">new</span> A(<span class="string">'a2'</span>)</span><br><span class="line">a2.con <span class="comment">// 'a2'</span></span><br><span class="line">a1.con <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
-
-<p>the new keyword and the .create method both combine the returned object to the prototype of the constructor function. However, the new object a2 will inheritage the this.con property constructor (a function) while the a1 will not.</p>
-<p>Both a1 and a2 have access to the .proto method by searching along the prototype chain.</p>
-<p>A common mistakes when I first bump into the idea of inheritance I have made was accidentally create an object from a  constructor function rather than the prototype of the constructor.</p>
-<img src="/.com//prototype-Page-3.png" alt="prototype-Page-3" style="zoom:50%;">
-
-<p>As the figure shown, the incorrectly created object a1now is an instance of function. And have no access to method of A.prototype.proto: </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a1 <span class="keyword">instanceof</span> <span class="built_in">Function</span> <span class="comment">//true</span></span><br><span class="line">a1.proto() <span class="comment">//a1.proto is not a function</span></span><br><span class="line">a1.prototype.proto() <span class="comment">//this works</span></span><br></pre></td></tr></table></figure>
-
-<p>The prototype object can be only found on a function. An object other than function have no pointer referencing to prototype. </p></p>
-      <div class="post-button"><a class="btn" href="/2020/05/25/inheritance-prototype/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
 
