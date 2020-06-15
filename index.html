@@ -105,6 +105,83 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2 class="title"><a href="/2020/06/15/es6ds/">es6ds</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-15</span>
+      <p><h1 id="ES6-Data-Type"><a href="#ES6-Data-Type" class="headerlink" title="ES6 Data Type"></a>ES6 Data Type</h1><div class="note warning">
+            <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h3><p>This article is originally based on my understanding of this concept. No guarantee on the accuracy.😅</p>
+          </div>
+
+<p>A summary of data type that introduced in ES6.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Symbol</th>
+<th>Map</th>
+<th>Set</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Summary</td>
+<td>Unique ‘string’</td>
+<td>Ordered ‘object’ whose key can be primitive &amp; reference</td>
+<td>‘Array’ with all unique value</td>
+</tr>
+<tr>
+<td>Construct</td>
+<td>let sb = Symbol()</td>
+<td>let m = new Map([iteratble])</td>
+<td>let s = new Set([iteratble])</td>
+</tr>
+<tr>
+<td>Key-value</td>
+<td>Description as ‘key’ <br>Symbol.keyFor(sb)</td>
+<td>key=&gt;any type ordered <br>value=&gt;any type</td>
+<td>key&lt;=&gt;value <br>unique key</td>
+</tr>
+<tr>
+<td>Loop</td>
+<td>N\A</td>
+<td>For…of  forEach()</td>
+<td>for…of forEach()</td>
+</tr>
+<tr>
+<td>Transfer</td>
+<td>sb.toString()</td>
+<td>[…m] = Array.from(m)  &lt;=&gt; new Map(arr).</td>
+<td>[…s] = Array.from(s)  &lt;=&gt; new Set(arr).</td>
+</tr>
+</tbody></table>
+<h2 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h2><blockquote>
+<p>An unique ‘string’ that would never be equvlient to others</p>
+</blockquote>
+<ul>
+<li><p>primitive data type</p>
+</li>
+<li><p><code>Symbol(&lt; description &gt;)</code> function returns an anonymous, unique value</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Symbol</span>(<span class="string">'foo'</span>) === <span class="built_in">Symbol</span>(<span class="string">'foo'</span>)  <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>This functon has its static propertise and methods</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> sb = <span class="built_in">Symbol</span>.for(<span class="string">'foo'</span>)</span><br><span class="line"><span class="keyword">let</span> sb2= <span class="built_in">Symbol</span>.for(<span class="string">'foo'</span>) <span class="comment">//saved the value in global env in the memory</span></span><br><span class="line">sb ===sb2<span class="comment">//true</span></span><br><span class="line"><span class="built_in">Symbol</span>.keyFor(sb) <span class="comment">//'foo'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Not <code>new Symbol()</code>  ❌</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> sym = <span class="keyword">new</span> <span class="built_in">Symbol</span>()  <span class="comment">// TypeError</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> sym = <span class="built_in">Symbol</span>(<span class="string">'foo'</span>)</span><br><span class="line"><span class="keyword">typeof</span> sym      <span class="comment">// "symbol" </span></span><br><span class="line"><span class="keyword">let</span> symObj = <span class="built_in">Object</span>(sym)</span><br><span class="line"><span class="keyword">typeof</span> symObj   <span class="comment">// "object"</span></span><br></pre></td></tr></table></figure>
+
+<p>But it has instance/prototype properties and methods</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Symbol</span>.prototype.toString()</span><br><span class="line"> <span class="keyword">let</span> sb = <span class="built_in">Symbol</span>(<span class="string">'context'</span>);</span><br><span class="line"> <span class="built_in">console</span>.log(sb.description); <span class="comment">//context</span></span><br></pre></td></tr></table></figure>
+
+<p>Returns a string containing the description of the Symbol. Overrides the Object.prototype.toString() method.</p>
+</li>
+</ul>
+<h3 id="Use-cases"><a href="#Use-cases" class="headerlink" title="Use cases"></a>Use cases</h3><p>To dealing with the same string name, use symbol to create unique value;</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> user1= &#123;</span><br><span class="line">	name:<span class="string">'Jack'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> user2 = &#123;</span><br><span class="line">    name:<span class="string">'Jack'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> data = &#123;</span><br><span class="line">    [user1]:&#123;<span class="attr">age</span>:<span class="number">19</span>&#125;,</span><br><span class="line">    [user2]:&#123;<span class="attr">age</span>:<span class="number">22</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(data[user1]) <span class="comment">//&#123;age: 22&#125;</span></span><br></pre></td></tr></table></figure></p>
+      <div class="post-button"><a class="btn" href="/2020/06/15/es6ds/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2 class="title"><a href="/2020/06/12/inheritance-0/">inheritance</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-12</span>
       <p><h1 id="Inheritance-of-Object-in-JS"><a href="#Inheritance-of-Object-in-JS" class="headerlink" title="Inheritance of Object in JS"></a>Inheritance of Object in JS</h1><div class="note warning">
@@ -447,70 +524,6 @@
 <p><a href="https://segmentfault.com/a/1190000018037485" target="_blank" rel="noopener">Article</a></p>
 </p>
       <div class="post-button"><a class="btn" href="/2020/05/27/type-conversion/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/05/27/Binary-tree-part-1/">Binary tree part 1</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-05-27</span>
-      <p><div class="note warning">
-            <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h3><p>This article is originally based on my understanding of this concept. No guarantee on the accuracy.😅</p>
-          </div>
-
-<p>Since the root and node share similar structure, it’s natural to use recursion to solve relative problem.</p>
-<p>Also, iteration can also be applied. The key would be which kind of data structure to store the data of a tree. Normally, a queue(FIFO) or a stack(FILO) depeding on the traversal order.</p>
-<h2 id="Binary-Tree-in-javascript："><a href="#Binary-Tree-in-javascript：" class="headerlink" title="Binary Tree in javascript："></a>Binary Tree in javascript：</h2><img src="https://pic2.zhimg.com/v2-3f628f0ace23334d7abdbce9cb9ff30d_r.jpg" alt="img" style="zoom:50%;">
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">BinaryTree</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> Node = <span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.val = val;</span><br><span class="line">    <span class="keyword">this</span>.left = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">this</span>.right = <span class="literal">null</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">let</span> root = <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Or using an array to store the elements of the tree where the root node is stored at index 1 not 0.</p>
-<p>For complete binary tree, if the index of an element (eg, D, i = 4). Its left child node will be stored in <code>2*i</code> (H,at 8), and its right childe node will be stored in<code>2 * i-1</code>, its root node will be stored at <code>Math.floor( i/2)</code></p>
-<img src="https://pic1.zhimg.com/v2-38bb49427f4918303528a0d7a7d3e650_r.jpg" alt="img" style="zoom:50%;">
-
-<img src="https://camo.githubusercontent.com/386bd63548817d77c2373eb1e63dfebd4f489e32/68747470733a2f2f7374617469633030312e6765656b62616e672e6f72672f7265736f757263652f696d6167652f30382f32332f30386264343339393135363163656562373636373966626237373037313232332e6a7067" alt="img" style="zoom:50%;">
-
-<h2 id="Traversal-of-tree"><a href="#Traversal-of-tree" class="headerlink" title="Traversal of tree"></a>Traversal of tree</h2><img src="https://pic1.zhimg.com/v2-28b51a414a2c78a707e7bb74364ecb1c_r.jpg" alt="img" style="zoom:50%;">
-
-<table>
-<thead>
-<tr>
-<th>Depth-first</th>
-<th>Breath-first</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Preorder</td>
-<td>Level-order</td>
-</tr>
-<tr>
-<td>Inorder</td>
-<td></td>
-</tr>
-<tr>
-<td>Postorder</td>
-<td></td>
-</tr>
-</tbody></table>
-<h2 id="Preorder-root-gt-left-node-gt-right-node"><a href="#Preorder-root-gt-left-node-gt-right-node" class="headerlink" title="Preorder (root -&gt; left node -&gt;right node"></a><strong>Preorder</strong> <strong><code>(root -&gt; left node -&gt;right node</code></strong></h2><p><img src="http://image.mamicode.com/info/201810/20181023185908213011.png" alt="preorder"></p>
-<p> <strong>Recursion:</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> preorderTraversal = <span class="function"><span class="keyword">function</span> (<span class="params">root</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> res = [];</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">traversal</span>(<span class="params">root</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root !== <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="comment">//exit point</span></span><br><span class="line">      <span class="comment">//the sequences matters!</span></span><br><span class="line">      res.push(root.val); <span class="comment">// access the root</span></span><br><span class="line">      traversal(root.left); <span class="comment">// left</span></span><br><span class="line">      traversal(root.right); <span class="comment">// right</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  traversal(root);</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p> *<em>Iteration: *</em></p>
-<p>version 1:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> preorderTraversal = <span class="function">(<span class="params">root</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> res = []; <span class="comment">//store the values of nodes</span></span><br><span class="line">  <span class="keyword">const</span> stack = [root]; <span class="comment">//FILO</span></span><br><span class="line">  <span class="keyword">if</span> (!root) <span class="keyword">return</span> res; <span class="comment">//exit point</span></span><br><span class="line">  <span class="keyword">while</span> (stack.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> cur = stack.pop(); <span class="comment">//pop out the current element</span></span><br><span class="line">    res.push(cur.val); <span class="comment">//push to the result array</span></span><br><span class="line">    cur.right &amp;&amp; stack.push(cur.right); <span class="comment">//if has right node, first push it</span></span><br><span class="line">    cur.left &amp;&amp; stack.push(cur.left); <span class="comment">//if has left node, then push it</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>version 2:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> preorderTraversal = <span class="function"><span class="keyword">function</span> (<span class="params">root</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> result = [];</span><br><span class="line">  <span class="keyword">var</span> stack = [];</span><br><span class="line">  <span class="keyword">var</span> p = root;</span><br><span class="line">  <span class="keyword">while</span> (stack.length != <span class="number">0</span> || p != <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (p != <span class="literal">null</span>) &#123;</span><br><span class="line">      stack.push(p);</span><br><span class="line">      result.push(p.val); <span class="comment">// Add before going to children</span></span><br><span class="line">      p = p.left;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">var</span> node = stack.pop();</span><br><span class="line">      p = node.right;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="Inorder-left-node-gt-root-gt-right-node"><a href="#Inorder-left-node-gt-root-gt-right-node" class="headerlink" title="Inorder left node -&gt; root -&gt; right node"></a><strong>Inorder</strong> <strong><code>left node -&gt; root -&gt; right node</code></strong></h2><ul>
-<li><p><img src="https://pic4.zhimg.com/v2-d3473214e2c730b8c52cca780f1281bb_r.jpg" alt="inorder traversal"></p>
-<p><strong>Recursion:</strong></p>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> inorderTraversal = <span class="function"><span class="keyword">function</span> (<span class="params">root</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> res = [];</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">traversal</span>(<span class="params">root</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root !== <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="comment">//exit point</span></span><br><span class="line">      traversal(root.left); <span class="comment">//left node first</span></span><br><span class="line">      res.push(root.val); <span class="comment">//store the root</span></span><br><span class="line">      traversal(root.right); <span class="comment">//right node last</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  traversal(root);</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-      <div class="post-button"><a class="btn" href="/2020/05/27/Binary-tree-part-1/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
 
