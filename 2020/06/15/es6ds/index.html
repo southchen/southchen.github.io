@@ -1,0 +1,419 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content=#58b77a>
+<title>es6ds | Brushes &amp; Keys</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Nan Chen">
+<meta name="keywords" content="javascript web-devlopement photography">
+<meta name="description" content="Personal blog tech & life">
+
+<script id="hexo-configurations">
+  var CONFIG = {
+    root: '/',
+    theme: 'lx',
+    version: '0.3.9',
+    localsearch:{
+      "enable": false,
+      "trigger": "auto",
+      "top_n_per_article": 1,
+      "unescape": false,
+      "preload": false
+      },
+    path: '-'
+  };
+</script>
+
+<link rel="shortcut icon" href="/bg.png">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/css/main.min.css">
+<link rel="stylesheet" href="/css/mycss.css">
+<style type="text/css">
+  pre,
+  code {
+    font-family: 'Hind Siliguri',
+      monospace;
+  }
+
+  html {
+    font-family: sans-serif;
+  }
+
+  body {
+    font-family: sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  figure {
+    font-family: Hind Siliguri;
+  }
+
+  .menu-container {
+    font-family: sans-serif;
+  }
+
+</style>
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/js/jquery.jside.menu.js"></script>
+<script>
+  $(document).ready(function () {
+    $(".menu-container").jSideMenu({
+      jSidePosition: "position-right",
+      jSideSticky: true,
+      jSideSkin: "greenish",
+    });
+  });
+
+</script>
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Hind Siliguri:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <style>
+  .single #lx-aside {
+    height: 380px;
+  }
+
+</style>
+<div class="single">
+  
+<div id="page">
+<div id="lx-aside" style="background-image: url(https://images.unsplash.com/photo-1505238680356-667803448bb6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80)" data-stellar-background-ratio="0.5">
+  <div class="overlay">
+    <div class="page-title">
+      <div class="avatar"><a href="/"><img src="https://avatars0.githubusercontent.com/u/26827800?s=460&u=59259f6cb361b7fba376e3ae0c589ccc1639c8b4&v=4"></a></div>
+      <span>2020-06-15</span>
+      <h2>es6ds</h2>
+      <div class="tags"><i
+          class="fa fa-tag"></i><a class="tag-link" href="/tags/es6/" rel="tag">es6</a> <i class="fa fa-tag"></i><a class="tag-link" href="/tags/javascript/" rel="tag">javascript</a>
+      </div>
+    <div class="social-links">
+  <a href="https://github.com/southchen" target="_blank"><i
+      class="fa fa-github fa-fw"></i></a>
+  <a href="https://instagram.com/divetothesea" target="_blank"><i
+      class="fa fa-instagram fa-fw"></i></a>
+  <a href="https://www.behance.net/southchen" target="_blank"><i
+      class="fa fa-behance fa-fw"></i></a>
+</div>
+</div>
+</div>
+</div>
+
+  <div id="lx-main-content">
+    <div class="lx-post">
+      <div class="lx-entry padding">
+        <div>
+          <h1 id="ES6-Data-Type"><a href="#ES6-Data-Type" class="headerlink" title="ES6 Data Type"></a>ES6 Data Type</h1><div class="note warning">
+            <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h3><p>This article is originally based on my understanding of this concept. No guarantee on the accuracy.😅</p>
+          </div>
+
+<p>A summary of data type that introduced in ES6.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Symbol</th>
+<th>Map</th>
+<th>Set</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Summary</td>
+<td>Unique ‘string’</td>
+<td>Ordered ‘object’ whose key can be primitive &amp; reference</td>
+<td>‘Array’ with all unique value</td>
+</tr>
+<tr>
+<td>Construct</td>
+<td>let sb = Symbol()</td>
+<td>let m = new Map([iteratble])</td>
+<td>let s = new Set([iteratble])</td>
+</tr>
+<tr>
+<td>Key-value</td>
+<td>Description as ‘key’ <br>Symbol.keyFor(sb)</td>
+<td>key=&gt;any type ordered <br>value=&gt;any type</td>
+<td>key&lt;=&gt;value <br>unique key</td>
+</tr>
+<tr>
+<td>Loop</td>
+<td>N\A</td>
+<td>For…of  forEach()</td>
+<td>for…of forEach()</td>
+</tr>
+<tr>
+<td>Transfer</td>
+<td>sb.toString()</td>
+<td>[…m] = Array.from(m)  &lt;=&gt; new Map(arr).</td>
+<td>[…s] = Array.from(s)  &lt;=&gt; new Set(arr).</td>
+</tr>
+</tbody></table>
+<h2 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h2><blockquote>
+<p>An unique ‘string’ that would never be equvlient to others</p>
+</blockquote>
+<ul>
+<li><p>primitive data type</p>
+</li>
+<li><p><code>Symbol(&lt; description &gt;)</code> function returns an anonymous, unique value</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Symbol</span>(<span class="string">'foo'</span>) === <span class="built_in">Symbol</span>(<span class="string">'foo'</span>)  <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>This functon has its static propertise and methods</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> sb = <span class="built_in">Symbol</span>.for(<span class="string">'foo'</span>)</span><br><span class="line"><span class="keyword">let</span> sb2= <span class="built_in">Symbol</span>.for(<span class="string">'foo'</span>) <span class="comment">//saved the value in global env in the memory</span></span><br><span class="line">sb ===sb2<span class="comment">//true</span></span><br><span class="line"><span class="built_in">Symbol</span>.keyFor(sb) <span class="comment">//'foo'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Not <code>new Symbol()</code>  ❌</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> sym = <span class="keyword">new</span> <span class="built_in">Symbol</span>()  <span class="comment">// TypeError</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> sym = <span class="built_in">Symbol</span>(<span class="string">'foo'</span>)</span><br><span class="line"><span class="keyword">typeof</span> sym      <span class="comment">// "symbol" </span></span><br><span class="line"><span class="keyword">let</span> symObj = <span class="built_in">Object</span>(sym)</span><br><span class="line"><span class="keyword">typeof</span> symObj   <span class="comment">// "object"</span></span><br></pre></td></tr></table></figure>
+
+<p>But it has instance/prototype properties and methods</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Symbol</span>.prototype.toString()</span><br><span class="line"> <span class="keyword">let</span> sb = <span class="built_in">Symbol</span>(<span class="string">'context'</span>);</span><br><span class="line"> <span class="built_in">console</span>.log(sb.description); <span class="comment">//context</span></span><br></pre></td></tr></table></figure>
+
+<p>Returns a string containing the description of the Symbol. Overrides the Object.prototype.toString() method.</p>
+</li>
+</ul>
+<h3 id="Use-cases"><a href="#Use-cases" class="headerlink" title="Use cases"></a>Use cases</h3><p>To dealing with the same string name, use symbol to create unique value;</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> user1= &#123;</span><br><span class="line">	name:<span class="string">'Jack'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> user2 = &#123;</span><br><span class="line">    name:<span class="string">'Jack'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> data = &#123;</span><br><span class="line">    [user1]:&#123;<span class="attr">age</span>:<span class="number">19</span>&#125;,</span><br><span class="line">    [user2]:&#123;<span class="attr">age</span>:<span class="number">22</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(data[user1]) <span class="comment">//&#123;age: 22&#125;</span></span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>Using symbol:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> user1= &#123;</span><br><span class="line">	name:<span class="string">'Jack'</span>,</span><br><span class="line">	key:<span class="built_in">Symbol</span>()</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> user2 = &#123;</span><br><span class="line">    name:<span class="string">'Jack'</span>,</span><br><span class="line">    key:<span class="built_in">Symbol</span>()</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> data = &#123;</span><br><span class="line">    [user1.key]:&#123;<span class="attr">age</span>:<span class="number">19</span>&#125;,</span><br><span class="line">    [user2.key]:&#123;<span class="attr">age</span>:<span class="number">22</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(data[user1.key]) <span class="comment">//&#123;age: 19&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>for...in</code> can only get the propertise of an object that its key is not a symbol.</p>
+<p>The <code>Object.getOwnPropertySymbols()</code> method can only get the symbol peroproty</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> sb = <span class="built_in">Symbol</span>(<span class="string">'b'</span>)</span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">	a:<span class="string">'a'</span>,</span><br><span class="line">    [sb]:<span class="string">'symbol'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> item <span class="keyword">of</span> <span class="built_in">Reflect</span>.ownKeys(obj))&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(item)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The symbol can protect the propertise to be looped from outside.</p>
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><p>The Map object holds key-value pairs and remembers the original insertion order of the keys. Any value (both objects and primitive values) may be used as either a key or a value.</p>
+<blockquote>
+<p>An order object whose key can be any data type</p>
+</blockquote>
+<ul>
+<li>iterable, can be looped through <code>for...of</code></li>
+<li>Its size can be easily obtained by the <code>size</code> property</li>
+<li>use <code>new Map([iterable])</code> to create a Map object where the key-value of each iterable were pushed into the Map</li>
+<li>Use <code>Map.prototype.set([key])</code> to push a new value, use <code>.get([key])</code>to get the value</li>
+<li><code>Map.prototype.has()</code> return boolean</li>
+<li>The key has to be unique. No repeating keys. The later insertion would overwrite the earlier one.</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj=&#123;<span class="attr">a</span>:<span class="string">'a'</span>&#125;</span><br><span class="line"><span class="keyword">let</span> obj1=&#123;<span class="attr">b</span>:<span class="string">'b'</span>&#125;</span><br><span class="line"><span class="keyword">let</span> m = <span class="keyword">new</span> <span class="built_in">Map</span>([[obj,<span class="string">'user'</span>],[<span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;&#125;,<span class="string">'function'</span>]])</span><br><span class="line"><span class="built_in">console</span>.log(m)<span class="comment">//Map(2) &#123;&#123;…&#125; =&gt; "user", ƒ =&gt; "function"&#125;</span></span><br><span class="line">m.set(obj1,<span class="string">'b'</span>)</span><br><span class="line">m.get(obj1)<span class="comment">//'b'</span></span><br><span class="line">m.get(&#123;<span class="attr">b</span>:<span class="string">'b'</span>&#125;)<span class="comment">//undefined</span></span><br><span class="line">m.has(obj)<span class="comment">//ture</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>These methods return a new iterator object contains each key/value/entry in the map</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[...m] <span class="comment">// [[&#123;&#125;,'user'],[f,'function'],[&#123;...&#125;,'b']]</span></span><br><span class="line">m.keys() <span class="comment">//MapIterator &#123;&#123;…&#125;, ƒ, Array(2)&#125;</span></span><br><span class="line">[...m.keys() ] <span class="comment">// [&#123;…&#125;, ƒ, Array(2)]</span></span><br><span class="line">m.values()</span><br><span class="line">m.entires()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>Map.prototype.forEach(callbackFn[, thisArg])</code> can loop the map</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">m.forEach(<span class="function">(<span class="params">value</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;)</span><br><span class="line">m.forEach(<span class="function">(<span class="params">value,key</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(value,key);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">of</span> m)&#123;</span><br><span class="line">    cosnole.log(item);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Compared-with-object"><a href="#Compared-with-object" class="headerlink" title="Compared with object"></a>Compared with object</h2><ul>
+<li>An <code>Object</code> has a prototype, so there are default keys in the map. </li>
+<li>(This can be bypassed using <code>map = Object.create(null)</code>.)</li>
+<li>The keys of an Object are Strings or Symbols, where they can be of any value for a Map.</li>
+</ul>
+<h2 id="Use-case"><a href="#Use-case" class="headerlink" title="Use case"></a>Use case</h2><p>use as an advanced version of object (hash map) to store. eg. Store the DOM element as the keys;</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">name</span>=<span class="string">'first'</span> <span class="attr">data-index</span>=<span class="string">'1'</span>&gt;</span></span><br><span class="line">        aaaa</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">name</span>=<span class="string">'second'</span> <span class="attr">data-index</span>=<span class="string">'2'</span>&gt;</span></span><br><span class="line">        bbbb</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map =<span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">docment.querySelectorAll(<span class="string">'div'</span>).forEach(<span class="function"><span class="params">item</span>=&gt;</span>&#123;</span><br><span class="line">    map.set(item,&#123;</span><br><span class="line">        name:item.getAttribute(<span class="string">'name'</span>),</span><br><span class="line">        index:item.dataset.index</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line">map <span class="comment">//div=&gt;&#123;&#125; div=&gt;&#123;&#125;</span></span><br><span class="line">map.forEach(<span class="function">(<span class="params">config,ele</span>)=&gt;</span>&#123;</span><br><span class="line">    ele.addEventListener(<span class="string">'click'</span>()=&gt;&#123;</span><br><span class="line">        alert(config.name +<span class="string">'at'</span> + config.index)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">I accept aggreement:</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"agreement"</span> <span class="attr">error</span>=<span class="string">"please accept"</span> /&gt;</span></span><br><span class="line">I am Student:</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"student"</span> <span class="attr">error</span>=<span class="string">"only open to student"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">post</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">   <span class="keyword">let</span> inputs = <span class="built_in">document</span>.querySelectorAll(<span class="string">'[error]'</span>);</span><br><span class="line">    inputs.forEach(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">       map.set(item, &#123;</span><br><span class="line">        error: item.getAttribute(<span class="string">'error'</span>),</span><br><span class="line">        status: item.checked,</span><br><span class="line">          &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">        <span class="comment">// console.log([...map]);</span></span><br><span class="line">    <span class="keyword">return</span> [...map].every(<span class="function">(<span class="params">[elem, config]</span>) =&gt;</span> &#123;</span><br><span class="line">          config.status || alert(config.error);</span><br><span class="line">          <span class="keyword">return</span> config.status;</span><br><span class="line">     &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Weak-Map"><a href="#Weak-Map" class="headerlink" title="Weak Map"></a>Weak Map</h2><p>The WeakMap object is a collection of key/value pairs in which the keys are <code>weakly referenced</code>. <strong>The keys must be objects</strong> and the values can be arbitrary values.</p>
+<ul>
+<li>Similar API with Map</li>
+<li><code>WeakMap</code> keys are not enumerable (i.e., there is no method giving you a list of the keys). If they were, the list would depend on the state of garbage collection, introducing non-determinism.</li>
+<li>they are a target of garbage collection (GC) if there is no other reference to the object anymore.</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> wm = <span class="keyword">new</span> <span class="built_in">WeakMap</span>()</span><br><span class="line"><span class="keyword">let</span> obj=&#123;<span class="attr">a</span>:<span class="string">'a'</span>&#125;</span><br><span class="line">wm.set(obj,<span class="number">1</span>)</span><br><span class="line">wm.keys()<span class="comment">//TypeError: wm.keys is not a function</span></span><br><span class="line">wm.values()<span class="comment">//❌</span></span><br><span class="line">wm.entries()<span class="comment">//❌</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Use-case-1"><a href="#Use-case-1" class="headerlink" title="Use case"></a>Use case</h3><p>to store private data for an object, or to hide implementation details.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> privates = <span class="keyword">new</span> <span class="built_in">WeakMap</span>();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Public</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> me = &#123;</span><br><span class="line">    <span class="comment">// Private data goes here</span></span><br><span class="line">  &#125;;</span><br><span class="line">  privates.set(<span class="keyword">this</span>, me);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Public.prototype.method = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> me = privates.get(<span class="keyword">this</span>);</span><br><span class="line">  <span class="comment">// Do stuff with private data in `me`...</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = Public;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><p>The Set object lets you store <code>unique</code> values of any type, whether primitive values or object references.</p>
+<ul>
+<li>‘unique’: <code>NaN</code> and <code>undefined</code> can also be stored in a Set. </li>
+<li>All <code>NaN</code> values are equated (i.e. NaN is considered the same as NaN, even though NaN !== NaN).</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">set</span> = new Set(['a',2])</span><br><span class="line"><span class="keyword">set</span>.size//2</span><br><span class="line"><span class="keyword">set</span>.add(&#123;obj:<span class="string">'obj'</span>&#125;)</span><br><span class="line"><span class="keyword">set</span>.has('b')//false</span><br><span class="line"><span class="keyword">set</span>.delete('a')//return true</span><br><span class="line"><span class="keyword">set</span>// Set(1) &#123;<span class="number">2</span>&#125;</span><br><span class="line"><span class="keyword">set</span>.delete('b')//false</span><br><span class="line"><span class="keyword">set</span>.clear()</span><br></pre></td></tr></table></figure>
+
+<p>Loop:</p>
+<p>iterator: since set only has keys so the set.values() return the keys as well. the entries() returns [[keys:keys]]</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>.keys()</span><br><span class="line"><span class="keyword">set</span>.values()</span><br><span class="line"><span class="keyword">set</span>.entries()</span><br><span class="line"><span class="keyword">set</span>.forEach(((item)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(item)</span><br><span class="line">&#125;))</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> isSuperSet = <span class="function">(<span class="params">subSet,superSet</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">let</span>(item <span class="keyword">of</span> subSet)&#123;</span><br><span class="line">        !superSet.has(item) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>string type can also be transfered</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> text = <span class="string">'India'</span>;</span><br><span class="line"><span class="keyword">let</span> mySet = <span class="keyword">new</span> <span class="built_in">Set</span>(text); <span class="comment">// Set &#123;'I', 'n', 'd', 'i', 'a'&#125;</span></span><br><span class="line">mySet.size; <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">set</span>= new Set('17323845');</span><br><span class="line"><span class="keyword">set</span> = new Set([...<span class="keyword">set</span>].filter(num=&gt;num&lt;5))//Set(4) &#123;<span class="string">"1"</span>, <span class="string">"3"</span>, <span class="string">"2"</span>, <span class="string">"4"</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Use-case-2"><a href="#Use-case-2" class="headerlink" title="Use case"></a>Use case</h3><ul>
+<li>remove duplicate from an array</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="string">'b'</span>, <span class="number">1</span>, <span class="string">'b'</span>]</span><br><span class="line"><span class="keyword">let</span> <span class="keyword">set</span> = new Set(arr);</span><br><span class="line">arr=Array.from(<span class="keyword">set</span>)</span><br><span class="line">arr= [...<span class="keyword">set</span>]</span><br><span class="line">//or in one line:</span><br><span class="line">arr = [... new Set(arr)]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>borrow API from Array</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> intersection = <span class="keyword">new</span> <span class="built_in">Set</span>([...set1].filter(<span class="function"><span class="params">x</span> =&gt;</span> set2.has(x)));</span><br><span class="line"><span class="keyword">let</span> difference = <span class="keyword">new</span> <span class="built_in">Set</span>([...set1].filter(<span class="function"><span class="params">x</span>=&gt;</span>!set2.has(x)))</span><br></pre></td></tr></table></figure>
+
+<p>Search history</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">let</span> obj = &#123;</span><br><span class="line">    data: <span class="keyword">new</span> <span class="built_in">Set</span>(), </span><br><span class="line">    keyword(word) &#123;</span><br><span class="line">    	<span class="keyword">this</span>.data.add(word);</span><br><span class="line">	&#125;,</span><br><span class="line">    show() &#123;</span><br><span class="line">       <span class="keyword">let</span> ul = <span class="built_in">document</span>.querySelector(<span class="string">'ul'</span>);</span><br><span class="line">       ul.innerHTML = <span class="string">''</span>;</span><br><span class="line">       <span class="keyword">this</span>.data.forEach(<span class="function">(<span class="params">value</span>)=&gt;</span> &#123;</span><br><span class="line">         	ul.innerHTML += <span class="string">`&lt;li&gt;<span class="subst">$&#123;value&#125;</span>&lt;/li&gt;`</span>;</span><br><span class="line">        	&#125;);</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">let</span> input = <span class="built_in">document</span>.querySelector(<span class="string">"[name='hd']"</span>);</span><br><span class="line">input.addEventListener(<span class="string">'blur'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">	obj.keyword(<span class="keyword">this</span>.value);</span><br><span class="line">	obj.show();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="WeakSet"><a href="#WeakSet" class="headerlink" title="WeakSet"></a>WeakSet</h2><p>WeakSet objects are collections of objects. All objects in a WeakSet’s collection are unique.</p>
+<p>Key difference with set:</p>
+<ul>
+<li><code>WeakSets</code> are collections of <strong>objects only</strong>.  </li>
+<li><code>WeakSets</code> are not enumerable.</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ws = <span class="keyword">new</span> <span class="built_in">WeakSet</span>();</span><br><span class="line"><span class="keyword">var</span> foo = &#123;&#125;;<span class="comment">//has to be an object</span></span><br><span class="line"><span class="keyword">var</span> bar = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">ws.add(foo);</span><br><span class="line">ws.add(bar);</span><br><span class="line"></span><br><span class="line">ws.has(foo);    <span class="comment">// true</span></span><br><span class="line">ws.has(bar);    <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Use-case-3"><a href="#Use-case-3" class="headerlink" title="Use case"></a>Use case</h3><p>Store DOM element, if the element was deleted from the DOM, the weakset lost the reference as well. No wasting memory.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">li</span>&gt;</span>houdunren.com <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:;"</span>&gt;</span>x<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>hdcms.com <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:;"</span>&gt;</span>x<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>houdunwang.com <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:;"</span>&gt;</span>x<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">      <span class="selector-class">.remove</span> &#123;</span></span><br><span class="line"><span class="css">      <span class="selector-tag">border</span>: <span class="selector-tag">solid</span> 2<span class="selector-tag">px</span> <span class="selector-id">#eee</span>;</span></span><br><span class="line"><span class="css">      <span class="selector-tag">opacity</span>: 0<span class="selector-class">.8</span>;</span></span><br><span class="line"><span class="css">      <span class="selector-tag">color</span>: <span class="selector-id">#eee</span>;</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="css">    <span class="selector-class">.remove</span> <span class="selector-tag">a</span> &#123;</span></span><br><span class="line"><span class="css">      <span class="selector-tag">background</span>: <span class="selector-id">#eee</span>;</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Todo</span> </span>&#123;</span><br><span class="line">     <span class="keyword">constructor</span>() &#123;</span><br><span class="line">       <span class="keyword">this</span>.items = <span class="built_in">document</span>.querySelectorAll(<span class="string">'ul&gt;li'</span>);</span><br><span class="line">       <span class="keyword">this</span>.lists = <span class="keyword">new</span> <span class="built_in">WeakSet</span>();</span><br><span class="line">       <span class="keyword">this</span>.items.forEach(<span class="function">(<span class="params">item</span>) =&gt;</span> <span class="keyword">this</span>.lists.add(item));</span><br><span class="line">     &#125;</span><br><span class="line">     run() &#123;</span><br><span class="line">       <span class="keyword">this</span>.addEvent();</span><br><span class="line">     &#125;</span><br><span class="line">     addEvent() &#123;</span><br><span class="line">       <span class="keyword">this</span>.items.forEach(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">         <span class="keyword">let</span> a = item.querySelector(<span class="string">'a'</span>);</span><br><span class="line">         a.addEventListener(<span class="string">'click'</span>, (event) =&gt; &#123;</span><br><span class="line">           <span class="keyword">const</span> parentElement = event.target.parentElement;</span><br><span class="line">           <span class="keyword">if</span> (<span class="keyword">this</span>.lists.has(parentElement)) &#123;</span><br><span class="line">             parentElement.classList.add(<span class="string">'remove'</span>);</span><br><span class="line">             <span class="keyword">this</span>.lists.delete(parentElement);</span><br><span class="line">           &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">             parentElement.classList.remove(<span class="string">'remove'</span>);</span><br><span class="line">             <span class="keyword">this</span>.lists.add(parentElement);</span><br><span class="line">           &#125;</span><br><span class="line">         &#125;);</span><br><span class="line">       &#125;);</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">new</span> Todo().run();</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="lx-navigation">
+  <div class="lx-cover prev lx-cover-sm">
+    <!-- style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-l.jpeg)" -->
+    <div class="overlay"></div>
+    <a class="copy" href="#">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>No newer post</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" >
+			<!-- style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-r.jpeg)" -->
+      <div class="overlay"></div>
+      <a class="copy" href="/2020/06/12/inheritance-0/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>inheritance</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+
+</div>
+
+<footer>
+  <div>
+    Copyright &copy; 2020<a href="/"> Brushes & Keys</a><br>Powered by <a
+      href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.js.org" target="_blank">Lx</a> |
+    Modified by
+    Nan Chen <br> Find me at <a href="https://github.com/southchen" target="_blank" rel="noopener">GitHub</a> <a
+      href="https://instagram.com/divetothesea">Instagram</a> <a href="https://www.behance.net/southchen" target="_blank" rel="noopener">Behance</a>
+    <br>
+  </div>
+</footer>
+
+</div>
+
+  <button class="hamburger hamburger--arrow-r" type="button">
+    <div class="hamburger-box">
+      <div class="hamburger-inner"></div>
+    </div>
+  </button>
+  <div class="menu visibility">
+  <div class="menu-head">
+    <span class="layer">
+      <div class="col">
+        <div class="row for-pic">
+          <div class="profile-pic">
+            <a href="/"><img src="https://avatars0.githubusercontent.com/u/26827800?s=460&u=59259f6cb361b7fba376e3ae0c589ccc1639c8b4&v=4" alt="Nan Chen"/></a>
+          </div>
+        </div>
+        <div class="row for-name">
+          <p>Nan Chen</p>
+          <span class="tagline">Not a Number 😆</span>
+        </div>
+      </div>
+    </span>
+  </div>
+  <nav class="menu-container">
+  <ul class="menu-items">
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>Home</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+    
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>Pages</span>
+        <ul>
+          <li><a href="/about">About</a></li>
+        </ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-link fa-fw"></i>Friends</span>
+        <ul>
+          <li> <a href="https://lx.js.org" target="_blank">Theme-Lx</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+</div>
+
+  <div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/js/jquery.easing.min.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      var goToTop = function () {
+        $(".js-gotop").on("click", function (event) {
+          event.preventDefault();
+          $("html, body").animate({
+            scrollTop: $("html").offset().top
+          }, 500, "easeInOutExpo");
+          return false;
+        });
+        $(window).scroll(function () {
+          var $win = $(window);
+          if ($win.scrollTop() > 200) {
+            $(".js-top").addClass("active");
+          } else {
+            $(".js-top").removeClass("active");
+          }
+        });
+      };
+      $(function () {
+        goToTop();
+      });
+    }());
+
+  </script>
+  
+
+
+</body>
+
+</html>

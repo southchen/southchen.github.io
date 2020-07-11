@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="theme-color" content=#58b77a>
-<title>Archives | Brushes &amp; Keys</title>
+<title>browser rendering | Brushes &amp; Keys</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Nan Chen">
 <meta name="keywords" content="javascript web-devlopement photography">
@@ -78,16 +78,24 @@
 <meta name="generator" content="Hexo 4.2.0"></head>
 
 <body>
+  <style>
+  .single #lx-aside {
+    height: 380px;
+  }
+
+</style>
+<div class="single">
   
 <div id="page">
-
-<div id="lx-aside" style="background-image: url(https://images.unsplash.com/photo-1557853197-aefb550b6fdc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80)">
+<div id="lx-aside" style="background-image: url(https://images.unsplash.com/photo-1505238680356-667803448bb6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80)" data-stellar-background-ratio="0.5">
   <div class="overlay">
-    <div class="featured">
+    <div class="page-title">
       <div class="avatar"><a href="/"><img src="https://avatars0.githubusercontent.com/u/26827800?s=460&u=59259f6cb361b7fba376e3ae0c589ccc1639c8b4&v=4"></a></div>
-      <span>Nan Chen</span>
-      <h1>Brushes & Keys</h1>
-      <span>Coding-Baking Photos-Paints </span>
+      <span>2020-06-08</span>
+      <h2>browser rendering</h2>
+      <div class="tags"><i
+          class="fa fa-tag"></i><a class="tag-link" href="/tags/browser/" rel="tag">browser</a> <i class="fa fa-tag"></i><a class="tag-link" href="/tags/css/" rel="tag">css</a> <i class="fa fa-tag"></i><a class="tag-link" href="/tags/html/" rel="tag">html</a> <i class="fa fa-tag"></i><a class="tag-link" href="/tags/javascript/" rel="tag">javascript</a>
+      </div>
     <div class="social-links">
   <a href="https://github.com/southchen" target="_blank"><i
       class="fa fa-github fa-fw"></i></a>
@@ -96,28 +104,78 @@
   <a href="https://www.behance.net/southchen" target="_blank"><i
       class="fa fa-behance fa-fw"></i></a>
 </div>
-
-  </div>
-  </div>
+</div>
+</div>
 </div>
 
-<div id="lx-main-content">
-  <div class="lx-post">
-  <h2 class="pagehead">Archives</h2>
-    <div class="lx-entry padding"><div>
-    <span class="lx-post-detail">2020-06-15</span>
-    <h2 class="title"><a href="/2020/06/15/es6ds/">es6ds</a></h2>
-    <p><i class="fa fa-tag"></i><a class="tag-link" href="/tags/es6/" rel="tag">es6</a> <i class="fa fa-tag"></i><a class="tag-link" href="/tags/javascript/" rel="tag">javascript</a></p></div></div><div class="lx-entry padding"><div>
-    <span class="lx-post-detail">2020-06-12</span>
-    <h2 class="title"><a href="/2020/06/12/inheritance-0/">inheritance</a></h2>
-    <p><i class="fa fa-tag"></i><a class="tag-link" href="/tags/class/" rel="tag">class</a> <i class="fa fa-tag"></i><a class="tag-link" href="/tags/javascript/" rel="tag">javascript</a> <i class="fa fa-tag"></i><a class="tag-link" href="/tags/object/" rel="tag">object</a></p></div></div><div class="lx-entry padding"><div>
-    <span class="lx-post-detail">2020-06-08</span>
-    <h2 class="title"><a href="/2020/06/08/browser-rendering/">browser rendering</a></h2>
-    <p><i class="fa fa-tag"></i><a class="tag-link" href="/tags/browser/" rel="tag">browser</a> <i class="fa fa-tag"></i><a class="tag-link" href="/tags/css/" rel="tag">css</a> <i class="fa fa-tag"></i><a class="tag-link" href="/tags/html/" rel="tag">html</a> <i class="fa fa-tag"></i><a class="tag-link" href="/tags/javascript/" rel="tag">javascript</a></p></div></div><div class="lx-entry padding"><div>
-    <span class="lx-post-detail">2020-06-01</span>
-    <h2 class="title"><a href="/2020/06/01/debounce-throttle/">debounce &amp; throttle</a></h2>
-    <p><i class="fa fa-tag"></i><a class="tag-link" href="/tags/javascript/" rel="tag">javascript</a></p></div></div>
+  <div id="lx-main-content">
+    <div class="lx-post">
+      <div class="lx-entry padding">
+        <div>
+          <h1 id="Browser-rendering"><a href="#Browser-rendering" class="headerlink" title="Browser rendering"></a>Browser rendering</h1><div class="note warning">
+            <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h3><p>This article is originally based on my understanding of this concept. No guarantee on the accuracy.😅</p>
+          </div>
 
+<p>Few key points:</p>
+<ul>
+<li>The parsing and creation of DOM tree and CSSOM tree is independent. </li>
+<li>The render tree can only be created when both CSSOM and DOM tree are ready.</li>
+</ul>
+<img src="/2020/06/08/browser-rendering/browser rendering-Page-1.png" alt="browser rendering-Page-1" style="zoom:50%;">
+
+<ul>
+<li><p>The  sync &lt; script &gt; tag would block the building of DOM tree, because:</p>
+<ul>
+<li>the Javscript has to wait the CSSOM tree to be built since it may need to manuplate or get information about the sytle. And the DOM tree has to stopped since it not sure if the js would interact with the DOM tree.</li>
+<li>So the CSSOM tree keeps building. When the CSSDOM tree finishes, the browser starts to parse js and execute it.</li>
+<li>If the script is trying to manipulate any dom element that hasn’t be created, it would fail. So normally the script tag was put at the end of the body tag.</li>
+<li>Then the DOM tree re-start to build.</li>
+<li>The mordern browser allows the rendering to perform bits by bits.</li>
+</ul>
+<p>![browser rendering-Page-2](browser-rendering/browser rendering-Page-2.png)</p>
+</li>
+<li><p>To shorten the time before the first-screen-rendering, it’s better to make the scirpt tag <code>async</code> </p>
+</li>
+<li><p>Now the parsing of CSS and html can again performs parallelly.</p>
+</li>
+</ul>
+<img src="/2020/06/08/browser-rendering/browser rendering-Page-3.png" alt="browser rendering-Page-3" style="zoom:67%;">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="lx-navigation">
+  <div class="lx-cover prev lx-cover-sm">
+    <!-- style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-l.jpeg)" -->
+    <div class="overlay"></div>
+    <a class="copy" href="/2020/06/12/inheritance-0/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>inherit...</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" >
+			<!-- style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-r.jpeg)" -->
+      <div class="overlay"></div>
+      <a class="copy" href="/2020/06/01/debounce-throttle/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>debounce & throttle</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+
+</div>
 
 <footer>
   <div>
@@ -130,8 +188,6 @@
   </div>
 </footer>
 
-  </div>
-</div>
 </div>
 
   <button class="hamburger hamburger--arrow-r" type="button">
