@@ -105,6 +105,234 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2 class="title"><a href="/2020/05/27/type-conversion/">type conversion</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-05-27</span>
+      <p><h2 id="Type-Conversion"><a href="#Type-Conversion" class="headerlink" title="Type Conversion"></a>Type Conversion</h2><h2 id="Primitive"><a href="#Primitive" class="headerlink" title="Primitive"></a>Primitive</h2><p>JavaScript is a loosely typed or a dynamic language. Variables in JavaScript are not directly associated with any particular value type, and any variable can be assigned (and re-assigned) values of all types:</p>
+<p>There are 6 primitive data types: <code>string, number, bigint, boolean, undefined, and symbol.</code> There also is null, which is seemingly primitive, but indeed is a special case for every Object: and any structured type is derived from null by the Prototype Chain. </p>
+<p>Except for null and undefined, all primitive values have object equivalents that wrap around the primitive values:</p>
+<p>String/ Number /BigInt /Boolean / Symbol<br>The wrapper’s valueOf() method returns the primitive value.</p>
+<h2 id="Explicit-coercion"><a href="#Explicit-coercion" class="headerlink" title="Explicit coercion"></a>Explicit coercion</h2><p>![type converting](type-conversion/type converting.png)</p>
+<h2 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean()"></a>Boolean()</h2><h3 id="Primitive-to-Boolean"><a href="#Primitive-to-Boolean" class="headerlink" title="Primitive to Boolean"></a>Primitive to Boolean</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>()) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(<span class="literal">false</span>)) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(<span class="literal">undefined</span>)) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(<span class="literal">null</span>)) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(+<span class="number">0</span>)) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(<span class="number">-0</span>)) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(<span class="literal">NaN</span>)) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(<span class="string">""</span>)) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Number"><a href="#Number" class="headerlink" title="Number()"></a>Number()</h2><p>When Number is called as a function rather than as a constructor, it performs a type conversion.</p>
+<p>Returns a Number value (not a Number object) computed by <code>ToNumber(value)</code> if value was supplied, else returns +0.</p>
+<p>toNumber()</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Undefined</td>
+<td>NaN</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>+0</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>true value-&gt; 1 false value-&gt; +0</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>same number</td>
+</tr>
+<tr>
+<td>String</td>
+<td></td>
+</tr>
+</tbody></table>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>()) <span class="comment">// +0</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>(<span class="literal">undefined</span>)) <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>(<span class="literal">null</span>)) <span class="comment">// +0</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>(<span class="literal">false</span>)) <span class="comment">// +0</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>(<span class="literal">true</span>)) <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>(<span class="string">"123"</span>)) <span class="comment">// 123</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>(<span class="string">"-123"</span>)) <span class="comment">// -123</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>(<span class="string">"1.2"</span>)) <span class="comment">// 1.2</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>(<span class="string">"000123"</span>)) <span class="comment">// 123</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>(<span class="string">"-000123"</span>)) <span class="comment">// -123</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>(<span class="string">"0x11"</span>)) <span class="comment">// 17</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>(<span class="string">""</span>)) <span class="comment">// 0</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>(<span class="string">" "</span>)) <span class="comment">// 0</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>(<span class="string">"123 123"</span>)) <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>(<span class="string">"foo"</span>)) <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>(<span class="string">"100a"</span>)) <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">parseInt</span>(<span class="string">"3 abc"</span>)) <span class="comment">// 3</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">parseFloat</span>(<span class="string">"3.14 abc"</span>)) <span class="comment">// 3.14</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">parseInt</span>(<span class="string">"-12.34"</span>)) <span class="comment">// -12</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">parseInt</span>(<span class="string">"0xFF"</span>)) <span class="comment">// 255 hexadecimal</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">parseFloat</span>(<span class="string">".1"</span>)) <span class="comment">// 0.1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">parseInt</span>(<span class="string">"0.1"</span>)) <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="String"><a href="#String" class="headerlink" title="String()"></a>String()</h2><p>When <code>String</code> is called as a function rather than as a constructor, it performs a type conversion.</p>
+<p>Returns a String value (not a String object) computed by <code>ToString(value)</code>. If value is not supplied, the empty String “” is returned.</p>
+<p>toString()</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Undefined</td>
+<td>“undefined”</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>“null”</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>true value-&gt; “true” false value -&gt;”false”</td>
+</tr>
+<tr>
+<td>Number</td>
+<td></td>
+</tr>
+<tr>
+<td>String</td>
+<td>Same</td>
+</tr>
+</tbody></table>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>()) <span class="comment">// 'empty string'</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>(<span class="literal">undefined</span>)) <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>(<span class="literal">null</span>)) <span class="comment">// null</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>(<span class="literal">false</span>)) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>(<span class="literal">true</span>)) <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>(<span class="number">0</span>)) <span class="comment">// 0</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>(<span class="number">-0</span>)) <span class="comment">// 0</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>(<span class="literal">NaN</span>)) <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>(<span class="literal">Infinity</span>)) <span class="comment">// Infinity</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>(-<span class="literal">Infinity</span>)) <span class="comment">// -Infinity</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>(<span class="number">1</span>)) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+
+<h2 id="Primitive-type-to-reference-type"><a href="#Primitive-type-to-reference-type" class="headerlink" title="Primitive type to reference type"></a>Primitive type to reference type</h2><p>String()、Number() and Boolean() constructor with <code>new</code> keyword</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> a); <span class="comment">// number</span></span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> <span class="built_in">Number</span>(a);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> b); <span class="comment">// object</span></span><br></pre></td></tr></table></figure>
+
+<p>primitive to boolean</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(Boolean(new Boolean(false))) &#x2F;&#x2F; true</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th><strong><em>Argument Type</em></strong></th>
+<th><strong><em>Result</em></strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Undefined</td>
+<td>Throw a <strong><a href="http://es5.github.io/#x15.11.6.5" target="_blank" rel="noopener">TypeError</a></strong> exception.</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>Throw a <strong><a href="http://es5.github.io/#x15.11.6.5" target="_blank" rel="noopener">TypeError</a></strong> exception.</td>
+</tr>
+</tbody></table>
+<hr>
+
+<h2 id="Object-to-string-and-number"><a href="#Object-to-string-and-number" class="headerlink" title="Object to string and number"></a>Object to string and number</h2><p>first converts to primitive using toPrimitive, then convert to sting/number using ToString/ToNumber</p>
+<blockquote>
+<p>Object.prototype<br>{<br>toString: ƒ toString()<br>valueOf: ƒ valueOf()<br>….<br>}</p>
+<p>let a ={}<br>a.valueOf= function(){ return ‘run this method’}</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a =&#123;<span class="attr">a</span>:<span class="string">'1'</span>&#125;</span><br><span class="line">a.valueOf() <span class="comment">//&#123;a: "1"&#125;</span></span><br><span class="line">a.toString() <span class="comment">//"[object Object]"</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log((&#123;&#125;).toString()) <span class="comment">// [object Object]</span></span><br><span class="line"><span class="built_in">console</span>.log([].toString()) <span class="comment">// ""</span></span><br><span class="line"><span class="built_in">console</span>.log([<span class="number">0</span>].toString()) <span class="comment">// 0</span></span><br><span class="line"><span class="built_in">console</span>.log([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].toString()) <span class="comment">// 1,2,3</span></span><br><span class="line"><span class="built_in">console</span>.log((<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">var</span> a = <span class="number">1</span>;&#125;).toString()) <span class="comment">// function ()&#123;var a = 1;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log((<span class="regexp">/\d+/g</span>).toString()) <span class="comment">// /\d+/g</span></span><br><span class="line"><span class="built_in">console</span>.log((<span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2010</span>, <span class="number">0</span>, <span class="number">1</span>)).toString()) <span class="comment">// Fri Jan 01 2010 00:00:00 GMT+0800 (CST)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Implicit-coercion"><a href="#Implicit-coercion" class="headerlink" title="Implicit coercion"></a>Implicit coercion</h2><p>(👆The tricky part)</p>
+<h3 id="Abstract-Equality-Comparison"><a href="#Abstract-Equality-Comparison" class="headerlink" title="Abstract Equality Comparison (==)"></a>Abstract Equality Comparison (<code>==</code>)</h3><div><table class="standard-table">
+ <thead>
+  <tr>
+   <th scope="row"></th>
+   <th colspan="7" scope="col" style="text-align: center;">Operand B</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <th scope="row"></th>
+   <td></td>
+   <td style="text-align: center;">Undefined</td>
+   <td style="text-align: center;">Null</td>
+   <td style="text-align: center;">Number</td>
+   <td style="text-align: center;">String</td>
+   <td style="text-align: center;">Boolean</td>
+   <td style="text-align: center;">Object</td>
+  </tr>
+  <tr>
+   <th colspan="1" rowspan="6" scope="row">Operand A</th>
+   <td>Undefined</td>
+   <td style="text-align: center;"><code>true</code></td>
+   <td style="text-align: center;"><code>true</code></td>
+   <td style="text-align: center;"><code>false</code></td>
+   <td style="text-align: center;"><code>false</code></td>
+   <td style="text-align: center;"><code>false</code></td>
+   <td style="text-align: center;"><code>false</code></td>
+  </tr>
+  <tr>
+   <td>Null</td>
+   <td style="text-align: center;"><code>true</code></td>
+   <td style="text-align: center;"><code>true</code></td>
+   <td style="text-align: center;"><code>false</code></td>
+   <td style="text-align: center;"><code>false</code></td>
+   <td style="text-align: center;"><code>false</code></td>
+   <td style="text-align: center;"><code>false</code></td>
+  </tr>
+  <tr>
+   <td>Number</td>
+   <td style="text-align: center;"><code>false</code></td>
+   <td style="text-align: center;"><code>false</code></td>
+   <td style="text-align: center;"><code>A === B</code></td>
+   <td style="text-align: center;"><code>A === ToNumber(B)</code></td>
+   <td style="text-align: center;"><code>A === ToNumber(B)</code></td>
+   <td style="text-align: center;"><code>A == ToPrimitive(B)</code></td>
+  </tr>
+  <tr>
+   <td>String</td>
+   <td style="text-align: center;"><code>false</code></td>
+   <td style="text-align: center;"><code>false</code></td>
+   <td style="text-align: center;"><code>ToNumber(A) === B</code></td>
+   <td style="text-align: center;"><code>A === B</code></td>
+   <td style="text-align: center;"><code>ToNumber(A) === ToNumber(B)</code></td>
+   <td style="text-align: center;"><code>A == ToPrimitive(B)</code></td>
+  </tr>
+  <tr>
+   <td>Boolean</td>
+   <td style="text-align: center;"><code>false</code></td>
+   <td style="text-align: center;"><code>false</code></td>
+   <td style="text-align: center;"><code>ToNumber(A) === B</code></td>
+   <td style="text-align: center;"><code>ToNumber(A) === ToNumber(B)</code></td>
+   <td style="text-align: center;"><code>A === B</code></td>
+   <td style="text-align: center;"><code>ToNumber(A) == ToPrimitive(B)</code></td>
+  </tr>
+  <tr>
+   <td>Object</td>
+   <td style="text-align: center;"><code>false</code></td>
+   <td style="text-align: center;"><code>false</code></td>
+   <td style="text-align: center;"><code>ToPrimitive(A) == B</code></td>
+   <td style="text-align: center;"><code>ToPrimitive(A) == B</code></td>
+   <td style="text-align: center;"><code>ToPrimitive(A) == ToNumber(B)</code></td>
+   <td style="text-align: center;"><code>A === B</code></td>
+  </tr>
+ </tbody>
+</table></div>
+
+
+<h4 id="To-primitive"><a href="#To-primitive" class="headerlink" title="To primitive:"></a>To primitive:</h4><p><code>ToPrimitive(A)</code> attempts to convert its object argument to a primitive value, by attempting to invoke varying sequences of <code>A.toString</code> and <code>A.valueOf</code> methods on <code>A</code>.</p>
+<img src="/2020/05/27/type-conversion/type converting-Page-2.png" alt="type converting-Page-2" style="zoom:50%;">
+
+<ul>
+<li><p>the piority of comparison type is <code>Number &gt; String &gt;Boolean&gt;Obj</code></p>
+</li>
+<li><p>if one side is number, then convert to number; else if one side is boolean, convert to number</p>
+</li>
+<li><pre><code class="js"><span class="literal">true</span>==<span class="string">'2'</span><span class="comment">//false</span>
+<span class="literal">true</span>-&gt;<span class="built_in">Number</span> -&gt;<span class="number">1</span>
+<span class="string">'2'</span>-&gt;<span class="built_in">Number</span> -&gt;<span class="number">2</span>
+<span class="literal">false</span>==<span class="string">'a'</span><span class="comment">//false</span>
+<span class="literal">true</span>=<span class="string">'a'</span><span class="comment">//false</span>
+<span class="string">'a'</span>-&gt;<span class="built_in">Number</span>-&gt;<span class="literal">NaN</span>
+&lt;!--￼<span class="number">8</span>--&gt;
+</code></pre>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[] == ![] <span class="comment">//true</span></span><br><span class="line">left:ToPrimitive(![]) &gt;&gt; ToPrimitive(!ToBoolean([])) &gt;&gt;</span><br><span class="line">ToPrimitive(!<span class="literal">true</span>) &gt;&gt; ToPrimitive(<span class="literal">false</span>) &gt;&gt; <span class="number">0</span></span><br><span class="line">ToPrimitive([]) &gt;&gt; <span class="string">""</span></span><br><span class="line"><span class="string">""</span> == <span class="number">0</span> &gt;&gt; ToNumber(<span class="string">""</span>) == <span class="number">0</span> &gt;&gt; <span class="number">0</span> == <span class="number">0</span> &gt;&gt; <span class="keyword">return</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="‘-’-operartor"><a href="#‘-’-operartor" class="headerlink" title="‘+’ operartor"></a>‘+’ operartor</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">21</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">var</span> c = <span class="string">'21'</span>;</span><br><span class="line"><span class="keyword">var</span> d = <span class="string">'4'</span>;</span><br><span class="line">a + b; <span class="comment">// 25</span></span><br><span class="line">c + d; <span class="comment">// "214"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arr0 = [<span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line"><span class="keyword">var</span> arr1 = [<span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line">arr0 + arr1; <span class="comment">// '1，23，4'</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(+[<span class="string">'1'</span>]); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(+[<span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>]); <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">console</span>.log(+&#123;&#125;); <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="amp-amp"><a href="#amp-amp" class="headerlink" title="||  &amp;&amp; !"></a>||  &amp;&amp; !</h3><p>The value produced by a <code>&amp;&amp;</code> or <code>||</code> operator is not necessarily of type Boolean. The value produced will always be the value of one of the two operand expressions.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> A = <span class="string">''</span>;</span><br><span class="line"><span class="keyword">let</span> B = <span class="number">1</span></span><br><span class="line">A ||B <span class="comment">//1</span></span><br><span class="line">A &amp;&amp; B <span class="comment">//''</span></span><br><span class="line">!B <span class="comment">//flase</span></span><br><span class="line">!A <span class="comment">//true</span></span><br><span class="line">A-&gt;<span class="built_in">Boolean</span>-&gt;<span class="literal">false</span> -&gt;OR run A </span><br><span class="line">				  -&gt;AND run B</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+
+<p>Ref:</p>
+<p><a href="http://es5.github.io/#x9.8" target="_blank" rel="noopener">ES5</a></p>
+<p><a href="https://segmentfault.com/a/1190000018037485" target="_blank" rel="noopener">Article</a></p>
+</p>
+      <div class="post-button"><a class="btn" href="/2020/05/27/type-conversion/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2 class="title"><a href="/2020/05/27/Binary-tree-part-1/">Binary tree part 1</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-05-27</span>
       <p><div class="note warning">
@@ -356,37 +584,6 @@
 
 <h2 id="🌟🌟-169-Majority-Element"><a href="#🌟🌟-169-Majority-Element" class="headerlink" title="🌟🌟 169. Majority Element"></a>🌟🌟 <a href="https://leetcode-cn.com/problems/majority-element/" target="_blank" rel="noopener">169. Majority Element</a></h2></p>
       <div class="post-button"><a class="btn" href="/2020/05/21/Template-for-Divided-Conquer-Algorithm/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/05/16/Understanding-Promise-part-2/">Understanding Promise part 2</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-05-16</span>
-      <p><div class="note warning">
-            <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h3><p>This article is originally based on my understanding of this concept. No guarantee on the accuracy.😅</p>
-          </div>
-
-<p>‘The <strong><code>Promise</code></strong> object represents the eventual completion (or failure) of an asynchronous operation, and its resulting value.’</p>
-<p>It was introduced to handle asynchronous operation like synchronous opeartion and avoid the callback hell.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">doSomething(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">  doSomethingElse(result, <span class="function"><span class="keyword">function</span>(<span class="params">newResult</span>) </span>&#123;</span><br><span class="line">    doThirdThing(newResult, <span class="function"><span class="keyword">function</span>(<span class="params">finalResult</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'Got the final result: '</span> + finalResult);</span><br><span class="line">    &#125;, failureCallback);</span><br><span class="line">  &#125;, failureCallback);</span><br><span class="line">&#125;, failureCallback);</span><br></pre></td></tr></table></figure>
-
-<p>Common asynchronous-operation</p>
-<ul>
-<li>setTimeOut, setInterval</li>
-<li>XHR request (fetch api)</li>
-<li>Event Listening</li>
-</ul>
-<p>Thansk to promise’s .then() chaining, we can put the callback outside：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">doSomething()</span><br><span class="line">.then(<span class="function"><span class="params">result</span> =&gt;</span> doSomethingElse(result))</span><br><span class="line">.then(<span class="function"><span class="params">newResult</span> =&gt;</span> doThirdThing(newResult))</span><br><span class="line">.then(<span class="function"><span class="params">finalResult</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Got the final result: <span class="subst">$&#123;finalResult&#125;</span>`</span>);</span><br><span class="line">&#125;)</span><br><span class="line">.catch(failureCallback);<span class="comment">//error handler for all above!</span></span><br></pre></td></tr></table></figure>
-
-<p>*<em>This all based on modern API that returning a promise. That is to say, the promise chains starts with an API function  which returns a promise. *</em></p>
-<p>We can create our own promise as well. Although it’s not typical practice but it can be helpful to ‘promisify’ some old callback-style API then chain the handler. </p>
-<p>Let’s look at how a promise is created. </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(</span><br><span class="line">  <span class="comment">//executor which runs immediately/sync:</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'sync!'</span>)</span><br><span class="line">  (res, rej)=&gt;&#123;</span><br><span class="line">    <span class="comment">// asynchronous operation. they will be put into the task queue</span></span><br><span class="line">    <span class="comment">//instead of returning something, it calls the callback as sideeffect to pass the result of asyn operation to res()/rej()</span></span><br><span class="line">    <span class="keyword">if</span>(somecodition) res(result); <span class="comment">//once the promise is settled the state won't be changed</span></span><br><span class="line">    rej(error)</span><br><span class="line">    <span class="comment">//then the res()/rej() can pass the result to the ousdie by chaining a .then()/.catch()</span></span><br><span class="line">&#125; </span><br><span class="line">  <span class="comment">//the construcor return the new promise obj (of course)</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-<p>An example of wrapping a callback-style function with Promise:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> wait = <span class="function"><span class="params">ms</span> =&gt;</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> setTimeout(resolve, ms));</span><br><span class="line">wait(<span class="number">10000</span>).then(<span class="function"><span class="params">()</span> =&gt;</span> saySomething(<span class="string">"10 seconds"</span>)).catch(failureCallback);</span><br><span class="line"><span class="comment">//template</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">            resolve(someSynchronousValue); </span><br><span class="line">&#125;).then( <span class="comment">/* ... */</span> );</span><br><span class="line"><span class="comment">//more simple and clear way</span></span><br><span class="line"><span class="built_in">Promise</span>.resolve(someSynchronousValue).then(</span><br><span class="line">            <span class="comment">/* recieve someSynchronousValue return value*/</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
-      <div class="post-button"><a class="btn" href="/2020/05/16/Understanding-Promise-part-2/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
 
