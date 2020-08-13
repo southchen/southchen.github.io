@@ -1,0 +1,382 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content=#58b77a>
+<title>The werid this | Brushes &amp; Keys</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Nan Chen">
+<meta name="keywords" content="javascript web-devlopement photography">
+<meta name="description" content="Personal blog tech & life">
+
+<script id="hexo-configurations">
+  var CONFIG = {
+    root: '/',
+    theme: 'lx',
+    version: '0.3.9',
+    localsearch:{
+      "enable": false,
+      "trigger": "auto",
+      "top_n_per_article": 1,
+      "unescape": false,
+      "preload": false
+      },
+    path: '-'
+  };
+</script>
+
+<link rel="shortcut icon" href="/bg.png">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/css/main.min.css">
+<link rel="stylesheet" href="/css/mycss.css">
+<style type="text/css">
+  pre,
+  code {
+    font-family: 'Hind Siliguri',
+      monospace;
+  }
+
+  html {
+    font-family: sans-serif;
+  }
+
+  body {
+    font-family: sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  figure {
+    font-family: Hind Siliguri;
+  }
+
+  .menu-container {
+    font-family: sans-serif;
+  }
+
+</style>
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/js/jquery.jside.menu.js"></script>
+<script>
+  $(document).ready(function () {
+    $(".menu-container").jSideMenu({
+      jSidePosition: "position-right",
+      jSideSticky: true,
+      jSideSkin: "greenish",
+    });
+  });
+
+</script>
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Hind Siliguri:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <style>
+  .single #lx-aside {
+    height: 380px;
+  }
+
+</style>
+<div class="single">
+  
+<div id="page">
+<div id="lx-aside" style="background-image: url(https://images.unsplash.com/photo-1505238680356-667803448bb6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80)" data-stellar-background-ratio="0.5">
+  <div class="overlay">
+    <div class="page-title">
+      <div class="avatar"><a href="/"><img src="https://avatars0.githubusercontent.com/u/26827800?s=460&u=59259f6cb361b7fba376e3ae0c589ccc1639c8b4&v=4"></a></div>
+      <span>2020-08-13</span>
+      <h2>The werid this</h2>
+      <div class="tags"><i
+          class="fa fa-tag"></i><a class="tag-link" href="/tags/javascript/" rel="tag">javascript</a>
+      </div>
+    <div class="social-links">
+  <a href="https://github.com/southchen" target="_blank"><i
+      class="fa fa-github fa-fw"></i></a>
+  <a href="https://instagram.com/divetothesea" target="_blank"><i
+      class="fa fa-instagram fa-fw"></i></a>
+  <a href="https://www.behance.net/southchen" target="_blank"><i
+      class="fa fa-behance fa-fw"></i></a>
+</div>
+</div>
+</div>
+</div>
+
+  <div id="lx-main-content">
+    <div class="lx-post">
+      <div class="lx-entry padding">
+        <div>
+          <div class="note warning">
+            <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h3><p>This article is originally based on my understanding of this concept. No guarantee on the accuracy.😅</p>
+          </div>
+
+<h1 id="The-weird-This"><a href="#The-weird-This" class="headerlink" title="The weird This"></a>The weird <strong>This</strong></h1><ul>
+<li><p><code>This</code> was property of a certain context, that is to say, in global context or a function contex</p>
+<img src="https://pic002.cnblogs.com/images/2011/349491/2011123113224058.png">
+
+<h2 id="The-ECMA-2015"><a href="#The-ECMA-2015" class="headerlink" title="The ECMA 2015"></a>The ECMA 2015</h2><img src="/2020/08/13/The-werid-this/interview prep/JS/expression this.png" alt="expression this" style="zoom:67%;">
+
+</li>
+</ul>
+<p>Note: </p>
+<p>A <code>Reference</code> is a resolved name binding. A Reference consists of three components, the <code>base value</code>, the referenced name and the Boolean valued strict reference flag. The base value is either <code>undefined, an Object, a Boolean, a String, a Number, or an environment record</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = ()&#123;<span class="built_in">console</span>.log(<span class="keyword">this</span>.value)&#125;;</span><br><span class="line">=======&gt;</span><br><span class="line"><span class="keyword">var</span> fooReference = &#123;</span><br><span class="line">    base: EnvironmentRecord,</span><br><span class="line">    name: <span class="string">'foo'</span>,</span><br><span class="line">    strict: <span class="literal">false</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> foo = &#123;</span><br><span class="line">    bar: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">foo.bar(); </span><br><span class="line">========&gt;</span><br><span class="line"><span class="keyword">var</span> BarReference = &#123;</span><br><span class="line">    base: foo,</span><br><span class="line">    propertyName: <span class="string">'bar'</span>,</span><br><span class="line">    strict: <span class="literal">false</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>In <code>strict mode</code> , <code>This</code> in global context refers to undefined, in <code>non-strict mdoe</code> it refers to the window object</li>
+<li>Inside a function , <code>This</code> pointer was determined when the function was invoked:<ul>
+<li>During the creation phase the <code>this</code> was initialized as <code>undefined</code></li>
+<li>Then during the execution phase the  <code>this</code> </li>
+<li>Therefore, whom the <code>This</code> pointer points to, is subjected to how the funciton was called, which means what is on the left of the <code>()</code> operator</li>
+</ul>
+</li>
+<li>A function can be invoked in the following ways by different <code>CallExpression</code><ul>
+<li>Function invocation  =&gt; CallExpression Arguments</li>
+<li>Method invocation  =&gt; CallExpression [ Expression ]      CallExpression . IdentifierName</li>
+<li>Constructor invocation =&gt; new MemberExpression Arguments</li>
+<li>Indirect invocation =&gt;MemberExpression Arguments</li>
+</ul>
+</li>
+</ul>
+<h2 id="Function-inovation-amp-method-invoation"><a href="#Function-inovation-amp-method-invoation" class="headerlink" title="Function inovation &amp; method invoation"></a>Function inovation &amp; method invoation</h2><ul>
+<li>When a function is called as a method of an object, the object is passed to the function as its <strong>this</strong> value.</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> value = <span class="string">'window'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.value)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> obj=&#123;</span><br><span class="line">    value:<span class="string">'obj'</span>,</span><br><span class="line">    foo()&#123;<span class="built_in">console</span>.log(<span class="keyword">this</span>.value)&#125;</span><br><span class="line">    inner:&#123;</span><br><span class="line">        value:<span class="string">'inner'</span>,</span><br><span class="line">    	foo</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doFoo</span> (<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  fn()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">doFoo(obj.foo)</span><br><span class="line">foo() <span class="comment">//window </span></span><br><span class="line">obj.foo()<span class="comment">//'obj'</span></span><br><span class="line">obj.inner.foo()<span class="comment">//'inner'</span></span><br><span class="line">(obj.foo=obj.foo)()<span class="comment">//'window'</span></span><br><span class="line">doFoo(obj.foo) <span class="comment">//window</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>foo()</p>
+<p>​    foo-&gt;MemberExpression=&gt;ref: foo =&gt; declaritive enviorment record =&gt; global object</p>
+</li>
+<li><p>obj.foo()</p>
+<p>​    obj.foo =&gt; ref=&gt; base=&gt;obj</p>
+</li>
+<li><p>obj.inner.foo()</p>
+<p>​    obj.inner.foo =&gt; base =&gt; inner </p>
+</li>
+<li><p>(obj.foo=obj.foo)()</p>
+<p>​    ‘=’  assignmetn oprator -&gt;call GetValue -&gt; return a value not a reference =&gt; global</p>
+</li>
+<li><p>doFoo(fn)=&gt;fn() </p>
+<p>​    arguments: fn = obj.foo =&gt; call GetValue -&gt; return a value not a reference =&gt; global</p>
+</li>
+</ol>
+<h2 id="Constructor-invocation"><a href="#Constructor-invocation" class="headerlink" title="Constructor invocation"></a>Constructor invocation</h2><p>   According to ECMA2015, the new operator would call the [[construct]] inner method of a function </p>
+<p>   ​    Let <em>obj</em> be a newly created native ECMAScript object.</p>
+<p>   ​    Let result be the result of calling the [[Call]] internal property of F, providing obj as the<code>this</code>value and providing the argument list passed into [[Construct]] as args.</p>
+<p>   ​    If Type(result) is Object then return result.</p>
+<p>   ​    Return obj.</p>
+   <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'window'</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.foo = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person1 = <span class="keyword">new</span> Person(<span class="string">'person1'</span>)</span><br><span class="line"><span class="keyword">var</span> person2 = <span class="keyword">new</span> Person(<span class="string">'person2'</span>)</span><br><span class="line"></span><br><span class="line">person1.foo.call(person2)()<span class="comment">//person2 window</span></span><br><span class="line">person1.foo().call(person2)<span class="comment">//person1 person2</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Arrow-function"><a href="#Arrow-function" class="headerlink" title="Arrow function"></a>Arrow function</h2><a id="more"></a>
+
+<blockquote>
+<p><em>ArrowFunction</em> <strong>:</strong> <em>ArrowParameters</em> <code>=&gt;</code> <em>ConciseBody</em></p>
+<p>If the function code for this <em>ArrowFunction</em> is <a href="http://www.ecma-international.org/ecma-262/6.0/index.html#sec-strict-mode-code" target="_blank" rel="noopener">strict mode code</a> (<a href="http://www.ecma-international.org/ecma-262/6.0/index.html#sec-strict-mode-code" target="_blank" rel="noopener">10.2.1</a>), let <em>strict</em> be <strong>true</strong>. Otherwise let <em>strict</em> be <strong>false</strong>.</p>
+<p>Let <em>scope</em> be the <a href="http://www.ecma-international.org/ecma-262/6.0/index.html#sec-execution-contexts" target="_blank" rel="noopener">LexicalEnvironment</a> of <a href="http://www.ecma-international.org/ecma-262/6.0/index.html#sec-execution-contexts" target="_blank" rel="noopener">the running execution context</a>.</p>
+<p>Let <em>parameters</em> be CoveredFormalsList of <em>ArrowParameters</em>.</p>
+<p>Let <em>closure</em> be <a href="http://www.ecma-international.org/ecma-262/6.0/index.html#sec-functioncreate" target="_blank" rel="noopener">FunctionCreate</a>(Arrow, <em>parameters</em>, <em>ConciseBody, scope</em>, <em>strict</em>).</p>
+<p>Return <em>closure</em>.</p>
+<p><strong>lexical</strong> means that <code>this</code> refers to the <strong>this</strong> value of a lexically enclosing function. </p>
+</blockquote>
+<ul>
+<li><p>before arrow function <code>This</code> is nothing to do with scope!!</p>
+</li>
+<li><p>In arrow functions, JavaScript sets the this lexically. It means the arrow function does not create its own execution context, but inherits the this  from the outer function where the arrow function is defined. </p>
+</li>
+<li><pre><code class="js"><span class="keyword">var</span> name = <span class="string">'window'</span>
+<span class="keyword">var</span> obj1 = {
+  name: <span class="string">'obj1'</span>,
+  foo: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)
+    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+      <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)
+    }
+  }
+}
+<span class="keyword">var</span> obj2 = {
+  name: <span class="string">'obj2'</span>,
+  foo: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)
+    <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> {
+      <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)
+    }
+  }
+}
+<span class="keyword">var</span> obj3 = {
+  name: <span class="string">'obj3'</span>,
+  foo: <span class="function"><span class="params">()</span> =&gt;</span> {
+    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)
+    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+      <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)
+    }
+  }
+}
+<span class="keyword">var</span> obj4 = {
+  name: <span class="string">'obj4'</span>,
+  foo: <span class="function"><span class="params">()</span> =&gt;</span> {
+    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)
+    <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> {
+      <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)
+    }
+  }
+}
+obj1.foo()() <span class="comment">// 'obj1' 'window'</span>
+obj2.foo()() <span class="comment">// 'obj2' 'obj2'</span>
+obj3.foo()() <span class="comment">// 'window' 'window'</span>
+obj4.foo()() <span class="comment">// 'window' 'window'</span>
+&lt;!--￼<span class="number">3</span>--&gt;
+</code></pre>
+</li>
+</ul>
+<h2 id="Combining-constructor-call-and-arrow-function"><a href="#Combining-constructor-call-and-arrow-function" class="headerlink" title="Combining constructor call and arrow function"></a>Combining constructor call and arrow function</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'window'</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//call by 'new' key word: this-&gt;the newly created object</span></span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.foo1 = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.foo2 = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">//arrow function dosen't has 'this', looks for it along the scope chain</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">  &#125;</span><br><span class="line">   <span class="keyword">this</span>.foo3 = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="comment">//called as normal function in the global context 'this'-&gt;window</span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">    <span class="keyword">this</span>.foo4 = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person1 = <span class="keyword">new</span> Person(<span class="string">'person1'</span>)</span><br><span class="line">person1.foo1()<span class="comment">///person1</span></span><br><span class="line">person1.foo2()<span class="comment">//person1</span></span><br><span class="line">person1.foo3()()<span class="comment">//person1  window</span></span><br><span class="line">person1.foo4()()<span class="comment">//person1 person1</span></span><br><span class="line">person1.foo4()() <span class="comment">// 'person1'</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'window'</span></span><br><span class="line"><span class="keyword">var</span> person1 = &#123;</span><br><span class="line">  name: <span class="string">'person1'</span>,</span><br><span class="line">  foo2: <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="keyword">this</span>.name),</span><br><span class="line">  foo4: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="comment">//person1.foo4() this-&gt;person1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">//'this' inside the arrow function always equals to the outter 'this' </span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person2 = &#123; <span class="attr">name</span>: <span class="string">'person2'</span> &#125;</span><br><span class="line"></span><br><span class="line">person1.foo2() <span class="comment">// 'window'</span></span><br><span class="line">person1.foo2.call(person2) <span class="comment">// 'window'</span></span><br><span class="line"></span><br><span class="line">person1.foo4()() <span class="comment">// 'person1' //inner arrow function looks for this in outter function</span></span><br><span class="line">person1.foo4.call(person2)() <span class="comment">// 'person2' //call() binds 'this' to person2 in outter functon</span></span><br><span class="line">person1.foo4().call(person2) <span class="comment">// 'person1' //call() didn't work for arrow function</span></span><br></pre></td></tr></table></figure>
+
+<p>Comparing with the constructor function:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'window'</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.foo2 = <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="keyword">this</span>.name),</span><br><span class="line">  <span class="keyword">this</span>.foo4 = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person1 = <span class="keyword">new</span> Person(<span class="string">'person1'</span>)</span><br><span class="line"><span class="keyword">var</span> person2 = <span class="keyword">new</span> Person(<span class="string">'person2'</span>)</span><br><span class="line"></span><br><span class="line">person1.foo2() <span class="comment">// 'person1'</span></span><br><span class="line">person1.foo2.call(person2) <span class="comment">// 'person1'</span></span><br><span class="line"></span><br><span class="line">person1.foo4()() <span class="comment">// 'person1'</span></span><br><span class="line">person1.foo4.call(person2)() <span class="comment">// 'person2'</span></span><br><span class="line">person1.foo4().call(person2) <span class="comment">// 'person1'</span></span><br></pre></td></tr></table></figure>
+
+<p>For nested object inside a constructor function same rules applies</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'window'</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.obj = &#123;</span><br><span class="line">    name: <span class="string">'obj'</span>,</span><br><span class="line">    foo2: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">//called by person1.obj.foo() this-&gt;obj</span></span><br><span class="line">      <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="comment">//looks for 'this' outside the arrow function</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person1 = <span class="keyword">new</span> Person(<span class="string">'person1'</span>)</span><br><span class="line"><span class="keyword">var</span> person2 = <span class="keyword">new</span> Person(<span class="string">'person2'</span>)</span><br><span class="line"></span><br><span class="line">person1.obj.foo2()()<span class="comment">//obj </span></span><br><span class="line">person1.obj.foo2.call(person2)() <span class="comment">//person2 //binds the person2 to the outter function</span></span><br><span class="line">person1.obj.foo2().call(person2)<span class="comment">//obj //call() fails to bind for arrow function</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Strict-mode"><a href="#Strict-mode" class="headerlink" title="Strict mode"></a>Strict mode</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log( <span class="keyword">this</span>.a ); <span class="comment">//2 this-&gt;window</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="meta">  "use strict"</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>) <span class="comment">//this-&gt;undefined</span></span><br><span class="line">  foo(); <span class="comment">//call function foo in global context</span></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<p>Comapring to:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">"use strict"</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log( <span class="keyword">this</span>.a ); <span class="comment">//2 this-&gt;undefined</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>) <span class="comment">//this-&gt;undefined</span></span><br><span class="line">  foo(); <span class="comment">//call function foo in global context</span></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<p>Ref: <a src="http://www.ecma-international.org/ecma-262/6.0/index.html">ECMA2015</a></p>
+<p>Test source: <a src="https://juejin.im/post/5e6358256fb9a07cd80f2e70#heading-40">Juejin</a></p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="lx-navigation">
+  <div class="lx-cover prev lx-cover-sm">
+    <!-- style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-l.jpeg)" -->
+    <div class="overlay"></div>
+    <a class="copy" href="#">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>No newer post</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" >
+			<!-- style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-r.jpeg)" -->
+      <div class="overlay"></div>
+      <a class="copy" href="/2020/08/12/Promise-A/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>Promise A+</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+
+</div>
+
+<footer>
+  <div>
+    Copyright &copy; 2020<a href="/"> Brushes & Keys</a><br>Powered by <a
+      href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.js.org" target="_blank">Lx</a> |
+    Modified by
+    Nan Chen <br> Find me at <a href="https://github.com/southchen" target="_blank" rel="noopener">GitHub</a> <a
+      href="https://instagram.com/divetothesea">Instagram</a> <a href="https://www.behance.net/southchen" target="_blank" rel="noopener">Behance</a>
+    <br>
+  </div>
+</footer>
+
+</div>
+
+  <button class="hamburger hamburger--arrow-r" type="button">
+    <div class="hamburger-box">
+      <div class="hamburger-inner"></div>
+    </div>
+  </button>
+  <div class="menu visibility">
+  <div class="menu-head">
+    <span class="layer">
+      <div class="col">
+        <div class="row for-pic">
+          <div class="profile-pic">
+            <a href="/"><img src="https://avatars0.githubusercontent.com/u/26827800?s=460&u=59259f6cb361b7fba376e3ae0c589ccc1639c8b4&v=4" alt="Nan Chen"/></a>
+          </div>
+        </div>
+        <div class="row for-name">
+          <p>Nan Chen</p>
+          <span class="tagline">Not a Number 😆</span>
+        </div>
+      </div>
+    </span>
+  </div>
+  <nav class="menu-container">
+  <ul class="menu-items">
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>Home</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+    
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>Pages</span>
+        <ul>
+          <li><a href="/about">About</a></li>
+        </ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-link fa-fw"></i>Friends</span>
+        <ul>
+          <li> <a href="https://lx.js.org" target="_blank">Theme-Lx</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+</div>
+
+  <div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/js/jquery.easing.min.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      var goToTop = function () {
+        $(".js-gotop").on("click", function (event) {
+          event.preventDefault();
+          $("html, body").animate({
+            scrollTop: $("html").offset().top
+          }, 500, "easeInOutExpo");
+          return false;
+        });
+        $(window).scroll(function () {
+          var $win = $(window);
+          if ($win.scrollTop() > 200) {
+            $(".js-top").addClass("active");
+          } else {
+            $(".js-top").removeClass("active");
+          }
+        });
+      };
+      $(function () {
+        goToTop();
+      });
+    }());
+
+  </script>
+  
+
+
+</body>
+
+</html>
