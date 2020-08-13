@@ -105,6 +105,75 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2 class="title"><a href="/2020/08/13/The-werid-this/">The werid this</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-08-13</span>
+      <p><div class="note warning">
+            <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h3><p>This article is originally based on my understanding of this concept. No guarantee on the accuracy.😅</p>
+          </div>
+
+<h1 id="The-weird-This"><a href="#The-weird-This" class="headerlink" title="The weird This"></a>The weird <strong>This</strong></h1><ul>
+<li><p><code>This</code> was property of a certain context, that is to say, in global context or a function contex</p>
+<img src="https://pic002.cnblogs.com/images/2011/349491/2011123113224058.png">
+
+<h2 id="The-ECMA-2015"><a href="#The-ECMA-2015" class="headerlink" title="The ECMA 2015"></a>The ECMA 2015</h2><img src="/.com//interview prep/JS/expression this.png" alt="expression this" style="zoom:67%;">
+
+</li>
+</ul>
+<p>Note: </p>
+<p>A <code>Reference</code> is a resolved name binding. A Reference consists of three components, the <code>base value</code>, the referenced name and the Boolean valued strict reference flag. The base value is either <code>undefined, an Object, a Boolean, a String, a Number, or an environment record</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = ()&#123;<span class="built_in">console</span>.log(<span class="keyword">this</span>.value)&#125;;</span><br><span class="line">=======&gt;</span><br><span class="line"><span class="keyword">var</span> fooReference = &#123;</span><br><span class="line">    base: EnvironmentRecord,</span><br><span class="line">    name: <span class="string">'foo'</span>,</span><br><span class="line">    strict: <span class="literal">false</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> foo = &#123;</span><br><span class="line">    bar: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">foo.bar(); </span><br><span class="line">========&gt;</span><br><span class="line"><span class="keyword">var</span> BarReference = &#123;</span><br><span class="line">    base: foo,</span><br><span class="line">    propertyName: <span class="string">'bar'</span>,</span><br><span class="line">    strict: <span class="literal">false</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>In <code>strict mode</code> , <code>This</code> in global context refers to undefined, in <code>non-strict mdoe</code> it refers to the window object</li>
+<li>Inside a function , <code>This</code> pointer was determined when the function was invoked:<ul>
+<li>During the creation phase the <code>this</code> was initialized as <code>undefined</code></li>
+<li>Then during the execution phase the  <code>this</code> </li>
+<li>Therefore, whom the <code>This</code> pointer points to, is subjected to how the funciton was called, which means what is on the left of the <code>()</code> operator</li>
+</ul>
+</li>
+<li>A function can be invoked in the following ways by different <code>CallExpression</code><ul>
+<li>Function invocation  =&gt; CallExpression Arguments</li>
+<li>Method invocation  =&gt; CallExpression [ Expression ]      CallExpression . IdentifierName</li>
+<li>Constructor invocation =&gt; new MemberExpression Arguments</li>
+<li>Indirect invocation =&gt;MemberExpression Arguments</li>
+</ul>
+</li>
+</ul>
+<h2 id="Function-inovation-amp-method-invoation"><a href="#Function-inovation-amp-method-invoation" class="headerlink" title="Function inovation &amp; method invoation"></a>Function inovation &amp; method invoation</h2><ul>
+<li>When a function is called as a method of an object, the object is passed to the function as its <strong>this</strong> value.</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> value = <span class="string">'window'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.value)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> obj=&#123;</span><br><span class="line">    value:<span class="string">'obj'</span>,</span><br><span class="line">    foo()&#123;<span class="built_in">console</span>.log(<span class="keyword">this</span>.value)&#125;</span><br><span class="line">    inner:&#123;</span><br><span class="line">        value:<span class="string">'inner'</span>,</span><br><span class="line">    	foo</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doFoo</span> (<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  fn()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">doFoo(obj.foo)</span><br><span class="line">foo() <span class="comment">//window </span></span><br><span class="line">obj.foo()<span class="comment">//'obj'</span></span><br><span class="line">obj.inner.foo()<span class="comment">//'inner'</span></span><br><span class="line">(obj.foo=obj.foo)()<span class="comment">//'window'</span></span><br><span class="line">doFoo(obj.foo) <span class="comment">//window</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>foo()</p>
+<p>​    foo-&gt;MemberExpression=&gt;ref: foo =&gt; declaritive enviorment record =&gt; global object</p>
+</li>
+<li><p>obj.foo()</p>
+<p>​    obj.foo =&gt; ref=&gt; base=&gt;obj</p>
+</li>
+<li><p>obj.inner.foo()</p>
+<p>​    obj.inner.foo =&gt; base =&gt; inner </p>
+</li>
+<li><p>(obj.foo=obj.foo)()</p>
+<p>​    ‘=’  assignmetn oprator -&gt;call GetValue -&gt; return a value not a reference =&gt; global</p>
+</li>
+<li><p>doFoo(fn)=&gt;fn() </p>
+<p>​    arguments: fn = obj.foo =&gt; call GetValue -&gt; return a value not a reference =&gt; global</p>
+</li>
+</ol>
+<h2 id="Constructor-invocation"><a href="#Constructor-invocation" class="headerlink" title="Constructor invocation"></a>Constructor invocation</h2><p>   According to ECMA2015, the new operator would call the [[construct]] inner method of a function </p>
+<p>   ​    Let <em>obj</em> be a newly created native ECMAScript object.</p>
+<p>   ​    Let result be the result of calling the [[Call]] internal property of F, providing obj as the<code>this</code>value and providing the argument list passed into [[Construct]] as args.</p>
+<p>   ​    If Type(result) is Object then return result.</p>
+<p>   ​    Return obj.</p>
+   <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'window'</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.foo = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person1 = <span class="keyword">new</span> Person(<span class="string">'person1'</span>)</span><br><span class="line"><span class="keyword">var</span> person2 = <span class="keyword">new</span> Person(<span class="string">'person2'</span>)</span><br><span class="line"></span><br><span class="line">person1.foo.call(person2)()<span class="comment">//person2 window</span></span><br><span class="line">person1.foo().call(person2)<span class="comment">//person1 person2</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Arrow-function"><a href="#Arrow-function" class="headerlink" title="Arrow function"></a>Arrow function</h2></p>
+      <div class="post-button"><a class="btn" href="/2020/08/13/The-werid-this/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2 class="title"><a href="/2020/08/12/Promise-A/">Promise A+</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-08-12</span>
       <p><div class="note warning">
@@ -319,39 +388,10 @@
       <div class="post-button"><a class="btn" href="/2020/06/08/browser-rendering/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/06/01/debounce-throttle/">debounce & throttle</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-01</span>
-      <p><div class="note warning">
-            <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h3><p>This article is originally based on my understanding of this concept. No guarantee on the accuracy.😅</p>
-          </div>
-
-<h2 id="Throttle"><a href="#Throttle" class="headerlink" title="Throttle"></a>Throttle</h2><img src="/.com//Untitled Diagram-Page-2.png" alt="throttle" style="zoom:80%;">
-
-<p>Throttle is used to limit how often a function can be called, though throttle is simpler to implement</p>
-<p>Using a flag to record the state: within or exceed the time limit</p>
-<p>Use case: during scrolling, resizing</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> throttle = <span class="function">(<span class="params">fn, limit</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> flag = <span class="literal">false</span>; <span class="comment">//init the flag</span></span><br><span class="line">        <span class="keyword">return</span> <span class="function">(<span class="params">...arg</span>) =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">if</span> (!flag) &#123; <span class="comment">//if the flag is false, exceeds the limit</span></span><br><span class="line">            fn(arg); <span class="comment">//run the passed in function</span></span><br><span class="line">            flag = <span class="literal">true</span>; <span class="comment">//turn the flog to ture, still inside the limit</span></span><br><span class="line">           setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="comment">//use a timer to turn flag to false after the limit</span></span><br><span class="line">            flag = <span class="literal">false</span>;</span><br><span class="line">          &#125;, limit);</span><br><span class="line">          &#125;</span><br><span class="line">  			<span class="comment">//if the flag was true, do nothing.</span></span><br><span class="line">        &#125;;</span><br><span class="line">      &#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="Debounce"><a href="#Debounce" class="headerlink" title="Debounce"></a>Debounce</h2><img src="/.com//Untitled Diagram-Page-1.png" alt="debounce" style="zoom:80%;">
-
-
-
-<p>A debounced function is called only once in a given period, delay milliseconds after its last invocation (the timer is reset on every call).</p>
-<p>use case: auto search</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> debounce = <span class="function">(<span class="params">fn, limit</span>) =&gt;</span> &#123;</span><br><span class="line">   <span class="keyword">let</span> id; </span><br><span class="line">   <span class="keyword">return</span> <span class="function">(<span class="params">...arg</span>) =&gt;</span> &#123;</span><br><span class="line">     <span class="keyword">if</span> (id) clearTimeout(id); <span class="comment">//every time the function was called, test if the the timer is running, if so, restart the timer</span></span><br><span class="line">     id = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123; </span><br><span class="line">       fn(arg);</span><br><span class="line">     &#125;, limit);</span><br><span class="line">   &#125;;</span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure>
-
-</p>
-      <div class="post-button"><a class="btn" href="/2020/06/01/debounce-throttle/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
 
 
 <div id="pagination">
-  <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"></a>
+  <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"></a>
 </div>
 
 <footer>
